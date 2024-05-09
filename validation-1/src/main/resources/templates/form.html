@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Validation Form</title>
+    <link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+</head>
+<body>
+    <h1 class = "text-center">Login Here</h1>
+    <form  th:action="@{/sucess}" th:object="${user}" method="post">
+        <div class = "text-center">
+            <label>Name: </label>
+            <input type="text" th:field="*{name}" />
+            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+        </div>
+        <div class = "text-center">
+            <label>Email: <input type="text" th:field="*{email}" /></label>
+            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+        </div>
+        <div class = "text-center">
+        <button  type="submit">Submit</button>
+        </div>
+    </form>
+</body>
+</html>

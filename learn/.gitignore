@@ -1,0 +1,36 @@
+# Java build output
+target/
+
+# IDE files (Eclipse, IntelliJ, etc.)
+.idea/
+*.iml
+
+# Compiled Java class files
+*.class
+
+# Log files
+*.log
+
+# Spring Boot specific
+application.properties
+application.yml
+application-dev.properties
+application-dev.yml
+application-prod.properties
+application-prod.yml
+
+# Generated files
+gen/
+bin/
+
+# Gradle specific
+.gradle/
+build/
+
+# Maven specific
+/.mvn/
+
+# Remove asc, xz, and info files
+*.asc
+*.xz
+*.info

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>hello world</h1>
+	<h1 th:text="${name}"></h1>
+	<ul>
+		<li th:each="n,status : ${name}">
+		<span th:style="${status.odd} ? 'color:red; font-weight: bold ':' '" th:text=" ${status.index+1}+''+${n}"></span>
+		</li>
+	</ul>
+</body>
+</html>

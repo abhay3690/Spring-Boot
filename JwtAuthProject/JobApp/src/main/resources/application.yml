@@ -1,0 +1,12 @@
+Server :
+  port : 8081
+  
+spring:
+#    application:
+#      name: USER-SERVICE
+    datasource :
+      url : jdbc:mysql://localhost:3306/datas
+      username : root
+      password : Abhay@3690
+      driver-class-name : com.mysql.cj.jdbc.Driver 
+      
