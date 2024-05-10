@@ -9,7 +9,7 @@ public class JwtHelper {
     public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
     
     public JwtHelper() {
-		secret = generateToken()
+		secret = generateToken();
 	}
 
     //    public static final long JWT_TOKEN_VALIDITY =  60;
