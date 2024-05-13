@@ -29,7 +29,9 @@ public class CategoryController {
 	// create
 	@PostMapping("/")
 	public ResponseEntity<CategoryDto> createCatogory(@Valid @RequestBody CategoryDto categoryDto) {
+		System.out.println(categoryDto);
 		CategoryDto category = this.categoryServiceImpl.createCategory(categoryDto);
+		System.out.println("controller after");
 		return new ResponseEntity<>(category, HttpStatus.CREATED);
 	}
 

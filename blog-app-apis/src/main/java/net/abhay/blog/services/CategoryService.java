@@ -2,23 +2,24 @@ package net.abhay.blog.services;
 
 import java.util.List;
 
-import org.aspectj.weaver.patterns.AnnotationPatternList;
-
 import net.abhay.payloads.CategoryDto;
 
+
+
 public interface CategoryService {
-	//create
-	public CategoryDto createCategory(CategoryDto categoryDto);
 
-	// delete
-	public void deleteCategory(Integer CategoryId);
-
+	// create
+	CategoryDto createCategory(CategoryDto categoryDto);
+	
 	// update
-	public CategoryDto updateCategory(CategoryDto categoryDto, Integer categoryId);
-
+	CategoryDto updateCategory(CategoryDto categoryDto,int categoryId);
+	
+	// delete
+	void deleteCategory(int categoryId);
+	
 	// get
-	public CategoryDto getCategory(Integer categoryId);
-
-	// getAll
+	CategoryDto getCategory(int categoryId);
+	
+	// get All
 	List<CategoryDto> getCategories();
 }
