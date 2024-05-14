@@ -3,6 +3,7 @@ package net.abhay.blog.services;
 import java.util.List;
 
 import net.abhay.payloads.PostDto;
+import net.abhay.payloads.PostResponse;
 
 public interface PostService {
 
@@ -20,7 +21,7 @@ public interface PostService {
 	PostDto getPostById(PostDto postDto,int postId);
 	
 	//get all
-	List<PostDto> getAllPost();
+	PostResponse getAllPost(Integer pageNumber, Integer pageSize);
 	
 	// get All Post By Category
 	List<PostDto> getPostsByCategory(int categoryId);

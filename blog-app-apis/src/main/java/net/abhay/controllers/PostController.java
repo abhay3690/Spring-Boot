@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import net.abhay.blog.services.PostService;
 import net.abhay.payloads.ApiResponse;
 import net.abhay.payloads.PostDto;
+import net.abhay.payloads.PostResponse;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,9 +54,12 @@ public class PostController {
 	// get all posts
 	@GetMapping("/posts")
 
-	public ResponseEntity<List<PostDto>> getAllPost() {
-		List<PostDto> allPost = this.postService.getAllPost();
-		return new ResponseEntity<List<PostDto>>(allPost, HttpStatus.OK);
+	public ResponseEntity<PostResponse> getAllPost(
+			@RequestParam (value ="pageNumber",defaultValue="0", required = false) Integer pageNumber,
+			@RequestParam (value ="pageSize",defaultValue="10", required = false) Integer pageSize
+			) {
+		 PostResponse postResponse = this.postService.getAllPost(pageNumber, pageSize);
+		return new ResponseEntity<PostResponse>(postResponse, HttpStatus.OK);
 	}
 
 	// get post by id
