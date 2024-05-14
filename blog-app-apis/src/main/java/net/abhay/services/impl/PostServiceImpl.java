@@ -56,26 +56,34 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public PostDto updatePost(PostDto postDto, int postId) {
-		// TODO Auto-generated method stub
-		return null;
+		Post post = this.postRepo.findById(postId)
+				.orElseThrow(() -> new ResourceNotFoundException("post", "post id", postId));
+		post.setTitle(postDto.getTitle());
+		post.setContent(postDto.getContent());
+		post.setImageName(postDto.getImageName());
+		Post updatedPost = this.postRepo.save(post);
+		return this.modelMapper.map(updatedPost, PostDto.class);
 	}
 
 	@Override
 	public void deletePost(int postId) {
-		// TODO Auto-generated method stub
-
+		Post post = this.postRepo.findById(postId)
+				.orElseThrow(() -> new ResourceNotFoundException("post", "post id", postId));
+		this.postRepo.delete(post);
 	}
 
 	@Override
 	public PostDto getPostById(PostDto postDto, int postId) {
-		Post post = this.postRepo.findById(postId).orElseThrow(()-> new ResourceNotFoundException("Post", "post id", postId));
+		Post post = this.postRepo.findById(postId)
+				.orElseThrow(() -> new ResourceNotFoundException("Post", "post id", postId));
 		return this.modelMapper.map(post, PostDto.class);
 	}
 
 	@Override
 	public List<PostDto> getAllPost() {
 		List<Post> allPosts = this.postRepo.findAll();
-		List<PostDto> postDtos = allPosts.stream().map((post)-> this.modelMapper.map(post, PostDto.class)).collect(Collectors.toList());
+		List<PostDto> postDtos = allPosts.stream().map((post) -> this.modelMapper.map(post, PostDto.class))
+				.collect(Collectors.toList());
 		return postDtos;
 	}
 
@@ -86,7 +94,7 @@ public class PostServiceImpl implements PostService {
 		List<Post> posts = this.postRepo.findByCategory(cat);
 		List<PostDto> postDtos = posts.stream().map(post -> this.modelMapper.map(post, PostDto.class))
 				.collect(Collectors.toList());
- 
+
 		return postDtos;
 	}
 
@@ -94,11 +102,11 @@ public class PostServiceImpl implements PostService {
 	public List<PostDto> getPostsByUser(int userId) {
 		User user = this.userRepo.findById(userId)
 				.orElseThrow(() -> new ResourceNotFoundException("User", "user Id", userId));
-		
+
 		List<Post> posts = this.postRepo.findByUser(user);
 		List<PostDto> postDtos = posts.stream().map(post -> this.modelMapper.map(post, PostDto.class))
 				.collect(Collectors.toList());
- 
+
 		return postDtos;
 	}
 
