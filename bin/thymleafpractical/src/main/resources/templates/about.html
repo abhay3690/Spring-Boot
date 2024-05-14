@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en" xmlns:th="hhtp://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Document</title>
+</head>
+<body>
+	<h1>xduce is a it company</h1>
+	<h2>Sans is acoubnting company</h2>
+	<h1 th:text="${ #strings.toUpperCase(name) }"></h1>
+	<p>
+		length of the Owner is <span th:text=${#strings.length(name)}></span>
+	</p>
+
+	<h2 th:text="${currentDate}"></h2>
+	<h2>
+		Name of the Owner is <span th:text=${name}></span>
+	</h2>
+	<div th:with="a=5,c=8,n=${name}">
+	<h1>
+		value of a is <span th:text="${a}"></span>
+	</h1>
+	<h1 th:text="'value of b is'+${c}"></h1>
+	</div>
+</body>
+</html>
