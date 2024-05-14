@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.abhay.blog.services.PostService;
+import net.abhay.config.AppConstatns;
 import net.abhay.payloads.ApiResponse;
 import net.abhay.payloads.PostDto;
 import net.abhay.payloads.PostResponse;
@@ -53,12 +55,13 @@ public class PostController {
 
 	// get all posts
 	@GetMapping("/posts")
-
 	public ResponseEntity<PostResponse> getAllPost(
-			@RequestParam (value ="pageNumber",defaultValue="0", required = false) Integer pageNumber,
-			@RequestParam (value ="pageSize",defaultValue="10", required = false) Integer pageSize
-			) {
-		 PostResponse postResponse = this.postService.getAllPost(pageNumber, pageSize);
+			@RequestParam(value = "pageNumber", defaultValue = AppConstatns.PAGE_NUMBER, required = false) Integer pageNumber,
+			@RequestParam(value = "pageSize", defaultValue = AppConstatns.PAGE_SIZE, required = false) Integer pageSize,
+			@RequestParam(value = "sortBy", defaultValue = AppConstatns.SORT_BY, required = false) String sortBy,
+			@RequestParam(value = "sortDir", defaultValue = AppConstatns.SORT_DIR, required = false) String sortDir) {
+
+		PostResponse postResponse = this.postService.getAllPost(pageNumber, pageSize, sortBy, sortDir);
 		return new ResponseEntity<PostResponse>(postResponse, HttpStatus.OK);
 	}
 
@@ -73,7 +76,7 @@ public class PostController {
 	// update
 	@PutMapping("/posts/{postId}")
 	public ResponseEntity<PostDto> updatePost(@RequestBody PostDto postDto, @PathVariable Integer postId) {
-		PostDto updatePost = this.postService.updatePost(postDto,postId);
+		PostDto updatePost = this.postService.updatePost(postDto, postId);
 		return new ResponseEntity<PostDto>(updatePost, HttpStatus.OK);
 	}
 
@@ -82,5 +85,12 @@ public class PostController {
 	public ApiResponse deletePost(@PathVariable Integer postId) {
 		this.postService.deletePost(postId);
 		return new ApiResponse("Post is sucessfully Deleted", true);
+	}
+	//search
+	@GetMapping("/posts/search/{keywords}")
+	public ResponseEntity<List<PostDto>> searchPostByTitle(@PathVariable("keywords") String keywords) {
+	 List<PostDto> result = this.postService.searchPosts(keywords);
+	 return new ResponseEntity<List<PostDto>>(result,HttpStatus.OK);
+		
 	}
 }
