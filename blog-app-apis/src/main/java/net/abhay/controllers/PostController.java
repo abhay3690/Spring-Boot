@@ -7,12 +7,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.abhay.blog.services.PostService;
+import net.abhay.payloads.ApiResponse;
 import net.abhay.payloads.PostDto;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -61,7 +65,18 @@ public class PostController {
 		PostDto postDto = this.postService.getPostById(null, postId);
 		return new ResponseEntity<PostDto>(postDto, HttpStatus.OK);
 	}
+
 	// update
+	@PutMapping("/posts/{postId}")
+	public ResponseEntity<PostDto> updatePost(@RequestBody PostDto postDto, @PathVariable Integer postId) {
+		PostDto updatePost = this.postService.updatePost(postDto,postId);
+		return new ResponseEntity<PostDto>(updatePost, HttpStatus.OK);
+	}
 
 	// delete
+	@DeleteMapping("/posts/{postId}")
+	public ApiResponse deletePost(@PathVariable Integer postId) {
+		this.postService.deletePost(postId);
+		return new ApiResponse("Post is sucessfully Deleted", true);
+	}
 }
