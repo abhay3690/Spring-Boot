@@ -2,16 +2,15 @@ package net.abhay.controllers;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 
-import javax.imageio.ImageReader;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.util.StreamUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -21,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.servlet.http.HttpServletResponse;
+
 import net.abhay.blog.services.FileService;
 import net.abhay.blog.services.PostService;
 import net.abhay.config.AppConstatns;
@@ -126,10 +126,14 @@ public class PostController {
 	}
 
 	// method serve file
-	@GetMapping(value = "post/image /{imageName}", produces = MediaType.IMAGE_JPEG_VALUE)
+	@GetMapping(value = "post/image /{imageName}", produces = {MediaType.IMAGE_JPEG_VALUE,MediaType.IMAGE_PNG_VALUE})
 	public void downloadImage(@PathVariable() String imageName, HttpServletResponse response) throws IOException {
 		InputStream resource = this.fileService.getResource(path, imageName);
+//		String contentType = someCondition ? MediaType.IMAGE_JPEG_VALUE : MediaType.IMAGE_PNG_VALUE;
+//		response.setContentType(contentType);
 		response.setContentType(MediaType.IMAGE_JPEG_VALUE);
+		response.setContentType(MediaType.IMAGE_PNG_VALUE);
+
 		StreamUtils.copy(resource, response.getOutputStream());
 
 	}
