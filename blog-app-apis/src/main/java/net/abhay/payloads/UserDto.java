@@ -28,5 +28,5 @@ public class UserDto {
 	@Pattern(regexp = "^[a-zA-Z0-9@#$%^&+=]{8,}$")
 	private String password;
 	private String about;
-	private Set<Comment> comments =new HashSet<>();
+	private Set<CommentDto> comments =new HashSet<>();
 }
