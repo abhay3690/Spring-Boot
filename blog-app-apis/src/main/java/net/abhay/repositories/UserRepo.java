@@ -9,5 +9,7 @@ import net.abhay.entities.User;
 
 @Repository
 public interface UserRepo extends JpaRepository<User, Integer> {
+
 	Optional<User> findByEmail(String email);
+	
 }
