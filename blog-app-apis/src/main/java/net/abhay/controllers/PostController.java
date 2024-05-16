@@ -28,11 +28,13 @@ import net.abhay.payloads.ApiResponse;
 import net.abhay.payloads.PostDto;
 import net.abhay.payloads.PostResponse;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
+
 @RequestMapping("/api/")
 public class PostController {
 
@@ -67,6 +69,7 @@ public class PostController {
 	}
 
 	// get all posts
+
 	@GetMapping("/posts")
 	public ResponseEntity<PostResponse> getAllPost(
 			@RequestParam(value = "pageNumber", defaultValue = AppConstatns.PAGE_NUMBER, required = false) Integer pageNumber,

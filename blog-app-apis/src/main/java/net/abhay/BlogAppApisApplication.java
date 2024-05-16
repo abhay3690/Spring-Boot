@@ -9,13 +9,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
-public class BlogAppApisApplication implements CommandLineRunner{
+//public class BlogAppApisApplication {
+
+public class BlogAppApisApplication implements CommandLineRunner {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+
 	public static void main(String[] args) {
 		SpringApplication.run(BlogAppApisApplication.class, args);
 	}
-	
+
 	@Bean
 	public ModelMapper modelMapper() {
 		return new ModelMapper();
@@ -23,7 +26,7 @@ public class BlogAppApisApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-System.out.println(this.passwordEncoder.encode("123"));		
+		System.out.println(this.passwordEncoder.encode("4521"));
 	}
 
 }
