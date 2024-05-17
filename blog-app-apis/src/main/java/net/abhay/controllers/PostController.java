@@ -36,7 +36,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RestController
 
 @RequestMapping("/api/")
-@CrossOrigin(origins = ("*"))
+@CrossOrigin(origins = ("*+"))
 public class PostController {
 
 	@Autowired
