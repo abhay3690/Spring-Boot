@@ -4,11 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import net.abhay.security.CustomUserDetailService;
 import net.abhay.security.JwtAuthenticationEntryPoint;
@@ -28,17 +30,17 @@ public class SecurityConfig {
 
 	private JwtAuthenticationFilter jwtAuthenticationFilter;
 
-//	@Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-// 
-//        http.csrf(csrf -> csrf.disable());
-//        http.authorizeHttpRequests(authorize -> authorize.requestMatchers("/api/v1/auth/login").permitAll().anyRequest().authenticated());        
-//        http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-//        http.exceptionHandling(e -> e.authenticationEntryPoint(this.jwtAuthenticationEntryPoint));
-//        http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-//        http.addFilterBefore(this.jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-//        return http.build();
-//    }
+	@Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+ 
+        http.csrf(csrf -> csrf.disable());
+        http.authorizeHttpRequests(authorize -> authorize.requestMatchers("/api/v1/auth/login").permitAll().anyRequest().authenticated());        
+        http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+        http.exceptionHandling(e -> e.authenticationEntryPoint(this.jwtAuthenticationEntryPoint));
+        http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+        http.addFilterBefore(this.jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        return http.build();
+    }
 //	@Bean
 //	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
 //		
@@ -70,11 +72,18 @@ public class SecurityConfig {
 //		        http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
 //		        return http.build();
 //		    }
+	
+	
 	@Bean
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+	protected void configure(AuthenticationManagerBuilder builder) throws Exception {
 		System.out.println("This is check purpose");
-		auth.userDetailsService(this.customUserDetailService).passwordEncoder(passwordEncoder());
+		builder.userDetailsService(this.customUserDetailService).passwordEncoder(passwordEncoder());
 	}
+//	@Bean
+//	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//		System.out.println("This is check purpose");
+//		auth.userDetailsService(this.customUserDetailService).passwordEncoder(passwordEncoder());
+//	}
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
