@@ -2,9 +2,11 @@ package com.ins.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.ins.exception.UserException;
 import com.ins.modal.User;
-
+@Service
 public interface UserService  {
 	public User registerUser(User user) throws UserException;
 	public User findUserByIdUser(Integer userId) throws UserException;
