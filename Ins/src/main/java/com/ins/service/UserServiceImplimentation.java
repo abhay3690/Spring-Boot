@@ -4,13 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
+
+import org.springframework.stereotype.Service;
 
 import com.ins.dto.UserDto;
 import com.ins.exception.UserException;
 import com.ins.modal.User;
 import com.ins.repository.UserRepository;
-
+@Service
 public class UserServiceImplimentation implements UserService {
 	@Autowired
 	private UserRepository userRepository;
@@ -79,35 +80,63 @@ public class UserServiceImplimentation implements UserService {
 		followUser.getFollower().add(follower);
 		
 		userRepository.save(followUser);
-		userRepository.save(reqUser	);
+		userRepository.save(reqUser);
 		
-		
-			
-		
-		return null;
+		return "yOU ARE FOLLOwing "+followUser.getUsername();
 	}
 
 	@Override
-	public String unFollowUser(Integer reqUserId, Integer followUsaerID) throws UserException {
-		// TODO Auto-generated method stub
-		return null;
+	public String unFollowUser(Integer reqUserId, Integer followUserId) throws UserException {
+		User reqUser = findUserByIdUser(reqUserId);
+		User followUser = findUserByIdUser(followUserId);
+		
+		UserDto follower = new UserDto();
+		follower.setEmail(reqUser.getEmail());
+		follower.setId(reqUser.getId());
+//		follower.setName(reqUser.getName());
+		follower.setUserImage(reqUser.getUserImage());
+		follower.setUsername(reqUser.getUsername());
+		
+		UserDto following = new UserDto();
+		following.setEmail(reqUser.getEmail());
+		following.setId(reqUser.getId());
+//		following.setName(reqUser.getName());
+		following.setUserImage(reqUser.getUserImage());
+		following.setUsername(reqUser.getUsername());
+		
+		reqUser.getFollwing().remove(following);
+		followUser.getFollower().remove(follower);
+		
+		userRepository.save(followUser);
+		userRepository.save(reqUser);
+		
+		return "You have Unfollowed " +followUser.getUsername();
 	}
 
 	@Override
 	public List<User> findUserByIds(List<Integer> userIds) throws UserException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		List<User> users = userRepository.findAllUsersByUserIds(userIds);
+		
+		return users;
 	}
 
 	@Override
 	public List<User> searchUser(String query) throws UserException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		List<User> users = userRepository.findByQuery(query);
+		if (users.size() == 0) {
+			throw new UserException("USer not Found");
+		}
+		return users;
 	}
 
 	@Override
 	public User updateUserDeatails(User updatedUser, User existingUser) throws UserException {
-		// TODO Auto-generated method stub
+		if (updatedUser.getEmail() != null) {
+			existingUser.setEmail(updatedUser.getEmail());
+		}
+	
 		return null;
 	}
 
