@@ -10,12 +10,13 @@ import lombok.Setter;
 
 
 @Entity
-@Getter@Setter
+@Getter
+@Setter
 
 public class Role {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
 	private int id;
 
 	private String Name;

@@ -5,6 +5,7 @@ import java.util.List;
 import net.abhay.payloads.UserDto;
 
 public interface UserService {
+	UserDto registerNewUser(UserDto userDto);
 
 	UserDto createUser(UserDto user);
 

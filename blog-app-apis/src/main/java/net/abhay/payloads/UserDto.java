@@ -12,6 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import net.abhay.entities.Comment;
+import net.abhay.entities.Role;
 
 @NoArgsConstructor
 @Getter
@@ -29,6 +30,8 @@ public class UserDto {
 	@Size(min = 3, max = 10, message = "Password must be min 3 chars and max 10 chars !!")
 	@Pattern(regexp = "^[a-zA-Z0-9@#$%^&+=]{8,}$")
 	private String password;
+	@NotEmpty
 	private String about;
 	private Set<CommentDto> comments = new HashSet<>();
+	private Set<Role> roles = new HashSet();
 }
