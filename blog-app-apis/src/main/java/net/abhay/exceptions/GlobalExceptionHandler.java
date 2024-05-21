@@ -1,4 +1,4 @@
- package net.abhay.exceptions;
+package net.abhay.exceptions;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,21 +16,26 @@ import net.abhay.payloads.ApiResponse;
 public class GlobalExceptionHandler {
 
 	@ExceptionHandler(ResourceNotFoundException.class)
-	public ResponseEntity<ApiResponse> resourceNotFoundExceptionHandler(ResourceNotFoundException ex){
+	public ResponseEntity<ApiResponse> resourceNotFoundExceptionHandler(ResourceNotFoundException ex) {
 		String message = ex.getMessage();
 		ApiResponse apiResponse = new ApiResponse(message, false);
-		return new ResponseEntity<ApiResponse>(apiResponse,HttpStatus.NOT_FOUND);
+		return new ResponseEntity<ApiResponse>(apiResponse, HttpStatus.NOT_FOUND);
 	}
-	
+
 	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public ResponseEntity<Map<String, String>> handleMethodArgsNotValidExption(MethodArgumentNotValidException ex)
-	{
+	public ResponseEntity<Map<String, String>> handleMethodArgsNotValidExption(MethodArgumentNotValidException ex) {
 		Map<String, String> resp = new HashMap<>();
 		ex.getBindingResult().getAllErrors().forEach((error) -> {
-			String fieldName = ((FieldError)error).getField();
+			String fieldName = ((FieldError) error).getField();
 			String message = error.getDefaultMessage();
 			resp.put(fieldName, message);
 		});
-		return new ResponseEntity<>(resp,HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(resp, HttpStatus.BAD_REQUEST);
+	}
+	@ExceptionHandler(ApiException.class)
+	public ResponseEntity<ApiResponse> handleApiException(ApiException ex){
+		String message = ex.getMessage();
+		ApiResponse apiResponse = new ApiResponse(message, false);
+		return new ResponseEntity<ApiResponse>(apiResponse,HttpStatus.BAD_REQUEST);
 	}
 }
