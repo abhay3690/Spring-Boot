@@ -1,6 +1,8 @@
 package com.ins.dto;
 
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -13,7 +15,6 @@ import lombok.ToString;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Data
 
 public class UserDto {
@@ -21,6 +22,7 @@ public class UserDto {
 	private String username;
 	private String email;
 	private String name;
-	private String userImage;	
+	private String userImage;
+
 
 }
