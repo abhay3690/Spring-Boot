@@ -13,20 +13,22 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import net.abhay.entities.Comment;
 
-@NoArgsConstructor@Getter@Setter
+@NoArgsConstructor
+@Getter
+@Setter
 public class UserDto {
 
 	private int id;
 	@NotEmpty
-	@Size(min = 3,message = "Username must be min of 3 characters")
+	@Size(min = 3, message = "Username must be min of 3 characters")
 	private String name;
 	@Email(message = "Please Enter Valid Email !!")
-    @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")
+	@Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")
 	private String email;
 	@NotEmpty
-	@Size(min=3,max = 10,message = "Password must be min 3 chars and max 10 chars !!")
+	@Size(min = 3, max = 10, message = "Password must be min 3 chars and max 10 chars !!")
 	@Pattern(regexp = "^[a-zA-Z0-9@#$%^&+=]{8,}$")
 	private String password;
 	private String about;
-	private Set<CommentDto> comments =new HashSet<>();
+	private Set<CommentDto> comments = new HashSet<>();
 }
