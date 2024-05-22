@@ -24,11 +24,11 @@ public class UserDto {
 	@Size(min = 3, message = "Username must be min of 3 characters")
 	private String name;
 	@Email(message = "Please Enter Valid Email !!")
-	@Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")
+//	@Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")
 	private String email;
 	@NotEmpty
 	@Size(min = 3, max = 10, message = "Password must be min 3 chars and max 10 chars !!")
-	@Pattern(regexp = "^[a-zA-Z0-9@#$%^&+=]{8,}$")
+//	@Pattern(regexp = "^[a-zA-Z0-9@#$%^&+=]{8,}$")
 	private String password;
 	@NotEmpty
 	private String about;
