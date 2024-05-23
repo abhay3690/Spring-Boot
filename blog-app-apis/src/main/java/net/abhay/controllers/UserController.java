@@ -22,6 +22,7 @@ import net.abhay.payloads.ApiResponse;
 import net.abhay.payloads.UserDto;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/users")
 //@CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
