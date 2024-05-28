@@ -10,14 +10,12 @@ import com.work.hotl.service.BookingService;
 import com.work.hotl.service.IRoomService;
 import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.codec.binary.Base64;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.sql.rowset.serial.SerialBlob;
-import javax.swing.text.html.Option;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Blob;
@@ -48,7 +46,7 @@ public class RoomController {
         return roomService.getAllRoomType();
     }
 
-    @GetMapping("all-rooms")
+    @GetMapping("/all-rooms")
     public ResponseEntity<List<RoomResponse>> getAllRooms() throws ResourceNotFoundException, SQLException {
         List<Room> rooms = roomService.getAllRoom();
         List<RoomResponse> roomResponses = new ArrayList<>();
@@ -106,7 +104,6 @@ public class RoomController {
         return new RoomResponse(room.getId(), room.getRoomType(), room.getRoomPrice(), room.isBooked(), photoBytes, bookingInfo);
     }
 
-    private List<BookedRoom> getAllBookingsByRoomId(Long roomId) {
-        return bookingService.getAllBokingsByRoomId(roomId);
-    }
+
+
 }

@@ -1,14 +1,10 @@
 package com.work.hotl.Response;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Lob;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.tomcat.util.codec.binary.Base64;
 
 import java.math.BigDecimal;
-import java.sql.Blob;
 
 import java.util.List;
 
