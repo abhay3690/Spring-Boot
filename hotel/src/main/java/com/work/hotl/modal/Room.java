@@ -3,7 +3,6 @@ package com.work.hotl.modal;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
@@ -25,8 +24,9 @@ public class Room {
     private String roomType;
     private BigDecimal roomPrice;
     private boolean isBooked =false;
+    @Lob
     private Blob Photo;
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="room", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<BookedRoom> bookings;
 
     public Room(){
@@ -40,16 +40,16 @@ public class Room {
         booking.setRoom(this);
         isBooked = true;
         String RandomStringUtils;
-        String bookingCode = RandomStringGenerator.generateRandomString(10);
+
+        String bookingCode = generateRandomString(10);
+        booking.setBookingConfirmationCode(bookingCode);
         booking.setBookingConfirmationCode(bookingCode);
     }
-    public class RandomStringGenerator {
-        public static String generateRandomString(int length) {
-            return new Random().ints(48, 58)
-                    .limit(length)
-                    .mapToObj(i -> (char) i)
-                    .map(Object::toString)
-                    .collect(Collectors.joining());
-        }
-
+    public static String generateRandomString(int length) {
+        return new Random().ints(48, 58)
+                .limit(length)
+                .mapToObj(i -> (char) i)
+                .map(Object::toString)
+                .collect(Collectors.joining());
     }
+}
