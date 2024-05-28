@@ -1,7 +1,5 @@
 package com.work.hotl.Response;
 
-import com.work.hotl.modal.Room;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
