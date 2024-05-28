@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+
 @Entity
 @Getter
 @Setter
@@ -16,27 +17,27 @@ public class BookedRoom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name="check_In")
+    @Column(name = "check_In")
     private LocalDate checkInDate;
-    @Column(name="check_Out")
+    @Column(name = "check_Out")
     private LocalDate checkOutDate;
-    @Column(name="Guest_FullName")
+    @Column(name = "Guest_FullName")
     private String guestFullName;
-    @Column(name="Guest_Email")
+    @Column(name = "Guest_Email")
     private String guestEmail;
-    @Column(name="Adult")
+    @Column(name = "Adult")
     private int NumOfAdults;
-    @Column(name="Children")
+    @Column(name = "Children")
     private int NumOfChildren;
-    @Column(name="Total_Guest")
+    @Column(name = "Total_Guest")
     private int totalNumberOfGuest;
-    @Column(name="confirmation_Code")
+    @Column(name = "confirmation_Code")
     private String bookingConfirmationCode;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="Room_Id")
+    @JoinColumn(name = "Room_Id")
     private Room room;
 
-    public void calculateNumberOfGuest(){
+    public void calculateNumberOfGuest() {
         this.totalNumberOfGuest = this.NumOfAdults + NumOfChildren;
     }
 
