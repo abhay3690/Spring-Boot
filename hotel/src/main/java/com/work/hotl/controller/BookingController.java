@@ -21,6 +21,7 @@ import java.util.List;
 public class BookingController {
     private final IBookingService bookingService;
     private final IRoomService roomService;
+
     @GetMapping("all-bookings")
     public ResponseEntity<List<BookingResponse>> getAllBookings(){
         List<BookedRoom> bookings =bookingService.getAllBookings();
@@ -31,8 +32,6 @@ public class BookingController {
         }
         return ResponseEntity.ok(bookingResponses);
     }
-
-
 
     @GetMapping("/confirmation/{confirmationcode}")
     public ResponseEntity<?> getBookingByConfirmationCode(@PathVariable String confirmationCode){
