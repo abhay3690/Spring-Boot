@@ -24,10 +24,10 @@ public class BookingService implements IBookingService {
     }
 
 
-    @Override
-    public List<BookedRoom> getBookingsByUserEmail(String email) {
-        return bookingRepository.findByGuestEmail(email);
-    }
+//    @Override
+//    public List<BookedRoom> getBookingsByUserEmail(String email) {
+//        return bookingRepository.findByGuestEmail(email);
+//    }
 
     @Override
     public void cancelBooking(Long bookingId) {
@@ -54,8 +54,7 @@ public class BookingService implements IBookingService {
 
     @Override
     public BookedRoom findByBookingConfirmationCode(String confirmationCode) {
-        return bookingRepository.findByBookingConfirmationCode(confirmationCode).orElseThrow(() -> new ResourceNotFoundException("No booking found with booking code :" + confirmationCode));
-
+        return bookingRepository.findByBookingConfirmationCode(confirmationCode);
     }
 
 
@@ -80,5 +79,6 @@ public class BookingService implements IBookingService {
                                 && bookingRequest.getCheckOutDate().equals(bookingRequest.getCheckInDate()))
                 );
     }
-    x
+
+
 }

@@ -71,7 +71,7 @@ public class RoomController {
 
     @PutMapping("update/{roomId}")
     public ResponseEntity<RoomResponse> updateRoom(@PathVariable Long roomId, @RequestParam(required = false) String roomType, @RequestParam(required = false) BigDecimal roomPrice, @RequestParam(required = false) MultipartFile photo) throws IOException, SQLException, ResourceNotFoundException {
-        byte[] photoBytes = photo != null && !photo.isEmpty()? photo.getBytes() : roomService.getRoomPhotoByRoomId(roomId);
+        byte[] photoBytes = photo != null && !photo.isEmpty() ? photo.getBytes() : roomService.getRoomPhotoByRoomId(roomId);
         Blob phototBlob = photoBytes != null && photoBytes.length > 0 ? new SerialBlob(photoBytes) : null;
         Room theRoom = roomService.updateRoom(roomId, roomType, roomPrice, photoBytes);
         theRoom.setPhoto(phototBlob);
@@ -79,13 +79,14 @@ public class RoomController {
         return ResponseEntity.ok(roomResponse);
 
     }
+
     @GetMapping("/room/{roomId}")
     public ResponseEntity<Optional<RoomResponse>> getRoomById(@PathVariable Long roomId) throws ResourceNotFoundException {
         Optional<Room> theRoom = roomService.getRoomById(roomId);
-        return theRoom.map(room->{
+        return theRoom.map(room -> {
             RoomResponse roomResponse = getRoomResponse(room);
             return ResponseEntity.ok(Optional.of(roomResponse));
-        }).orElseThrow(() ->new ResourceNotFoundException("Room not found"));
+        }).orElseThrow(() -> new ResourceNotFoundException("Room not found"));
     }
 
 
@@ -104,6 +105,9 @@ public class RoomController {
         return new RoomResponse(room.getId(), room.getRoomType(), room.getRoomPrice(), room.isBooked(), photoBytes, bookingInfo);
     }
 
+    private List<BookedRoom> getAllBookingsByRoomId(Long id) {
+        return null;
+    }
 
 
 }

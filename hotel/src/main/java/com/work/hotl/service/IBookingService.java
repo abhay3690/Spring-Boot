@@ -5,7 +5,7 @@ import com.work.hotl.modal.BookedRoom;
 import java.util.List;
 
 public interface IBookingService {
-    List<BookedRoom> getBookingsByUserEmail(String email);
+//    List<BookedRoom> getBookingsByUserEmail(String email);
 
     void cancelBooking(Long bookingId);
 
