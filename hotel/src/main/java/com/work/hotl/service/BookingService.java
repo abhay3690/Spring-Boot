@@ -80,5 +80,6 @@ public class BookingService implements IBookingService {
                                 && bookingRequest.getCheckOutDate().equals(bookingRequest.getCheckInDate()))
                 );
     }
-    x
+
+
 }
