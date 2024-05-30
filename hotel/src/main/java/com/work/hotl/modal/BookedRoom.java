@@ -31,7 +31,7 @@ public class BookedRoom {
     private int NumOfChildren;
     @Column(name = "Total_Guest")
     private int totalNumberOfGuest;
-    @Setter
+
     @Column(name = "confirmation_Code")
     private String bookingConfirmationCode;
     @ManyToOne(fetch = FetchType.LAZY)
@@ -47,10 +47,9 @@ public class BookedRoom {
         calculateNumberOfGuest();
     }
 
+
     public void setNumOfAdults(int numOfAdults) {
         NumOfAdults = numOfAdults;
         calculateNumberOfGuest();
     }
-
-
 }
