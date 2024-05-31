@@ -1,0 +1,34 @@
+package com.ins.service.impl;
+
+import java.util.List;
+import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ins.Repository.UserRepository;
+import com.ins.modal.User;
+import com.ins.service.UserServices;
+
+@Service
+public class UserServiceImplement implements UserServices  {
+	@Autowired
+	private UserRepository userRepository;
+	@Override
+	public User saveUser(User user) {
+		String randomUserId =UUID.randomUUID().toString();
+		user.setId(randomUserId);
+		return userRepository.save(user);
+	}
+	@Override
+	public List<User> getAllUser() {
+
+		return userRepository.findAll();
+	}
+	@Override
+	public User getUser(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
