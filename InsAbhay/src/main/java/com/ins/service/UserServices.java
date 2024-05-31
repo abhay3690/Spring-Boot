@@ -9,6 +9,6 @@ import com.ins.modal.User;
 public interface UserServices {
 	User saveUser(User user);
 	List<User> getAllUser();
-	User getUser(Integer id);
+	User getUser(String id);
 
 }

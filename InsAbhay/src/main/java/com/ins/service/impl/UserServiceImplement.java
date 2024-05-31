@@ -1,8 +1,10 @@
 package com.ins.service.impl;
 
+import java.lang.module.ResolutionException;
 import java.util.List;
 import java.util.UUID;
 
+import com.ins.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,10 +27,12 @@ public class UserServiceImplement implements UserServices  {
 
 		return userRepository.findAll();
 	}
+
 	@Override
-	public User getUser(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+	public User getUser(String id) {
+		User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User is not found With id : " + id));
+		return user;
 	}
+
 
 }
