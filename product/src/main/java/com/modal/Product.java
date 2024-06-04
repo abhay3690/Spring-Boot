@@ -1,43 +1,37 @@
 package com.modal;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import jakarta.annotation.Generated;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-@Builder
 @Entity
 public class Product {
 	@Id
-	@Column(name = "ID")
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private int pid;
 	@Column(name = "name" ,length = 20)
-	private String title;
+	private String ptitle;
 	@Column(name = "price" ,length = 20)
 	private String price;
 	@Column(name = "image" ,length = 20)
-	private String image;
+	private String pimage;
 	@Column(name = "discription" ,length = 100)
-	private String discription;
+	private String pdiscription;
 	
 	@ManyToOne
-	private Seller seller; 
+	private Seller seller;
 	
 }

@@ -1,22 +1,18 @@
 package com.service.impl;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.exception.ResourceNotFoundException;
-import com.modal.Product;
+
 import com.modal.Seller;
 import com.payload.SellerDto;
 import com.repository.ProductRepo;
 import com.repository.SellerRepo;
 import com.service.SellerService;
-
-import net.abhay.entities.Post;
-import net.abhay.payloads.PostDto;
 
 
 @Service
@@ -35,7 +31,7 @@ public class SellerServiceImpl implements SellerService{
 			seller.setName(sellerDto.getName());
 			seller.setPhonenumber(seller.getPhonenumber());
 			seller.setAddress(sellerDto.getAddress());
-			seller.setProduct(seller.getProduct());
+			seller.setProducts(seller.getProducts());
 			
 			Seller newseller = this.sellerRepo.save(seller);
 			return this.modelMapper.map(newseller, SellerDto.class);
@@ -48,7 +44,7 @@ public class SellerServiceImpl implements SellerService{
 		seller.setName(sellerDto.getName());
 		seller.setPhonenumber(seller.getPhonenumber());
 		seller.setAddress(sellerDto.getAddress());
-		seller.setProduct(seller.getProduct());
+		seller.setProducts(seller.getProducts());
 		Seller updatedPost = this.sellerRepo.save(seller);
 		return this.modelMapper.map(updatedPost, SellerDto.class);
 	}
@@ -71,10 +67,11 @@ public class SellerServiceImpl implements SellerService{
 	}
 	@Override
 	public List<SellerDto> searchProducts(String keyword) {
-		List<Seller> sellers = this.sellerRepo.searchByTitle("%" + keyword + "%");
-		List<SellerDto> sellerDtos = sellers.stream().map((seller) -> this.modelMapper.map(seller, SellerDto.class))
-				.collect(Collectors.toList());
-		return sellerDtos;
+//		List<Seller> sellers = this.sellerRepo.searchByTitle("%" + keyword + "%");
+//		List<SellerDto> sellerDtos = sellers.stream().map((seller) -> this.modelMapper.map(seller, SellerDto.class))
+//				.collect(Collectors.toList());
+//		return sellerDtos;
+		return null;
 	}
 
 }
