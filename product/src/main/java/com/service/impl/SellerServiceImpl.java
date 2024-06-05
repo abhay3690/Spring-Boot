@@ -55,6 +55,7 @@ public class SellerServiceImpl implements SellerService{
 		seller.setPhonenumber(sellerDto.getPhonenumber());
 		seller.setAddress(sellerDto.getAddress());
 		Seller updatedSeller = this.sellerRepo.save(seller);
+		
 		return this.modelMapper.map(updatedSeller, SellerDto.class);
 	}
 	@Override
@@ -75,8 +76,8 @@ public class SellerServiceImpl implements SellerService{
 //		Sort sort =null;
 		Sort sort = (sortDir.equalsIgnoreCase("asc")) ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
 		/*
-		 * if(sortDir.equalsIgnoreCase("asc")) { sort = Sort.by(sortBy).ascending();
-		 * }else { sort = Sort.by(sortBy).descending(); }
+		  if(sortDir.equalsIgnoreCase("asc")) { sort = Sort.by(sortBy).ascending();
+		  }else { sort = Sort.by(sortBy).descending(); }
 		 */
 		Pageable p = PageRequest.of(pageNumber, pageSize, sort /* Sort.by(sortBy).descending() */);
 		Page<Seller> pageSeller = this.sellerRepo.findAll(p);
