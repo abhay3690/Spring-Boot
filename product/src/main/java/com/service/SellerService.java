@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.payload.SellerDto;
+import com.payload.SellerResponse;
 import com.payload.ServiceResponse;
 
 
@@ -23,12 +24,12 @@ public interface SellerService {
 	SellerDto getSellerById(int sellerId);
 	
 	//get all
-//	ServiceResponse getAllSeller(Integer pageNumber, Integer pageSize, String sortBy, String sortDir);
+	SellerResponse getAllSeller(Integer pageNumber, Integer pageSize, String sortBy, String sortDir);
 	
 	// get All posts By User
 	List<SellerDto> getSellersByProduct(int productId);
 	
 	// search posts
-	List<SellerDto> searchProducts(String keyword);	
+	List<SellerDto> searchSellers(String keyword);	
 
 }

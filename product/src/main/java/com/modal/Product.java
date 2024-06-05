@@ -1,16 +1,24 @@
 package com.modal;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 
 @Getter
 @Setter
@@ -31,7 +39,13 @@ public class Product {
 	@Column(name = "discription" ,length = 100)
 	private String pdiscription;
 	
-	@ManyToOne
-	private Seller seller;
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinTable(
+	    name = "product_seller",
+	    joinColumns = @JoinColumn(name = "product_id"),
+	    inverseJoinColumns = @JoinColumn(name = "seller_id")
+	)
+	private List<Seller> sellers = new ArrayList<>();
 	
 }
