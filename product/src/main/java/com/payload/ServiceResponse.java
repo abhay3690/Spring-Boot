@@ -11,6 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ServiceResponse {
+	
 	private List<SellerDto> content;
 	private int pageNumber;
 	private int pageSize;

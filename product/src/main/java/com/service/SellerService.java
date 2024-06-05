@@ -11,7 +11,7 @@ import com.payload.ServiceResponse;
 
 @Service
 public interface SellerService {
-
+	// create
 	SellerDto createSeller(SellerDto sellerDto,int productId);
 	
 	// update
