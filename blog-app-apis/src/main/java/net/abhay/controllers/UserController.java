@@ -38,7 +38,7 @@ public class UserController {
 	}
 
 	// Put- Update User
-	@PutMapping("/{userId}")
+	@PutMapping("/{productId}")
 	public ResponseEntity<UserDto> updateUser(@Valid @RequestBody UserDto userDto, @PathVariable("userId") int userId) {
 		UserDto updateUser = this.userService.updateUser(userDto, userId);
 		return ResponseEntity.ok(updateUser);
@@ -46,14 +46,14 @@ public class UserController {
 	//Admin
 	// Delete User
 	@PreAuthorize("hasRole('ADMIN')")
-	@DeleteMapping("{userId}")
+	@DeleteMapping("{productId}")
 	public ResponseEntity<ApiResponse> deleteUser(@PathVariable int userId) {
 		this.userService.deleteUser(userId);
 		return new ResponseEntity<>(new ApiResponse("User Deleted Successfully", true), HttpStatus.OK);
 	}
 
 	// Get User
-	@GetMapping("{userId}")
+	@GetMapping("{productId}")
 	public ResponseEntity<UserDto> getSingleUser(@PathVariable int userId) {
 		UserDto userById = this.userService.getUserById(userId);
 		return ResponseEntity.ok(userById);
