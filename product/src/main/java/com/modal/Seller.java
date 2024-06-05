@@ -24,11 +24,10 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Builder
-@Table(name ="seller")
 @Entity
 public class Seller {
 	@Id
-	@Column(name = "ID")
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column(name = "name" ,length = 20)
@@ -37,8 +36,9 @@ public class Seller {
 	private Long phonenumber;
 	@Column(name = "address" ,length = 100)
 	private String address;
-	@OneToMany(mappedBy = "seller", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Product> product = new ArrayList<>();
+	
 	
 
+	@OneToMany(mappedBy = "seller", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Product> products = new ArrayList<>();
 }

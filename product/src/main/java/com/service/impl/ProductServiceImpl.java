@@ -24,12 +24,14 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDto createProduct(ProductDto productDto) {
-        Product product = this.modelMapper.map(productDto, Product.class);
-        product.setId(productDto.getId());
-        product.setTitle(productDto.getTitle());
-        product.setImage(productDto.getImage());
-        product.setDiscription(productDto.getDiscription());
+        
+    	Product product = this.modelMapper.map(productDto, Product.class);
+        product.setPid(productDto.getPid());
+        product.setPtitle(productDto.getPtitle());
+        product.setPimage(productDto.getPimage());
+        product.setPdiscription(productDto.getPdiscription());
         product.setPrice(productDto.getPrice());
+        product.setSeller(productDto.getSeller());
         Product savedProduct = productRepo.save(product);
         return modelMapper.map(savedProduct, ProductDto.class);
     }
@@ -40,8 +42,8 @@ public class ProductServiceImpl implements ProductService {
                                              .orElseThrow(() -> new IllegalArgumentException("Product not found with id: " + productId));
 
         // Update existing product with new data
-        product.setTitle(productDto.getTitle());
-        product.setDiscription(productDto.getDiscription());
+        product.setPtitle(productDto.getPtitle());
+        product.setPdiscription(productDto.getPdiscription());
         // You can update other fields similarly
 
         // Save the updated product
