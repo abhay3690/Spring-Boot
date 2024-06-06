@@ -16,6 +16,7 @@ import com.repository.ProductRepo;
 import com.repository.SellerRepo;
 import com.service.SellerService;
 import org.springframework.data.domain.Sort;
+
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Page;
@@ -29,6 +30,8 @@ public class SellerServiceImpl implements SellerService{
 	private ModelMapper modelMapper;
 	@Autowired
 	private ProductRepo productRepo;
+//	@Autowired
+//	private PasswordEncoder passwordEncoder;
 	@Override
 	public SellerDto createSeller(SellerDto sellerDto, int productId) {
 		Product product = this.productRepo.findById(productId)
@@ -40,6 +43,7 @@ public class SellerServiceImpl implements SellerService{
 		seller.setName(sellerDto.getName());
 		seller.setPhonenumber(sellerDto.getPhonenumber());
 		seller.setAddress(sellerDto.getAddress());
+		seller.setPassword(sellerDto.getPassword());
 		seller.setProduct(product);
 		
 		Seller newSeller = this.sellerRepo.save(seller);
@@ -54,6 +58,7 @@ public class SellerServiceImpl implements SellerService{
 		seller.setName(sellerDto.getName());
 		seller.setPhonenumber(sellerDto.getPhonenumber());
 		seller.setAddress(sellerDto.getAddress());
+		seller.setPassword(sellerDto.getPassword());
 		Seller updatedSeller = this.sellerRepo.save(seller);
 		
 		return this.modelMapper.map(updatedSeller, SellerDto.class);

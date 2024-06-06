@@ -1,5 +1,7 @@
 package com.payload;
 
+import jakarta.validation.constraints.NotEmpty;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,5 +19,9 @@ public class SellerDto {
 
 	private String address;
 	
+	@NotEmpty
+	private String password;
+	
 	private ProductDto product;
+	
 }

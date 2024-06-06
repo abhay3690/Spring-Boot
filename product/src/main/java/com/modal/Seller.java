@@ -27,15 +27,18 @@ public class Seller {
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
 	@Column(name = "name" ,length = 20)
 	private String name;
+	
 	@Column(name = "phonenumber" ,length = 10)
 	private Long phonenumber;
+	
 	@Column(name = "address" ,length = 100)
 	private String address;
 	
+	private String password;
 	
-
 	@ManyToOne
 	@JoinColumn(name = "product_id")
 	private Product product;
