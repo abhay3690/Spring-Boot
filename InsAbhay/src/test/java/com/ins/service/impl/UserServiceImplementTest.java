@@ -23,7 +23,6 @@ import com.ins.service.UserServices;
 
 
 public class UserServiceImplementTest {
-
 	@Mock
 	private UserServices userRepository;
 
@@ -106,4 +105,5 @@ public class UserServiceImplementTest {
 		assertEquals("Abhay", retrievedUser.getName());
 		assertEquals("Ganesh gold", retrievedUser.getAddress());
 	}
+	
 }
