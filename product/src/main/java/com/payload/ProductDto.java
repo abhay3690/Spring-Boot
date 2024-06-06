@@ -1,11 +1,9 @@
 package com.payload;
 
-
-
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter; 
+import lombok.Setter;
+ 
 
 @Getter
 @Setter
@@ -21,8 +19,6 @@ public class ProductDto {
 	private String pimage;
 
 	private String pdiscription;
-	
-	
-	
+		
 }
 
