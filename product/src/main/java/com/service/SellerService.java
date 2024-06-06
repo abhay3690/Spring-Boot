@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.payload.ProductDto;
 import com.payload.SellerDto;
 import com.payload.SellerResponse;
 import com.payload.ServiceResponse;
@@ -31,5 +32,6 @@ public interface SellerService {
 	
 	// search posts
 	List<SellerDto> searchSellers(String keyword);	
+
 
 }
