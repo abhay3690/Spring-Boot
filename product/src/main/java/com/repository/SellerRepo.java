@@ -3,6 +3,7 @@ package com.repository;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -19,6 +20,7 @@ public interface SellerRepo extends JpaRepository<Seller, Integer> {
 
     @Query("select s from Seller s where s.name like %:key%")
     List<Seller> searchByTitle(@Param("key") String title);
+//    Optional<Seller> findById(String id);
 }
 
 
