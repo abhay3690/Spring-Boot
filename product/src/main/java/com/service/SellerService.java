@@ -9,29 +9,29 @@ import com.payload.SellerDto;
 import com.payload.SellerResponse;
 import com.payload.ServiceResponse;
 
-
 @Service
 public interface SellerService {
 	// create
-	SellerDto createSeller(SellerDto sellerDto,int productId);
-	
+	SellerDto createSeller(SellerDto sellerDto, int productId);
+
 	// update
-	SellerDto updateSeller(SellerDto sellerDto,int sellerId);
-	
+	SellerDto updateSeller(SellerDto sellerDto, int sellerId);
+
 	// delete
 	void deleteSeller(int sellerId);
-	
+
 	// get single Seller
 	SellerDto getSellerById(int sellerId);
-	
-	//get all
+
+	// get all
 	SellerResponse getAllSeller(Integer pageNumber, Integer pageSize, String sortBy, String sortDir);
-	
+
 	// get All posts By User
 	List<SellerDto> getSellersByProduct(int productId);
-	
-	// search posts
-	List<SellerDto> searchSellers(String keyword);	
 
+	// search posts
+	List<SellerDto> searchSellers(String keyword);
+
+	SellerDto registerNewSeller(SellerDto sellerDto);
 
 }

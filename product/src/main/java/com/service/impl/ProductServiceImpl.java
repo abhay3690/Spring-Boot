@@ -15,8 +15,6 @@ import com.payload.ProductDto;
 import com.repository.ProductRepo;
 import com.service.ProductService;
 
-
-
 @Service
 public class ProductServiceImpl implements ProductService {
 	@Autowired
@@ -74,7 +72,7 @@ public class ProductServiceImpl implements ProductService {
 		Product product = this.productRepo.findById(productId)
 				.orElseThrow(() -> new ResourceNotFoundException("Product", " Id ", productId));
 		this.productRepo.delete(product);
-		
+
 	}
 
 	public Product dtoToProduct(ProductDto productDto) {
@@ -88,6 +86,7 @@ public class ProductServiceImpl implements ProductService {
 //		user.setAbout(userDto.getAbout());
 		return product;
 	}
+
 	public ProductDto productToDto(Product product) {
 		ProductDto productDto = this.modelMapper.map(product, ProductDto.class);
 
@@ -99,31 +98,6 @@ public class ProductServiceImpl implements ProductService {
 //		userDto.setAbout(user.getAbout());
 		return productDto;
 	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 //    @Autowired
 //    private ProductRepo productRepo;

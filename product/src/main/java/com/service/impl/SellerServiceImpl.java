@@ -7,82 +7,92 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.config.AppConstatns;
 import com.exception.ResourceNotFoundException;
 import com.modal.Product;
+import com.modal.Role;
 import com.modal.Seller;
 import com.payload.SellerDto;
 import com.payload.SellerResponse;
 import com.repository.ProductRepo;
+import com.repository.RoleRepo;
 import com.repository.SellerRepo;
 import com.service.SellerService;
 import org.springframework.data.domain.Sort;
-
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Page;
 
-
 @Service
-public class SellerServiceImpl implements SellerService{
+public class SellerServiceImpl implements SellerService {
 	@Autowired
 	private SellerRepo sellerRepo;
 	@Autowired
 	private ModelMapper modelMapper;
 	@Autowired
 	private ProductRepo productRepo;
-//	@Autowired
-//	private PasswordEncoder passwordEncoder;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	@Autowired
+	private RoleRepo roleRepo;
+
 	@Override
 	public SellerDto createSeller(SellerDto sellerDto, int productId) {
 		Product product = this.productRepo.findById(productId)
 				.orElseThrow(() -> new ResourceNotFoundException("Product ", "Product id", productId));
 
-		
 		Seller seller = this.modelMapper.map(sellerDto, Seller.class);
 		seller.setId(sellerDto.getId());
 		seller.setName(sellerDto.getName());
+		seller.setEmail(sellerDto.getEmail());
 		seller.setPhonenumber(sellerDto.getPhonenumber());
 		seller.setAddress(sellerDto.getAddress());
 		seller.setPassword(sellerDto.getPassword());
 		seller.setProduct(product);
-		
+
 		Seller newSeller = this.sellerRepo.save(seller);
 
 		return this.modelMapper.map(newSeller, SellerDto.class);
 	}
+
 	@Override
 	public SellerDto updateSeller(SellerDto sellerDto, int sellerId) {
 		Seller seller = this.sellerRepo.findById(sellerId)
 				.orElseThrow(() -> new ResourceNotFoundException("seller", "seller id", sellerId));
 		seller.setId(sellerDto.getId());
 		seller.setName(sellerDto.getName());
+		seller.setEmail(sellerDto.getEmail());
 		seller.setPhonenumber(sellerDto.getPhonenumber());
 		seller.setAddress(sellerDto.getAddress());
 		seller.setPassword(sellerDto.getPassword());
 		Seller updatedSeller = this.sellerRepo.save(seller);
-		
+
 		return this.modelMapper.map(updatedSeller, SellerDto.class);
 	}
+
 	@Override
 	public void deleteSeller(int sellerId) {
 		Seller seller = this.sellerRepo.findById(sellerId)
 				.orElseThrow(() -> new ResourceNotFoundException("seller", "seller id", sellerId));
 		this.sellerRepo.delete(seller);
-		
+
 	}
+
 	@Override
 	public SellerDto getSellerById(int sellerId) {
 		Seller seller = this.sellerRepo.findById(sellerId)
 				.orElseThrow(() -> new ResourceNotFoundException("Seller", "seller id", sellerId));
 		return this.modelMapper.map(seller, SellerDto.class);
 	}
+
 	@Override
 	public SellerResponse getAllSeller(Integer pageNumber, Integer pageSize, String sortBy, String sortDir) {
 //		Sort sort =null;
 		Sort sort = (sortDir.equalsIgnoreCase("asc")) ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
 		/*
-		  if(sortDir.equalsIgnoreCase("asc")) { sort = Sort.by(sortBy).ascending();
-		  }else { sort = Sort.by(sortBy).descending(); }
+		 * if(sortDir.equalsIgnoreCase("asc")) { sort = Sort.by(sortBy).ascending();
+		 * }else { sort = Sort.by(sortBy).descending(); }
 		 */
 		Pageable p = PageRequest.of(pageNumber, pageSize, sort /* Sort.by(sortBy).descending() */);
 		Page<Seller> pageSeller = this.sellerRepo.findAll(p);
@@ -99,6 +109,7 @@ public class SellerServiceImpl implements SellerService{
 
 		return sellerResponse;
 	}
+
 	@Override
 	public List<SellerDto> getSellersByProduct(int productId) {
 		Product product = this.productRepo.findById(productId)
@@ -110,6 +121,7 @@ public class SellerServiceImpl implements SellerService{
 
 		return sellerDtos;
 	}
+
 	@Override
 	public List<SellerDto> searchSellers(String keyword) {
 		List<Seller> sellers = this.sellerRepo.searchByTitle("%" + keyword + "%");
@@ -117,46 +129,21 @@ public class SellerServiceImpl implements SellerService{
 				.collect(Collectors.toList());
 		return sellerDtos;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	@Override
+	public SellerDto registerNewSeller(SellerDto sellerDto) {
+		Seller seller = this.modelMapper.map(sellerDto, Seller.class);
+		// encode password
+		seller.setPassword(this.passwordEncoder.encode(seller.getPassword()));
+		// roles
+		Role role = this.roleRepo.findById(AppConstatns.NORMAL_USER).get();
+
+		seller.getRoles().add(role);
+
+		Seller newSeller = this.sellerRepo.save(seller);
+		return this.modelMapper.map(newSeller, SellerDto.class);
+	}
+
 //	@Autowired
 //	private SellerRepo sellerRepo;
 //	@Autowired

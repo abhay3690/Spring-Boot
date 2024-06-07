@@ -33,31 +33,58 @@ public class UserServiceImplementTest {
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
 	}
-
+	
 	@Test
 	public void testSaveUser() {
-		User user = new User();
-		user.setId("1");
-		user.setName("Abhay");
-		user.setAddress("Ganesh gold");
+	    // Create a user object
+	    User user = new User();
+	    user.setName("abhay");
+	    user.setAddress("Godrej garden city");
 
-		// Mocking userRepository.save() method
-		when(userRepository.saveUser(any(User.class))).thenReturn(user);
+	    // Mocking userRepository.save() method
+	    when(userRepository.saveUser(any(User.class))).thenReturn(user);
 
-		// Call the method to be tested
-		User savedUser = userService.saveUser(user);
+	    // Call the method to be tested
+	    User savedUser = userService.saveUser(user);
 
-		// Verify that userRepository.save() was called once
-		verify(userRepository, times(1)).saveUser(savedUser);
+	    // Verify that userRepository.save() was called once with the user object passed to saveUser method
+	    verify(userRepository, times(1)).saveUser(user);
 
-		// Assert that the returned user is not null
-		assertNotNull(savedUser);
-		// Assert that the returned user has an ID generated
-		assertNotNull(savedUser.getId());
-		// Assert that the returned user's name and email match the input
-		assertEquals("1", savedUser.getId());
-		assertEquals("Abhay", savedUser.getName());
+	    // Assert that the returned user is not null
+	    assertNotNull(savedUser);
+	    // Assert that the returned user has an ID generated
+	    assertNotNull(savedUser.getId());
+	    // Assert that the returned user's name and address match the input
+	    assertEquals("abhay", savedUser.getName());
+	    assertEquals("Godrej garden city", savedUser.getAddress());
 	}
+
+//
+//	@Test
+//	public void testSaveUser() {
+//		User user = new User();
+//		user.setId("1");
+//		user.setName("Sabhay");
+//		user.setAddress("Ganesha gold");
+//
+//		// Mocking userRepository.save() method
+//		when(userRepository.saveUser(any(User.class))).thenReturn(user);
+//
+//		// Call the method to be tested
+//		User savedUser = userService.saveUser(user);
+//
+//		// Verify that userRepository.save() was called once
+//		verify(userRepository, times(1)).saveUser(savedUser);
+//
+//		// Assert that the returned user is not null
+//		assertNotNull(savedUser);
+//		// Assert that the returned user has an ID generated
+//		assertNotNull(savedUser.getId());
+//		// Assert that the returned user's name and email match the input
+////		assertEquals("2", savedUser.getId());
+//		assertEquals("Sabhay", savedUser.getName());
+//		assertEquals("Ganesha gold", savedUser.getAddress());
+//	}
 
 	@Test
 	public void testGetAllUser() {
@@ -88,7 +115,7 @@ public class UserServiceImplementTest {
 		User user = new User();
 		user.setId("1");
 		user.setName("Abhay");
-		user.setAddress("Ganesh gold");
+		user.setAddress("Godrej garden city");
 
 
 
@@ -103,7 +130,7 @@ public class UserServiceImplementTest {
 		// Assert that the retrieved user's ID, name, and email match the input user
 		assertEquals("1", retrievedUser.getId());
 		assertEquals("Abhay", retrievedUser.getName());
-		assertEquals("Ganesh gold", retrievedUser.getAddress());
+		assertEquals("Godrej garden city", retrievedUser.getAddress());
 	}
 	
 }
