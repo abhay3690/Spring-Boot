@@ -20,7 +20,7 @@ public interface SellerRepo extends JpaRepository<Seller, Integer> {
 
     @Query("select s from Seller s where s.name like %:key%")
     List<Seller> searchByTitle(@Param("key") String title);
-//    Optional<Seller> findById(String id);
+    Optional<Seller> findByEmail(String email);
 }
 
 

@@ -1,9 +1,7 @@
 package com.modal;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -14,14 +12,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-
 
 @Getter
 @Setter
@@ -33,23 +28,17 @@ public class Product {
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int pid;
-	@Column(name = "name" ,length = 20)
+	@Column(name = "name", length = 20)
 	private String ptitle;
-	@Column(name = "price" ,length = 20)
+	@Column(name = "price", length = 20)
 	private String price;
-	@Column(name = "image" ,length = 20)
+	@Column(name = "image", length = 20)
 	private String pimage;
-	@Column(name = "discription" ,length = 100)
+	@Column(name = "discription", length = 100)
 	private String pdiscription;
-	
-	
+
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinTable(
-	    name = "product_seller",
-	    joinColumns = @JoinColumn(name = "product_id"),
-	    inverseJoinColumns = @JoinColumn(name = "seller_id")
-	)
+	@JoinTable(name = "product_seller", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "seller_id"))
 	private List<Seller> sellers = new ArrayList<>();
-	
-	
+
 }

@@ -15,9 +15,12 @@ public class SellerDto {
 
 	private String name;
 
+	private String email;
+
 	private Long phonenumber;
 
 	private String address;
+	
 	
 	@NotEmpty
 	private String password;
