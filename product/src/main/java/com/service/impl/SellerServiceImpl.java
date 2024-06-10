@@ -129,27 +129,6 @@ public class SellerServiceImpl implements SellerService {
 				.collect(Collectors.toList());
 		return sellerDtos;
 	}
-	
-	
-//	@Override
-//	public SellerDto registerNewSeller(SellerDto sellerDto) {
-//	    if (sellerDto.getPassword() == null) {
-//	        throw new IllegalArgumentException("Password cannot be null");
-//	    }
-//
-//	    System.out.println(sellerDto.getEmail() + " " + sellerDto.getPassword());
-//	    Seller seller = this.modelMapper.map(sellerDto, Seller.class);
-//	    
-//	    // Encode password
-//	    seller.setPassword(this.passwordEncoder.encode(seller.getPassword()));
-//
-//	    // Roles
-//	    Role role = this.roleRepo.findById(AppConstatns.NORMAL_USER).orElseThrow(() -> new ResourceNotFoundException("seller", "seller", AppConstatns.NORMAL_USER));
-//	    seller.getRoles().add(role);
-//
-//	    Seller newSeller = this.sellerRepo.save(seller);
-//	    return this.modelMapper.map(newSeller, SellerDto.class);
-//	}
 
 
 	@Override
@@ -161,7 +140,6 @@ public class SellerServiceImpl implements SellerService {
 		System.out.println(sellerDto.getEmail()+" "+sellerDto.getPassword());
 		Seller seller = this.modelMapper.map(sellerDto, Seller.class);
 		// encode password
-//		seller.setPassword(this.passwordEncoder.encode(seller.getPassword()));
 		seller.setPassword(this.passwordEncoder.encode(seller.getPassword()));
 		// roles
 		Role role = this.roleRepo.findById(AppConstatns.NORMAL_USER).get();
