@@ -34,8 +34,8 @@ public class ProductController {
 
     private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
-    @PostMapping("/")
-    public ResponseEntity<ProductDto> createProduct(@Valid @RequestBody ProductDto productDto) {
+    @PostMapping("/")    public ResponseEntity<ProductDto> createProduct(@Valid @RequestBody ProductDto productDto) {
+
         try {
             logger.info("Creating product...");
             ProductDto createProductDto = this.productService.createProduct(productDto);
