@@ -44,7 +44,7 @@ public class ProductApplication implements CommandLineRunner{
 			
 			List<Role> result = this.roleRepo.saveAll(roles);
 			
-//			result.forEach(r -> System.out.println(r.getName()));
+			result.forEach(r -> System.out.println(r.getName()));
 	
 		} catch (Exception e) {
 			// TODO: handle exception

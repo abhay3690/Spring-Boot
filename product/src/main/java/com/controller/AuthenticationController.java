@@ -35,7 +35,7 @@ public class AuthenticationController {
 	// register new user
 
 	@PostMapping("/register")
-	public ResponseEntity<SellerDto> registerUser(@RequestBody SellerDto sellerDto) {
+	public ResponseEntity<SellerDto> registerNewSeller(@RequestBody SellerDto sellerDto) {
 		SellerDto registerUser = this.sellerService.registerNewSeller(sellerDto);
 		return new ResponseEntity<SellerDto>(registerUser, HttpStatus.CREATED);
 	}
