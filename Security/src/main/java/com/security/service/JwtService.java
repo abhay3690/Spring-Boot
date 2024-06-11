@@ -21,7 +21,7 @@ import java.util.function.Function;
 public class JwtService {
     @Autowired
     private BlackList blackList;
-    private static final String SECERET = "!@#$FDGSDFGSGSGSGSHSHSHSSHGFFDSGSFGSSGHSDFSDFSFSFSFSDFSFSFSF";
+    private static final String SECERET = "!@#$FDGSDFGSGSGSGSHSHSHSSHGFFDSGSFGSSGHSDFSDFdfgdsagfdsgfadfsddfgdasfdfasfSFSFSFSDFSFSFSF";
 
     public String generateToken(String userName){
         Map<String, Objects> claims = new HashMap<>();
