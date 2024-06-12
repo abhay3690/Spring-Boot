@@ -13,9 +13,7 @@ import org.springframework.stereotype.Service;
 import com.defaultException.ResourceNotFoundException;
 import com.entity.Product;
 import com.load.ProductDto;
-import com.modal.Seller;
-import com.payload.SellerDto;
-import com.payload.SellerResponse;
+
 import com.repository.ProductRepo;
 import com.repository.ProductResponse;
 import com.service.ProductService;
