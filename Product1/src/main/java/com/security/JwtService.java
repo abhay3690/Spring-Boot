@@ -18,7 +18,7 @@ import io.jsonwebtoken.security.Keys;
 @Service
 public class JwtService {
 
-	private static final String SECRET_KEY = "nRIPfvtw7zPQ7IUeGL+3P1dtupwAc6arSvKCjkgbkjkjbjbnjkhhjkhhkjh05wXRseS5frpmoYMLVqitcX1ZjGf";
+	private static final String SECRET_KEY = "nRIPfvtw7zPQ7IUeGL+3P1dtupwAc6arSvKC05wXRseS5frpmoYMLVqitcX1ZjGf";
 
 	//requirement :
     public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
@@ -50,7 +50,7 @@ public class JwtService {
     }
 
     //generate token for user
-	public String generateToken(UserDetails userDetails) {
+    public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
         return doGenerateToken(claims, userDetails.getUsername());
     }
