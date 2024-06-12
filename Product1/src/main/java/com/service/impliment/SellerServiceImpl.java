@@ -82,4 +82,6 @@ public class SellerServiceImpl implements SellerService {
 		Seller newSeller = this.sellerRepo.save(seller);
 		return this.modelMapper.map(newSeller, SellerDto.class);
 	}
+
+
 }
