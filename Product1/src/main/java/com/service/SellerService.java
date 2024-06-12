@@ -18,4 +18,5 @@ public interface SellerService {
 	void deleteSeller(Long id);
 	
 	SellerDto registerNewSeller(SellerDto sellerDto);
+
 }
