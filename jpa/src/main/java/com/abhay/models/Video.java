@@ -14,7 +14,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-@Builder
+//@Builder
 @Entity
 //@DiscriminatorValue("V")
 public class Video extends Resource{

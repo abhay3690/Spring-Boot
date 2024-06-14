@@ -17,7 +17,7 @@ public class JpaApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(JpaApplication.class, args);
 	}
-	@Bean
+//	@Bean
 	public CommandLineRunner commandLineRunner(AuthorRepository repository, VideoRepository videoRepository){
 		return args -> {
 			var author = Author.builder().firstname("abhay").lastname("suthar").age(22).email("abhaysuthar7777@gmail.com").build();

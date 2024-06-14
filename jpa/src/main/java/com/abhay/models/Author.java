@@ -19,20 +19,25 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-@EqualsAndHashCode(callSuper = true)
+
+//@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@SuperBuilder
+//@SuperBuilder
 @Entity
-@Table(name = "authors") // Optionally, you can specify the table name
-public class Author extends BaseEntity {
-   
-    private String firstname;
-    private String lastname;
-    @Column(unique = true, nullable = false)
-    private String email;
-    private int age;
-    @ManyToMany(mappedBy = "authors")
-    private List<Course> courses;
+@Builder
+//@Table(name = "authors") // Optionally, you can specify the table name
+public class Author {
+//public class Author extends BaseEntity {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	private String firstname;
+	private String lastname;
+	@Column(unique = true, nullable = false)
+	private String email;
+	private int age;
+	@ManyToMany(mappedBy = "authors")
+	private List<Course> courses;
 }
