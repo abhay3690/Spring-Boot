@@ -1,11 +1,6 @@
-package net.abhay.exceptions;
+package com.portf.exception;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter@Setter
-public class ResourceNotFoundException extends RuntimeException {
-
+public class ResourceNotFoundException extends RuntimeException{
 	String resourceName;
 	String fieldName;
 	long fieldValue;
