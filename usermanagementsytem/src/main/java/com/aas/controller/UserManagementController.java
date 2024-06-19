@@ -47,6 +47,10 @@ public class UserManagementController {
 		return ResponseEntity.ok(usersManagementService.getUsersById(userId));
 
 	}
+//	@GetMapping("/admin/get-users/{userName}")
+//	public ResponseEntity<ReqRes> getUsersByName(@PathVariable String userName){
+//		return ResponseEntity.ok(usersManagementService.getIdByUser(userName));
+//	}
 
 	@PutMapping("/admin/update/{userId}")
 	public ResponseEntity<ReqRes> updateUser(@PathVariable Integer userId, @RequestBody OurUsers reqres) {
