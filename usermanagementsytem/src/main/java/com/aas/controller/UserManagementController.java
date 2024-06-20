@@ -39,14 +39,16 @@ public class UserManagementController {
 	@GetMapping("/admin/get-all-users")
 	public ResponseEntity<ReqRes> getAllUsers() {
 		return ResponseEntity.ok(usersManagementService.getAllUsers());
-
 	}
 
 	@GetMapping("/admin/get-users/{userId}")
 	public ResponseEntity<ReqRes> getUSerByID(@PathVariable Integer userId) {
 		return ResponseEntity.ok(usersManagementService.getUsersById(userId));
-
 	}
+//	@GetMapping("/admin/get-users/{userName}")
+//	public ResponseEntity<ReqRes> getUsersByName(@PathVariable String userName){
+//		return ResponseEntity.ok(usersManagementService.getIdByUser(userName));
+//	}
 
 	@PutMapping("/admin/update/{userId}")
 	public ResponseEntity<ReqRes> updateUser(@PathVariable Integer userId, @RequestBody OurUsers reqres) {
@@ -60,10 +62,9 @@ public class UserManagementController {
 		ReqRes response = usersManagementService.getMyInfo(email);
 		return ResponseEntity.status(response.getStatusCode()).body(response);
 	}
-
+	
 	@DeleteMapping("/admin/delete/{userId}")
 	public ResponseEntity<ReqRes> deleteUSer(@PathVariable Integer userId) {
 		return ResponseEntity.ok(usersManagementService.deleteUser(userId));
 	}
-
 }

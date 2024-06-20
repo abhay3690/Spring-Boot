@@ -8,4 +8,6 @@ import com.aas.entity.OurUsers;
 
 public interface UsersRepo extends JpaRepository<OurUsers, Integer> {
 	Optional<OurUsers> findByEmail(String email);
+
+	Optional<OurUsers> findByName(String name);
 }
