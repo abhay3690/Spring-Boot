@@ -14,6 +14,6 @@ public class RandomStringGenerator {
  
     public static void main(String[] args) {
        
-        System.out.println("Random 10-Digit String: " + randomString);
+        System.out.println("Random 10-Digit String: " );
     }
 }
