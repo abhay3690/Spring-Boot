@@ -1,5 +1,6 @@
 package com.portf.controller;
 
+
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -92,6 +93,7 @@ public class UserController {
 		} catch (Exception e) {
 			logger.error("Failed to delete user with ID: {}", userId, e);
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+
 		}
 	}
 }

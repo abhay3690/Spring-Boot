@@ -9,7 +9,7 @@
 		<version>3.2.5</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-<groupId>com.gaurang.blog</groupId>
+	<groupId>com.gaurang.blog</groupId>
 	<artifactId>blog-app-apis</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>blog-app-apis</name>
@@ -38,8 +38,7 @@
 		</dependency>
 
 
-		<!--
-		https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation -->
+		<!--https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
@@ -68,8 +67,7 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
-		<!--
-		https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+		<!--https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>

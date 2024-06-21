@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class OurUsers implements UserDetails{
+public class OurUsers implements UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -30,21 +30,25 @@ public class OurUsers implements UserDetails{
 	private String password;
 	private String city;
 	private String role;
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
 		return List.of(new SimpleGrantedAuthority(role));
 	}
+
 	@Override
 	public String getPassword() {
 		// TODO Auto-generated method stub
 		return password;
 	}
+
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
 		return email;
 	}
+
 	@Override
 	public boolean isAccountNonExpired() {
 		return true;
@@ -64,5 +68,5 @@ public class OurUsers implements UserDetails{
 	public boolean isEnabled() {
 		return true;
 	}
-	
+
 }
