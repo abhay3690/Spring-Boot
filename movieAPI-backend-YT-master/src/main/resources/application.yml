@@ -1,0 +1,33 @@
+spring:
+  datasource:
+    username: root
+    password: Abhay@3690
+    url: jdbc:mysql://localhost:3306/movie
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: abhaysuthar331@gmail.com
+    password: wqnyrorlytvsbeqc
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+project:
+  poster: posters/
+
+base:
+  url: "http://localhost:8080"
