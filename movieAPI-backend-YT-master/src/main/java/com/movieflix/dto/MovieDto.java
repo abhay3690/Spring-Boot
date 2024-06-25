@@ -12,24 +12,24 @@ import java.util.Set;
 @AllArgsConstructor
 public class MovieDto {
 
-    private Integer movieId;
+	private Integer movieId;
 
-    @NotBlank(message = "Please provide movie's title!")
-    private String title;
+	@NotBlank(message = "Please provide movie's title!")
+	private String title;
 
-    @NotBlank(message = "Please provide movie's director!")
-    private String director;
+	@NotBlank(message = "Please provide movie's director!")
+	private String director;
 
-    @NotBlank(message = "Please provide movie's studio!")
-    private String studio;
+	@NotBlank(message = "Please provide movie's studio!")
+	private String studio;
 
-    private Set<String> movieCast;
+	private Set<String> movieCast;
 
-    private Integer releaseYear;
+	private Integer releaseYear;
 
-    @NotBlank(message = "Please provide movie's poster!")
-    private String poster;
+	@NotBlank(message = "Please provide movie's poster!")
+	private String poster;
 
-    @NotBlank(message = "Please provide poster's url!")
-    private String posterUrl;
+	@NotBlank(message = "Please provide poster's url!")
+	private String posterUrl;
 }

@@ -101,7 +101,7 @@ public class MovieServiceImpl implements MovieService {
                 movie.getReleaseYear(),
                 movie.getPoster(),
                 posterUrl
-        );
+		);
 
         return response;
     }

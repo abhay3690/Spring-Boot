@@ -16,25 +16,25 @@ import java.io.InputStream;
 @RequestMapping("/file/")
 public class FileController {
 
-    private final FileService fileService;
+	private final FileService fileService;
 
-    public FileController(FileService fileService) {
-        this.fileService = fileService;
-    }
+	public FileController(FileService fileService) {
+		this.fileService = fileService;
+	}
 
-    @Value("${project.poster}")
-    private String path;
+	@Value("${project.poster}")
+	private String path;
 
-    @PostMapping("/upload")
-    public ResponseEntity<String> uploadFileHandler(@RequestPart MultipartFile file) throws IOException {
-        String uploadedFileName = fileService.uploadFile(path, file);
-        return ResponseEntity.ok("File uploaded : " + uploadedFileName);
-    }
+	@PostMapping("/upload")
+	public ResponseEntity<String> uploadFileHandler(@RequestPart MultipartFile file) throws IOException {
+		String uploadedFileName = fileService.uploadFile(path, file);
+		return ResponseEntity.ok("File uploaded : " + uploadedFileName);
+	}
 
-    @GetMapping(value = "/{fileName}")
-    public void serveFileHandler(@PathVariable String fileName, HttpServletResponse response) throws IOException {
-        InputStream resourceFile = fileService.getResourceFile(path, fileName);
-        response.setContentType(MediaType.IMAGE_PNG_VALUE);
-        StreamUtils.copy(resourceFile, response.getOutputStream());
-    }
+	@GetMapping(value = "/{fileName}")
+	public void serveFileHandler(@PathVariable String fileName, HttpServletResponse response) throws IOException {
+		InputStream resourceFile = fileService.getResourceFile(path, fileName);
+		response.setContentType(MediaType.IMAGE_PNG_VALUE);
+		StreamUtils.copy(resourceFile, response.getOutputStream());
+	}
 }
