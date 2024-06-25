@@ -10,10 +10,10 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 
-    Optional<User> findByEmail(String username);
+	Optional<User> findByEmail(String username);
 
-    @Transactional
-    @Modifying
-    @Query("update User u set u.password = ?2 where u.email = ?1")
-    void updatePassword(String email, String password);
+	@Transactional
+	@Modifying
+	@Query("update User u set u.password = ?2 where u.email = ?1")
+	void updatePassword(String email, String password);
 }
