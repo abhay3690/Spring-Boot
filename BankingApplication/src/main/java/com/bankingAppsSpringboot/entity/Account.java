@@ -1,7 +1,5 @@
 package com.bankingAppsSpringboot.entity;
 
-import java.math.BigDecimal;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,9 +21,7 @@ public class Account {
 	private Long id;
 	@Column(name = "account_holder_name")
 	private String accountHolderName;
-	
+
 	private double balance;
-	
-	
-	
+
 }
