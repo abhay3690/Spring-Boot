@@ -23,43 +23,48 @@ import com.bankingAppsSpringboot.service.AccountService;
 public class AccountController {
 	@Autowired
 	private AccountService accountService;
+
 	public AccountController(AccountService accountService) {
 		super();
 		this.accountService = accountService;
 	}
-	//add account restAPi
+
+	// add account restAPi
 	@PostMapping
-	public ResponseEntity<AccountDto> addAccount(@RequestBody AccountDto accountDto){
-		return new ResponseEntity<>(accountService.createAccount(accountDto),HttpStatus.CREATED);
+	public ResponseEntity<AccountDto> addAccount(@RequestBody AccountDto accountDto) {
+		return new ResponseEntity<>(accountService.createAccount(accountDto), HttpStatus.CREATED);
 	}
-	
+
 	@GetMapping("/{id}")
-	public ResponseEntity<AccountDto> getAccountById(@PathVariable Long id){
+	public ResponseEntity<AccountDto> getAccountById(@PathVariable Long id) {
 		AccountDto accountDto = accountService.getAccountById(id);
 		return ResponseEntity.ok(accountDto);
 	}
+
 	@PutMapping("/{id}/deposite")
-	public ResponseEntity<AccountDto> deposite(@PathVariable Long id, @RequestBody Map<String, Double > request){
+	public ResponseEntity<AccountDto> deposite(@PathVariable Long id, @RequestBody Map<String, Double> request) {
 		Double ammount = request.get("ammount");
 		AccountDto accountDto = accountService.deposite(id, ammount);
 		return ResponseEntity.ok(accountDto);
 	}
+
 	@PutMapping("/{id}/withdraw")
-	public ResponseEntity<AccountDto> withdraw(@PathVariable Long id, @RequestBody Map<String, Double > request){
+	public ResponseEntity<AccountDto> withdraw(@PathVariable Long id, @RequestBody Map<String, Double> request) {
 		Double ammount = request.get("ammount");
 		AccountDto accountDto = accountService.withdraw(id, ammount);
 		return ResponseEntity.ok(accountDto);
 	}
+
 	@GetMapping
-	public ResponseEntity<List<AccountDto>> getAllAccounts(){
+	public ResponseEntity<List<AccountDto>> getAllAccounts() {
 		List<AccountDto> accountDto = accountService.getAllAccount();
 		return ResponseEntity.ok(accountDto);
 	}
+
 	@DeleteMapping("/{id}")
-	public ResponseEntity<String> deleteAccount(@PathVariable Long id){
+	public ResponseEntity<String> deleteAccount(@PathVariable Long id) {
 		accountService.deleteAccount(id);
 		return ResponseEntity.ok("Account deleted succesfully");
 	}
-
 
 }
