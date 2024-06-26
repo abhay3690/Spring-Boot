@@ -18,8 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bankingAppsSpringboot.dto.AccountDto;
 import com.bankingAppsSpringboot.service.AccountService;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
 @RequestMapping("api/accounts")
+//@RequiredArgsConstructor       If you take theis annotation then remove the line number of 30 to 33
 public class AccountController {
 	@Autowired
 	private AccountService accountService;
