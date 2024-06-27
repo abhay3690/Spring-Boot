@@ -20,6 +20,7 @@ import com.bankingAppsSpringboot.service.AccountService;
 
 @RestController
 @RequestMapping("api/accounts")
+//@RequiredArgsConstructor       If you take this annotation then remove the line number of 28 to 31
 public class AccountController {
 	@Autowired
 	private AccountService accountService;
