@@ -3,6 +3,8 @@ package com.bankingAppsSpringboot.controller;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +24,9 @@ import com.bankingAppsSpringboot.service.AccountService;
 @RequestMapping("api/accounts")
 //@RequiredArgsConstructor       If you take this annotation then remove the line number of 28 to 31
 public class AccountController {
+
+	private static final Logger logger = LoggerFactory.getLogger(AccountController.class);
+
 	@Autowired
 	private AccountService accountService;
 
@@ -33,39 +38,82 @@ public class AccountController {
 	// add account restAPi
 	@PostMapping
 	public ResponseEntity<AccountDto> addAccount(@RequestBody AccountDto accountDto) {
-		return new ResponseEntity<>(accountService.createAccount(accountDto), HttpStatus.CREATED);
+		try {
+			logger.info("Received request to add account: {}", accountDto);
+			AccountDto createdAccount = accountService.createAccount(accountDto);
+			logger.info("Account created: {}", createdAccount);
+			return new ResponseEntity<>(createdAccount, HttpStatus.CREATED);
+		} catch (Exception e) {
+			logger.error("Error adding account: {}", accountDto, e);
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<AccountDto> getAccountById(@PathVariable Long id) {
-		AccountDto accountDto = accountService.getAccountById(id);
-		return ResponseEntity.ok(accountDto);
+		try {
+			logger.info("Received request to get account by id: {}", id);
+			AccountDto accountDto = accountService.getAccountById(id);
+			logger.info("Retrieved account: {}", accountDto);
+			return ResponseEntity.ok(accountDto);
+		} catch (Exception e) {
+			logger.error("Error retrieving account with id: {}", id, e);
+			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+		}
 	}
 
-	@PutMapping("/{id}/deposite")
-	public ResponseEntity<AccountDto> deposite(@PathVariable Long id, @RequestBody Map<String, Double> request) {
-		Double ammount = request.get("ammount");
-		AccountDto accountDto = accountService.deposite(id, ammount);
-		return ResponseEntity.ok(accountDto);
+	@PutMapping("/{id}/deposit")
+	public ResponseEntity<AccountDto> deposit(@PathVariable Long id, @RequestBody Map<String, Double> request) {
+		Double amount = request.get("amount");
+		try {
+			logger.info("Received request to deposit {} to account id: {}", amount, id);
+			AccountDto accountDto = accountService.deposite(id, amount);
+			logger.info("Deposited amount: {}. Updated account: {}", amount, accountDto);
+			return ResponseEntity.ok(accountDto);
+		} catch (Exception e) {
+			logger.error("Error depositing amount: {} to account id: {}", amount, id, e);
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	@PutMapping("/{id}/withdraw")
 	public ResponseEntity<AccountDto> withdraw(@PathVariable Long id, @RequestBody Map<String, Double> request) {
-		Double ammount = request.get("ammount");
-		AccountDto accountDto = accountService.withdraw(id, ammount);
-		return ResponseEntity.ok(accountDto);
+		Double amount = request.get("amount");
+		try {
+			logger.info("Received request to withdraw {} from account id: {}", amount, id);
+			AccountDto accountDto = accountService.withdraw(id, amount);
+			logger.info("Withdrawn amount: {}. Updated account: {}", amount, accountDto);
+			return ResponseEntity.ok(accountDto);
+		} catch (Exception e) {
+			logger.error("Error withdrawing amount: {} from account id: {}", amount, id, e);
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	@GetMapping
 	public ResponseEntity<List<AccountDto>> getAllAccounts() {
-		List<AccountDto> accountDto = accountService.getAllAccount();
-		return ResponseEntity.ok(accountDto);
+		try {
+			logger.info("Received request to get all accounts");
+			List<AccountDto> accountDtoList = accountService.getAllAccount();
+			logger.info("Retrieved all accounts");
+			return ResponseEntity.ok(accountDtoList);
+		} catch (Exception e) {
+			logger.error("Error retrieving all accounts", e);
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> deleteAccount(@PathVariable Long id) {
-		accountService.deleteAccount(id);
-		return ResponseEntity.ok("Account deleted succesfully");
+		try {
+			logger.info("Received request to delete account id: {}", id);
+			accountService.deleteAccount(id);
+			logger.info("Deleted account id: {}", id);
+			return ResponseEntity.ok("Account deleted successfully");
+		} catch (Exception e) {
+			logger.error("Error deleting account with id: {}", id, e);
+			return new ResponseEntity<>("Failed to delete account", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
-
 }
+
