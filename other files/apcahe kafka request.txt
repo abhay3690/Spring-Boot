@@ -1,0 +1,11 @@
+apcahe kafka request
+
+
+
+
+bin\windows\kafka-server-start.bat config\server.properties
+
+bin\windows\zookeeper-server-start.bat config\zookeeper.properties
+
+bin\windows\kafka-console-consumer.bat --topic location_update_topic --from-beginning --bootstrap-server localhost:9092
+ 
