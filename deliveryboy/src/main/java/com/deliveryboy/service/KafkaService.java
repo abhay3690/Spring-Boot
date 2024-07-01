@@ -13,6 +13,7 @@ public class KafkaService {
 	@Autowired
 	private KafkaTemplate<String, String> kafkaTemplate;
 	private Logger logger = LoggerFactory.getLogger(KafkaService.class);
+
 	public boolean updateLocation(String location) {
 		this.kafkaTemplate.send(AppConstants.LOCATION_TOPIC_NAME, location);
 		this.logger.info("message produced");
