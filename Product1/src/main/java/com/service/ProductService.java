@@ -20,6 +20,6 @@ public interface ProductService {
 	List<ProductDto> getAllProductBySId(Long sId);
 	
 	ProductDto getProductByPId(Long pId);
-	
+
 	void deleteProduct(Long pId);
 }

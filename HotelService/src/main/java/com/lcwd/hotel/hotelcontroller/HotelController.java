@@ -20,22 +20,23 @@ import com.lcwd.hotel.services.HotelService;
 public class HotelController {
 	@Autowired
 	private HotelService hotelService;
-	
+
 //create
 	@PostMapping
-	public ResponseEntity<Hotel> crateHotel(@RequestBody Hotel hotel){
+	public ResponseEntity<Hotel> crateHotel(@RequestBody Hotel hotel) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(hotelService.create(hotel));
 	}
+
 //	get
 	@GetMapping("{hotelId}")
-	public ResponseEntity<Hotel> crateHotel(@PathVariable() String hotelId){
+	public ResponseEntity<Hotel> crateHotel(@PathVariable() String hotelId) {
 		return ResponseEntity.status(HttpStatus.OK).body(hotelService.get(hotelId));
 	}
+
 //	getall
 	@GetMapping
-	public ResponseEntity<List<Hotel>> getAll(){
+	public ResponseEntity<List<Hotel>> getAll() {
 		return ResponseEntity.ok(hotelService.getAll());
 	}
-
 
 }

@@ -1,4 +1,4 @@
- package com.ins.service;
+package com.ins.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -156,31 +156,32 @@ public class UserServiceImplimentation implements UserService {
 		userRepository.save(reqUser);
 
 		return "You have Unfollowed " + followUser.getUsername();
-	
+
 	}
+
 	@Override
 	public List<UserDto> findUserByIds(List<Integer> userIds) throws UserException {
-	    // Retrieve users from the repository based on the provided user IDs
-	    List<User> users = userRepository.findAllUsersByUserIds(userIds);
-	    
-	    // Create a list to store UserDto objects
-	    List<UserDto> userDtos = new ArrayList<>();
-	    
-	    // Iterate through each User object and convert it to UserDto
-	    for (User user : users) {
-	        UserDto userDto = new UserDto();
-	        userDto.setId(user.getId());
-	        userDto.setUsername(user.getUsername());
-	        userDto.setEmail(user.getEmail());
+		// Retrieve users from the repository based on the provided user IDs
+		List<User> users = userRepository.findAllUsersByUserIds(userIds);
+
+		// Create a list to store UserDto objects
+		List<UserDto> userDtos = new ArrayList<>();
+
+		// Iterate through each User object and convert it to UserDto
+		for (User user : users) {
+			UserDto userDto = new UserDto();
+			userDto.setId(user.getId());
+			userDto.setUsername(user.getUsername());
+			userDto.setEmail(user.getEmail());
 //	        userDto.setName(user.getName());
-	        userDto.setUserImage(user.getUserImage());
-	        
-	        // Add the converted UserDto to the list
-	        userDtos.add(userDto);
-	    }
-	    
-	    // Return the list of UserDto objects
-	    return userDtos;
+			userDto.setUserImage(user.getUserImage());
+
+			// Add the converted UserDto to the list
+			userDtos.add(userDto);
+		}
+
+		// Return the list of UserDto objects
+		return userDtos;
 	}
 
 //	@Override
@@ -191,38 +192,36 @@ public class UserServiceImplimentation implements UserService {
 //		}
 //		return users;
 //	}
-	
-	
+
 	@Override
 	public List<UserDto> searchUser(String query) throws UserException {
-	    // Retrieve users from the repository based on the provided query
-	    List<User> users = userRepository.findByQuery(query);
-	    
-	    // Check if users are found
-	    if (users.isEmpty()) {
-	        throw new UserException("User not Found");
-	    }
-	    
-	    // Create a list to store UserDto objects
-	    List<UserDto> userDtos = new ArrayList<>();
-	    
-	    // Convert each User object to UserDto
-	    for (User user : users) {
-	        UserDto userDto = new UserDto();
-	        userDto.setId(user.getId());
-	        userDto.setUsername(user.getUsername());
-	        userDto.setEmail(user.getEmail());
-//	        userDto.setName(user.getName());
-	        userDto.setUserImage(user.getUserImage());
-	        
-	        // Add the converted UserDto to the list
-	        userDtos.add(userDto);
-	    }
-	    
-	    // Return the list of UserDto objects
-	    return userDtos;
-	}
+		// Retrieve users from the repository based on the provided query
+		List<User> users = userRepository.findByQuery(query);
 
+		// Check if users are found
+		if (users.isEmpty()) {
+			throw new UserException("User not Found");
+		}
+
+		// Create a list to store UserDto objects
+		List<UserDto> userDtos = new ArrayList<>();
+
+		// Convert each User object to UserDto
+		for (User user : users) {
+			UserDto userDto = new UserDto();
+			userDto.setId(user.getId());
+			userDto.setUsername(user.getUsername());
+			userDto.setEmail(user.getEmail());
+//	        userDto.setName(user.getName());
+			userDto.setUserImage(user.getUserImage());
+
+			// Add the converted UserDto to the list
+			userDtos.add(userDto);
+		}
+
+		// Return the list of UserDto objects
+		return userDtos;
+	}
 
 	@Override
 	public UserDto updateUserDeatails(UserDto updatedUser, UserDto existingUser) throws UserException {
@@ -232,16 +231,6 @@ public class UserServiceImplimentation implements UserService {
 		return null;
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 //	@Override
 //	public User registerUser(User user) throws UserException {
 //		Optional<User> isEmailExist = userRepository.findByEmail(user.getEmail());

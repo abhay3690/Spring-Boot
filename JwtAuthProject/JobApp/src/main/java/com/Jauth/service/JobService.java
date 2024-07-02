@@ -13,36 +13,37 @@ public class JobService {
 
 	@Autowired
 	public JobRepo repo;
-	
+
 	// method to return all JobPosts
-		public List<JobPost> getAllJobs() {
-			return repo.findAll();
+	public List<JobPost> getAllJobs() {
+		return repo.findAll();
 
-		}
+	}
 
-		// method to add a jobPost
-		public void addJobPost(JobPost jobPost) {
-			repo.save(jobPost);
+	// method to add a jobPost
+	public void addJobPost(JobPost jobPost) {
+		repo.save(jobPost);
 
-		}
+	}
 
-		public JobPost getJob(int postId) {
-			return repo.findById(postId).orElse(new JobPost());
-		}
+	public JobPost getJob(int postId) {
+		return repo.findById(postId).orElse(new JobPost());
+	}
 
-		public void updateJob(JobPost jobPost) {
-			repo.save(jobPost);
+	public void updateJob(JobPost jobPost) {
+		repo.save(jobPost);
 
-		}
+	}
 
-		public void deleteJob(int postId) {
-			// TODO Auto-generated method stub
-			repo.deleteById(postId);;
-		}
-		
-		public List<JobPost> search(String keyword){
-			return repo.findByPostProfileContainingOrPostDescContaining(keyword,keyword);
-		}
+	public void deleteJob(int postId) {
+		// TODO Auto-generated method stub
+		repo.deleteById(postId);
+		;
+	}
+
+	public List<JobPost> search(String keyword) {
+		return repo.findByPostProfileContainingOrPostDescContaining(keyword, keyword);
+	}
 
 //	// method to return all JobPosts
 //	public List<JobPost> getAllJobs() {

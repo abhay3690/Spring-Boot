@@ -22,12 +22,13 @@ public class ApplicationConfig {
 
 	@Autowired
 	public final SellerRepo userRepo;
-	
+
 	@Bean
 	public UserDetailsService userDetailsService() {
-		return email-> userRepo.findByEmail(email).orElseThrow(() ->new ResourceNotFoundException("Seller ", " email " + email, 0)); 
+		return email -> userRepo.findByEmail(email)
+				.orElseThrow(() -> new ResourceNotFoundException("Seller ", " email " + email, 0));
 	}
-	
+
 	@Bean
 	public AuthenticationProvider authenticationProvider() {
 		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -35,12 +36,12 @@ public class ApplicationConfig {
 		authProvider.setPasswordEncoder(passwordEncoder());
 		return authProvider;
 	}
-	
+
 	@Bean
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
 		return config.getAuthenticationManager();
 	}
-	
+
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();

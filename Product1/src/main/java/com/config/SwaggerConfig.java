@@ -14,31 +14,19 @@ import io.swagger.v3.oas.models.security.SecurityScheme;
 @Configuration
 public class SwaggerConfig {
 
-
-	
 	@Bean
 	GroupedOpenApi publicApi() {
-		return GroupedOpenApi.builder()
-				.group("public-apis")
-				.pathsToMatch("/**")
-				.build();
+		return GroupedOpenApi.builder().group("public-apis").pathsToMatch("/**").build();
 	}
-	
+
 	@Bean
 	OpenAPI customOpenAPI() {
 		return new OpenAPI()
-				.info(new Info().title("Seller-Product Application : Backed Api Project")
-						.version("1.0")
+				.info(new Info().title("Seller-Product Application : Backed Api Project").version("1.0")
 						.description("This is my first Full Project")
-						.contact(new Contact()
-								.name("Abhay A Suthar")
-								.email("abhaysuthar7777@gmail.com")))
+						.contact(new Contact().name("Abhay A Suthar").email("abhaysuthar7777@gmail.com")))
 				.addSecurityItem(new SecurityRequirement().addList("bearerAuth"))
-				.components(
-						new Components()
-						.addSecuritySchemes("bearerAuth", new SecurityScheme()
-								.type(SecurityScheme.Type.HTTP)
-								.scheme("bearer")
-								.bearerFormat("JWT")));
+				.components(new Components().addSecuritySchemes("bearerAuth",
+						new SecurityScheme().type(SecurityScheme.Type.HTTP).scheme("bearer").bearerFormat("JWT")));
 	}
 }

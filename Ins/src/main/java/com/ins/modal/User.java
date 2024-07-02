@@ -22,20 +22,21 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name =  "Users")
+@Table(name = "Users")
 public class User {
 	@Id
-	@GeneratedValue(strategy =  GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	private String username; 
+	private String username;
 	private String email;
 	private String mobile;
-	private String website; 
+	private String website;
 	private String bio;
 	private String gender;
 	private String image;
@@ -46,15 +47,14 @@ public class User {
 	@Embedded
 	@ElementCollection
 	private Set<UserDto> follwing = new HashSet<UserDto>();
-	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Story> stories = new ArrayList<>();
 	@ManyToMany
 	private List<Post> savedPost = new ArrayList<>();
+
 	public String getUserImage() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	
 
 }

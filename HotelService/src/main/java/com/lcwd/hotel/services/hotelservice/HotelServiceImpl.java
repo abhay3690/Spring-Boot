@@ -10,14 +10,15 @@ import com.lcwd.hotel.entities.Hotel;
 import com.lcwd.hotel.repositories.HotelRepository;
 import com.lcwd.hotel.services.HotelService;
 import com.lcwd.user.service.exceptiopn.ResourceNotFoundException;
+
 @Service
 public class HotelServiceImpl implements HotelService {
-@Autowired
-private HotelRepository hotelRepository;
+	@Autowired
+	private HotelRepository hotelRepository;
 
 	@Override
 	public Hotel create(Hotel hotel) {
-		String hotelId =UUID.randomUUID().toString();
+		String hotelId = UUID.randomUUID().toString();
 		hotel.setId(hotelId);
 		return hotelRepository.save(hotel);
 	}
@@ -29,7 +30,8 @@ private HotelRepository hotelRepository;
 
 	@Override
 	public Hotel get(String id) {
-		return hotelRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not found with given Id " + id));
+		return hotelRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("User not found with given Id " + id));
 	}
 
 }

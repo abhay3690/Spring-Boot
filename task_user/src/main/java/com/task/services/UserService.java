@@ -4,9 +4,6 @@ import java.util.List;
 
 import com.task.modal.User;
 
-
-
-
 public interface UserService {
 	User registerNewUser(User userDto);
 

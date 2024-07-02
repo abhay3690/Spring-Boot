@@ -13,10 +13,9 @@ import com.Jauth.model.JobPost;
 
 //@Repository
 @Component
-public interface JobRepo extends JpaRepository<JobPost, Integer>{
-	
-	
-	List<JobPost> findByPostProfileContainingOrPostDescContaining(String PostProfile,String PostDesc);
+public interface JobRepo extends JpaRepository<JobPost, Integer> {
+
+	List<JobPost> findByPostProfileContainingOrPostDescContaining(String PostProfile, String PostDesc);
 
 //	private static List<JobPost> jobs = new ArrayList<>();
 //	List<JobPost> jobs = new ArrayList<>();
@@ -45,7 +44,7 @@ public interface JobRepo extends JpaRepository<JobPost, Integer>{
 //				List.of("iOS Development", "Android Development", "Mobile App")));
 //
 //	}
-	
+
 //	public List<JobPost> getAllJobs(){
 //		return jobs;
 //	}

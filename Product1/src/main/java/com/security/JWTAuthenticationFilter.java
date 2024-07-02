@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 @Component
 @RequiredArgsConstructor
 public class JWTAuthenticationFilter extends OncePerRequestFilter {
-	
+
 	@Autowired
 	private JwtService jwtService;
 
@@ -59,6 +59,4 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
 		filterChain.doFilter(request, response);
 	}
 
-	
 }
-
