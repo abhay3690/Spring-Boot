@@ -11,6 +11,7 @@ class Bicycle {
     {
         this.gear = gear;
         this.speed = speed;
+
     }
 
     // the Bicycle class has three methods
@@ -61,11 +62,21 @@ class MountainBike extends Bicycle {
                 + seatHeight);
     }
 }
+class Roadbikes extends MountainBike{
+    int a;
+
+    public Roadbikes(int gear, int speed, int startHeight) {
+        super(gear, speed, startHeight);
+        System.out.println("This is th heaight of the mountanbikes and also it will be process of the manipulation");
+    }
+
+}
 public class Main {
 
     public static void main(String[] args) {
         MountainBike mb = new MountainBike(3, 100, 25);
         System.out.println(mb.toString());
+        System.out.println("It will be process of the controller and give some of the refference and also provide the certain limited programme");
 
     }
 }
