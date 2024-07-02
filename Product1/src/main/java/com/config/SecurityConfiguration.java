@@ -22,34 +22,21 @@ import lombok.RequiredArgsConstructor;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration {
 
-	private static final String[] PUBLIC_URLS = {
-			"/api/v1/auth/**",
-			"/v3/api-docs/**",
+	private static final String[] PUBLIC_URLS = { "/api/v1/auth/**", "/v3/api-docs/**",
 //			"/v2/api-docs/**",
-			"/swagger-resources/**",
-			"/swagger-ui/**",
-			"/webjars/**"
-	};
+			"/swagger-resources/**", "/swagger-ui/**", "/webjars/**" };
 
 	private final JWTAuthenticationFilter jwtAuthFilter;
 	private final AuthenticationProvider authenticationProvider;
-	
+
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http
-		.csrf()
-		.disable()
-		.authorizeHttpRequests()
-		.requestMatchers(PUBLIC_URLS).permitAll()
+		http.csrf().disable().authorizeHttpRequests().requestMatchers(PUBLIC_URLS).permitAll()
 //		.requestMatchers(HttpMethod.GET).permitAll()
-		.anyRequest()
-		.authenticated()
-		.and()
-		.sessionManagement()
-		.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-		.and()
-		.authenticationProvider(authenticationProvider)
-		.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+				.anyRequest().authenticated().and().sessionManagement()
+				.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+				.authenticationProvider(authenticationProvider)
+				.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 		return http.build();
 	}
 }

@@ -10,12 +10,10 @@ import org.springframework.stereotype.Repository;
 import com.entity.Product;
 import com.entity.Seller;
 
-
-
 @Repository
-public interface ProductRepo extends JpaRepository<Product, Long>{	
-	
+public interface ProductRepo extends JpaRepository<Product, Long> {
+
 	@Query("SELECT p FROM Product p WHERE p.sId = :sId")
-    List<Product> findAllBySId(@Param("sId") Long sId);
+	List<Product> findAllBySId(@Param("sId") Long sId);
 
 }

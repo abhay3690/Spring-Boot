@@ -19,24 +19,23 @@ public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int productId;
-	
-	@Column(name = "product_title",length = 100,nullable = false)
+
+	@Column(name = "product_title", length = 100, nullable = false)
 	private String title;
 	@Column(length = 10000)
 	private String content;
-	
+
 	private String imageName;
-	
+
 	private Date addedDate;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	private Category category;
-	
+
 	@ManyToOne
 	private User user;
-	@OneToMany(mappedBy = "procuct",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "procuct", cascade = CascadeType.ALL)
 	private Set<Comment> comments = new HashSet<>();
-	
 
 }

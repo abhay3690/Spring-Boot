@@ -23,24 +23,21 @@ public class AuthenticationController {
 
 	@Autowired
 	private final AuthenticationService service;
-	
+
 	@Autowired
 	private SellerService sellerService;
-	
-	// login user
-		@PostMapping("/login")
-		  public ResponseEntity<AuthenticationResponse> authenticate(
-		      @RequestBody AuthenticationRequest request
-		  ) {
-		    return ResponseEntity.ok(service.authenticate(request));
-		  }
-		
-		// register new user
-		
-		@PostMapping("/register")
-		public ResponseEntity<SellerDto> registerUser(@RequestBody SellerDto sellerDto){
-			SellerDto registerUser = this.sellerService.registerNewSeller(sellerDto);
-			return new ResponseEntity<SellerDto>(registerUser,HttpStatus.CREATED);
-		}
-}
 
+	// login user
+	@PostMapping("/login")
+	public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request) {
+		return ResponseEntity.ok(service.authenticate(request));
+	}
+
+	// register new user
+
+	@PostMapping("/register")
+	public ResponseEntity<SellerDto> registerUser(@RequestBody SellerDto sellerDto) {
+		SellerDto registerUser = this.sellerService.registerNewSeller(sellerDto);
+		return new ResponseEntity<SellerDto>(registerUser, HttpStatus.CREATED);
+	}
+}

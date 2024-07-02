@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableDiscoveryClient
 public class ApiGatewayApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(ApiGatewayApplication.class, args);	
+		SpringApplication.run(ApiGatewayApplication.class, args);
 	}
 }

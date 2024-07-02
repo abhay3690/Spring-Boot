@@ -101,10 +101,6 @@ public class UserServiceImpl implements UserService {
 		return null;
 	}
 
-	
-
-	
-
 //	@Override
 //	public UserDto registerNewUser(UserDto userDto) {
 //		User user = this.modelMapper.map(userDto, User.class);
@@ -120,8 +116,5 @@ public class UserServiceImpl implements UserService {
 //
 //		return this.modelMapper.map(newUser, UserDto.class);
 //	}
-	
-	
-	
-	
+
 }

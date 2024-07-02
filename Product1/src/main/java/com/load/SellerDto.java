@@ -21,16 +21,14 @@ public class SellerDto {
 	@NotBlank(message = "Email is required")
 	@Email(message = "Email should be valid")
 	private String email;
-	
+
 	@NotBlank(message = "Password is required")
 	@Size(min = 3, max = 50, message = "Password must be between 3 and 50 characters")
 	private String password;
 
-	
 	private List<ProductDto> products;
 
-
-	public SellerDto(Long id,String name,String email,String password,List<ProductDto> products) {
+	public SellerDto(Long id, String name, String email, String password, List<ProductDto> products) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -38,8 +36,6 @@ public class SellerDto {
 		this.password = password;
 		this.products = products;
 	}
-	
-	
 
 //	public SellerDto(Long id,String name,String email,List<ProductDto> products) {
 //		super();

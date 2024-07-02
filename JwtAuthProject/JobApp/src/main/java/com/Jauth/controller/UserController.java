@@ -18,26 +18,26 @@ public class UserController {
 
 	@Autowired
 	private UserService service;
-	
+
 	@Autowired
 	AuthenticationManager authenticationManager;
-	
+
 	@Autowired
 	private JwtService jwtService;
-	
+
 	@PostMapping("register")
 	public User register(@RequestBody User user) {
 		return service.saveUser(user);
 	}
-	
+
 	@PostMapping("login")
 	public String login(@RequestBody User user) {
-		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
-		
+		Authentication authentication = authenticationManager
+				.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
+
 		if (authentication.isAuthenticated()) {
 			return jwtService.generateToken(user.getUsername());
-		}
-		else {
+		} else {
 			return "Login Failed";
 		}
 	}

@@ -15,7 +15,6 @@ import com.ins.exception.UserException;
 import com.ins.modal.User;
 import com.ins.service.UserService;
 
-
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -45,9 +44,9 @@ public class UserController {
 		return new ResponseEntity<UserDto>(registerUser, HttpStatus.CREATED);
 	}
 
-	// Get User  findUserByIdUser
+	// Get User findUserByIdUser
 	@GetMapping("{userId}")
-	public ResponseEntity<UserDto> getSingleUser(@PathVariable int userId)	 throws UserException {
+	public ResponseEntity<UserDto> getSingleUser(@PathVariable int userId) throws UserException {
 		UserDto userByIdUser = this.userService.findUserByIdUser(userId);
 		return ResponseEntity.ok(userByIdUser);
 	}

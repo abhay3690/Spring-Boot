@@ -1,4 +1,5 @@
 package com.task.modal;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,5 +26,5 @@ public class Comment {
 	private Product procuct;
 	@ManyToOne
 	private User user;
-	
+
 }

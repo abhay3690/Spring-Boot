@@ -31,10 +31,8 @@ public class ProductDto {
 	private String pCategory;
 
 	private String pDescription;
-	
+
 	@JsonIgnore
 	private Seller seller;
-
-	
 
 }

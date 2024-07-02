@@ -25,13 +25,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Data
-@Table (name = "posts")
+@Table(name = "posts")
 public class Post {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -41,19 +39,16 @@ public class Post {
 	private String location;
 	private LocalDateTime createdAt;
 	@Embedded
-	@AttributeOverrides({
-		@AttributeOverride(name = "id", column = @Column(name ="user_id")),
-		@AttributeOverride(name = "email", column = @Column(name ="user_email")),
-		
+	@AttributeOverrides({ @AttributeOverride(name = "id", column = @Column(name = "user_id")),
+			@AttributeOverride(name = "email", column = @Column(name = "user_email")),
+
 	})
 	private UserDto user;
 	@OneToMany
-	private List<Comment> comment =new ArrayList<Comment>();
+	private List<Comment> comment = new ArrayList<Comment>();
 	@Embedded
 	@ElementCollection
-	@JoinTable(name= "likedByUsers", joinColumns = @JoinColumn(name= "user_id"))
+	@JoinTable(name = "likedByUsers", joinColumns = @JoinColumn(name = "user_id"))
 	private Set<UserDto> likedByUser = new HashSet<>();
-
-	
 
 }

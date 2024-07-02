@@ -1,6 +1,5 @@
 package com.entity;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
@@ -22,29 +21,29 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity
 public class Product {
-	
+
 	private Long sId;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "product_id")
 	private Long pId;
-	
+
 	@Column(name = "product_name")
 	private String pName;
-	
+
 	@Column(name = "product_image")
 	private String pImage;
-	
+
 	@Column(name = "product_price")
 	private Long pPrice;
-	
-	@Column(name = "product_category")	
+
+	@Column(name = "product_category")
 	private String pCategory;
-	
+
 	@Column(name = "product_description")
 	private String pDescription;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "products")
 	private Seller seller;

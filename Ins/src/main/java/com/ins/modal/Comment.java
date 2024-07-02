@@ -15,24 +15,23 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+
 @Entity
 
 public class Comment {
 	@Id
-	@GeneratedValue(strategy =  GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	@Embedded
-	@AttributeOverrides({
-		@AttributeOverride(name = "id", column = @Column(name ="user_id")),
-		@AttributeOverride(name = "email", column = @Column(name ="user_email")),
-		
+	@AttributeOverrides({ @AttributeOverride(name = "id", column = @Column(name = "user_id")),
+			@AttributeOverride(name = "email", column = @Column(name = "user_email")),
+
 	})
-	private UserDto user ;
+	private UserDto user;
 	private String content;
 	@Embedded
-	@ElementCollection	private Set<UserDto> likedByUsers =new HashSet<UserDto>();
+	@ElementCollection
+	private Set<UserDto> likedByUsers = new HashSet<UserDto>();
 	private LocalDateTime createdAt;
-	
-	
 
 }

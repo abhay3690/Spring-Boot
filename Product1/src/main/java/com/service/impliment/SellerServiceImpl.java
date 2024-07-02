@@ -57,7 +57,7 @@ public class SellerServiceImpl implements SellerService {
 
 	@Override
 	public void deleteSeller(Long id) {
-		this.sellerRepo.findById(id).orElseThrow(()-> new ResourceNotFoundException("Seller ", "id ", id) );
+		this.sellerRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Seller ", "id ", id));
 		sellerRepo.deleteById(id);
 	}
 
@@ -76,12 +76,11 @@ public class SellerServiceImpl implements SellerService {
 		seller.setPassword(this.passwordEncoder.encode(seller.getPassword()));
 		// roles
 		Role role = this.roleRepo.findById(AppConstants.NORMAL_USER).get();
-		
+
 		seller.getRoles().add(role);
-		
+
 		Seller newSeller = this.sellerRepo.save(seller);
 		return this.modelMapper.map(newSeller, SellerDto.class);
 	}
-
 
 }

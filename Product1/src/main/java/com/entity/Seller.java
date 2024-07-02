@@ -36,29 +36,29 @@ import lombok.Setter;
 public class Seller implements UserDetails {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    private String name;
+	private String name;
 
-    private String email;
-    
-    private String password;
+	private String email;
+
+	private String password;
 
 //    @OneToMany(mappedBy = "seller",cascade = CascadeType.ALL)
 //    private List<Product> products;
-    
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Product> products;
-    
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-	@JoinTable(name = "seller_role", joinColumns = @JoinColumn(name = "seller", referencedColumnName = "id"), 
-	inverseJoinColumns = @JoinColumn(name = "role", referencedColumnName = "id"))
+
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Product> products;
+
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name = "seller_role", joinColumns = @JoinColumn(name = "seller", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role", referencedColumnName = "id"))
 	private Set<Role> roles = new HashSet<>();
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		List<SimpleGrantedAuthority> authorities = this.roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
+		List<SimpleGrantedAuthority> authorities = this.roles.stream()
+				.map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
 		return authorities;
 	}
 
@@ -92,6 +92,5 @@ public class Seller implements UserDetails {
 		// TODO Auto-generated method stub
 		return password;
 	}
-    
-    
+
 }

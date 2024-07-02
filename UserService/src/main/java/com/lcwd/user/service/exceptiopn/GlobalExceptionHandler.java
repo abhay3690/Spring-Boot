@@ -1,4 +1,4 @@
- package com.lcwd.user.service.exceptiopn;
+package com.lcwd.user.service.exceptiopn;
 
 import org.apache.catalina.connector.Response;
 import org.springframework.http.HttpStatus;
@@ -10,12 +10,11 @@ import com.lcwd.user.service.payload.ApiResponse;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-	@ExceptionHandler(ResourceNotFoundException.class )
- public ResponseEntity<ApiResponse> handlertResourceNotFoundException(ResourceNotFoundException ex){
-	String message = ex.getMessage();
-	ApiResponse response  = ApiResponse.builder().success(true).status(HttpStatus.NOT_FOUND).build();
-	return new ResponseEntity<ApiResponse>(response,HttpStatus.NOT_FOUND);
-	
-	 
- }
+	@ExceptionHandler(ResourceNotFoundException.class)
+	public ResponseEntity<ApiResponse> handlertResourceNotFoundException(ResourceNotFoundException ex) {
+		String message = ex.getMessage();
+		ApiResponse response = ApiResponse.builder().success(true).status(HttpStatus.NOT_FOUND).build();
+		return new ResponseEntity<ApiResponse>(response, HttpStatus.NOT_FOUND);
+
+	}
 }
