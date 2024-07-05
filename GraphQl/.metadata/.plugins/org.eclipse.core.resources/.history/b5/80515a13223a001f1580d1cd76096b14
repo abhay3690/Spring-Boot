@@ -1,0 +1,33 @@
+package com.gaphql.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.gaphql.entities.User;
+import com.gaphql.helper.ExceptionHelper;
+import com.gaphql.repositories.UserRepo;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class UserService {
+	private UserRepo userRepo;
+	public User createUser(User user) {
+		return userRepo.save(user);
+	}
+	public List<User> getAllUser(){
+		return userRepo.findAll();
+	}
+	public User getUser(int userId) {
+		User user = userRepo.findById(userId).orElseThrow(ExceptionHelper::throwResourceNotFoundException);
+		return user;
+	}
+	
+	//creating
+	//get all 
+	//get single byId
+	//delete 
+	//updating
+}

@@ -1,0 +1,5 @@
+package com.gaphql.service;
+
+public interface UserService {
+
+}

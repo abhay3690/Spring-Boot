@@ -5,38 +5,43 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.question.entity.Question;
+import com.question.exception.QuestionNotFoundException;
 import com.question.repository.QuestionRepository;
 import com.question.service.QuestionService;
 
-import lombok.RequiredArgsConstructor;
 @Service
-public class QuestionServiceImpl implements QuestionService {
+public class QuestionServiceImpl implements QuestionService{
 
-    private QuestionRepository questionRepository;
-
-    public QuestionServiceImpl(QuestionRepository questionRepository) {
-        this.questionRepository = questionRepository;
-    }
-
-    @Override
-    public Question create(Question question) {
-        return questionRepository.save(question);
-    }
-
-    @Override
-    public List<Question> get() {
-        return questionRepository.findAll();
-    }
-
-    @Override
-    public Question getOne(Long id) {
-        return questionRepository.findById(id).orElseThrow(() -> new RuntimeException("Question not found !!"));
-    }
+	private final QuestionRepository questionRepository;
+	
+	
+	public QuestionServiceImpl(QuestionRepository questionRepository) {
+		super();
+		this.questionRepository = questionRepository;
+	}
 
 	@Override
-	public List<Question> getQuestionOfQuiz(Long quizId) {
-		
-		return questionRepository.findByQuizId(quizId);
+	public Question create(Question question) {
+		Question save = this.questionRepository.save(question);
+		return save;
+	}
+
+	@Override
+	public List<Question> get() {
+		List<Question> list = this.questionRepository.findAll();
+		return list;
+	}
+
+	@Override
+	public Question getOne(Long id) {
+		Question question = this.questionRepository.findById(id).orElseThrow(()-> new QuestionNotFoundException("Question Not Found With id : "+id));
+		return question;
+	}
+
+	@Override
+	public List<Question> getQuestionsOfQuiz(Long quizId) {
+		List<Question> list = this.questionRepository.findByQuizId(quizId);
+		return list;
 	}
 
 }

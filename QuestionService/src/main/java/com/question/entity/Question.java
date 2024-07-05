@@ -15,9 +15,12 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Question {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long questionId;
+	
 	private String question;
+	
 	private Long quizId;
 }
