@@ -1,0 +1,5 @@
+package com.gaphql.entities;
+
+public class Order {
+	
+}
