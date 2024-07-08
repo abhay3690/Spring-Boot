@@ -35,7 +35,8 @@ public class CloudVendorServiceImpl implements CloudVendorService {
 
     @Override
     public String deleteCloudVendor(String cloudVendorId) {
-        cloudVendorRepo.deleteById(cloudVendorId);
+      CloudVendor cloudVendor =  cloudVendorRepo.findById(cloudVendorId).orElseThrow(()-> new CloudVendorNotFoundException("User Not Found!!"+cloudVendorId));
+        cloudVendorRepo.delete(cloudVendor);
         return "Sucess";
     }
 
