@@ -1,9 +1,12 @@
 package com.thinkconstructive.rest_demo.controller;
 
 import com.thinkconstructive.rest_demo.model.CloudVendor;
+import com.thinkconstructive.rest_demo.response.ResponseHandler;
 import com.thinkconstructive.rest_demo.service.CloudVendorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,8 +19,8 @@ public class cloudApiVendorController {
     @Autowired
     private CloudVendorService cloudVendorService;
     @GetMapping("/{vendorId}")
-    public CloudVendor getCloudVendorDetails(@PathVariable("vendorId") String vendorId){
-        return cloudVendorService.getCloudVendor(vendorId);
+    public ResponseEntity<Object> getCloudVendorDetails(@PathVariable("vendorId") String vendorId){
+        return ResponseHandler.responseBuilder("Requested vendor details are given here", HttpStatus.OK, cloudVendorService.getCloudVendor(vendorId));
     }
     @GetMapping()
     public List<CloudVendor> getAllCloudVendorDetails(){
