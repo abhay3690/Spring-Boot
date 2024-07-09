@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: rest-demo
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/restDemo
+    username: root
+    password: Abhay@3690
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true

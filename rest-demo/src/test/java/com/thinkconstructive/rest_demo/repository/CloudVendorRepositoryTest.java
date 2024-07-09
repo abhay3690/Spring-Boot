@@ -13,13 +13,14 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @DataJpaTest
 public class CloudVendorRepositoryTest {
-  @Autowired
+    @Autowired
     private CloudVendorRepo cloudVendorRepo;
- CloudVendor cloudVendor;
+
+    CloudVendor cloudVendor;
 
     @BeforeEach
     void setUp() {
-        cloudVendor = new CloudVendor("1","Amazon","Usa","xxxxxx");
+        cloudVendor = new CloudVendor("123","abhay","Canada","875646584");
         cloudVendorRepo.save(cloudVendor);
     }
 
@@ -31,10 +32,10 @@ public class CloudVendorRepositoryTest {
     //Test case Sucess
     @Test
     void testFindByVendorName_Found(){
+
         List<CloudVendor> cloudVendorList = cloudVendorRepo.findByVendorName("Amazon");
         assertThat(cloudVendorList.get(0).getVendorId()).isEqualTo(cloudVendor.getVendorId());
         assertThat(cloudVendorList.get(0).getVendorAddress()).isEqualTo(cloudVendor.getVendorAddress());
-
     }
 
     //Test Case Failure
