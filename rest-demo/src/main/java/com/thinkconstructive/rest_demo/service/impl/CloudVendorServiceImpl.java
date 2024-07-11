@@ -15,16 +15,13 @@ import java.util.List;
 public class CloudVendorServiceImpl implements CloudVendorService {
     @Autowired
     private CloudVendorRepo cloudVendorRepo;
-
     @Override
     public String createCloudVendor(CloudVendor cloudVendor) {
         cloudVendorRepo.save(cloudVendor);
         return "Suceess";
     }
-
     @Override
     public String updateCloudVendor(String vendorId,CloudVendor cloudVendor) {
-
         CloudVendor cloudVendor1 = cloudVendorRepo.findById(vendorId).orElseThrow(() -> new CloudVendorNotFoundException("User not found : " + vendorId));
         cloudVendor1.setVendorName(cloudVendor.getVendorName());
         cloudVendor1.setVendorAddress(cloudVendor.getVendorAddress());
@@ -32,19 +29,16 @@ public class CloudVendorServiceImpl implements CloudVendorService {
         cloudVendorRepo.save(cloudVendor1);
         return "success";
     }
-
     @Override
     public String deleteCloudVendor(String cloudVendorId) {
       CloudVendor cloudVendor =  cloudVendorRepo.findById(cloudVendorId).orElseThrow(()-> new CloudVendorNotFoundException("User Not Found!!"+cloudVendorId));
         cloudVendorRepo.delete(cloudVendor);
         return "Sucess";
     }
-
     @Override
     public CloudVendor getCloudVendor(String cloudVendorId) {
         return cloudVendorRepo.findById(cloudVendorId).orElseThrow(()-> new CloudVendorNotFoundException("User Not Found!!"+cloudVendorId));
     }
-
     @Override
     public List<CloudVendor> getAllCloudVendor() {
         return cloudVendorRepo.findAll();
