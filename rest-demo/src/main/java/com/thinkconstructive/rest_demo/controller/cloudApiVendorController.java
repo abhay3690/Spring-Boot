@@ -26,13 +26,11 @@ public class cloudApiVendorController {
     public List<CloudVendor> getAllCloudVendorDetails(){
         return cloudVendorService.getAllCloudVendor();
     }
-
     @PostMapping
     public String createCloudVendorDetails(@RequestBody CloudVendor cloudVendor){
         cloudVendorService.createCloudVendor(cloudVendor);
         return "ClodVendor created Successfully ";
     }
-
     @PutMapping("/{vendorId}")
     public String updateCloudVendorDetails(@PathVariable String vendorId,@RequestBody CloudVendor cloudVendor) {
         System.out.println(" controller "+cloudVendor.getVendorName()+" "+vendorId);
@@ -44,5 +42,4 @@ public class cloudApiVendorController {
         cloudVendorService.deleteCloudVendor(vendorId);
         return "Cloud vendor deleted successfully";
     }
-
 }
