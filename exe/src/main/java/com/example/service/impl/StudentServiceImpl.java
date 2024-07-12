@@ -22,9 +22,8 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> allStudent() {
         return  this.studentRepo.findAll();
     }
-
     @Override
-    public Student getUserId(Integer rollNumber) {
+    public Student getStudentId(Integer rollNumber) {
         Student student = this.studentRepo.findById(rollNumber).orElseThrow(() -> new RuntimeException("This Student is not Found in our List"));
         return student;
     }
