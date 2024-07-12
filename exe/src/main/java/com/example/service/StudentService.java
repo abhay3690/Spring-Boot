@@ -9,7 +9,7 @@ import java.util.List;
 public interface StudentService {
     Student createStudent(Student student);
     List<Student> allStudent();
-    Student getUserId(Integer rollNumber);
+    Student getStudentId(Integer rollNumber);
     Student updateStudent(Student student, Integer rollNumber);
     void deleteStudent(Integer rollNumber);
 }
