@@ -2,6 +2,7 @@ package com.example.service.impl;
 
 import com.example.entity.Student;
 import com.example.entity.Teacher;
+import com.example.exception.ResourceNotFoundException;
 import com.example.reposity.TeacherRepo;
 import com.example.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,13 +35,13 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public Teacher getTeacherId(Integer id) { // corrected method name
         return this.teacherRepo.findById(id)
-                .orElseThrow(() -> new RuntimeException("Teacher not found for this id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("teacher","id",id));
     }
 
     @Override
     public Teacher updateTeacher(Teacher teacher, Integer id) {
         Teacher existingTeacher = this.teacherRepo.findById(id)
-                .orElseThrow(() -> new RuntimeException("Teacher not found for this id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("teacher","id",id));
 
         existingTeacher.setTeacherName(teacher.getTeacherName());
         existingTeacher.setSubjectCourse(teacher.getSubjectCourse());
@@ -58,7 +59,7 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public void deleteTeacher(Integer id) {
         Teacher teacher = this.teacherRepo.findById(id)
-                .orElseThrow(() -> new RuntimeException("Teacher not found for this id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("teacher","id",id));
         this.teacherRepo.delete(teacher);
     }
 }
