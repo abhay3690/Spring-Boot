@@ -18,6 +18,7 @@ public class Teacher {
     private Integer id;
     private String teacherName;
     private String subjectCourse;
+    private String schoolName;
     @JsonIgnore
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Student> students;  // Ensure proper mapping
