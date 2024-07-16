@@ -114,13 +114,16 @@ public class AdminServiceImpl implements AdminService{
         car.setType(searchCarDto.getType());
         car.setTransmission(searchCarDto.getTransmission());
         car.setColor(searchCarDto.getColor());
+
         ExampleMatcher exampleMatcher = ExampleMatcher.matchingAll()
-                .withMatcher("brand", ExampleMatcher.GenericPropertyMatcher.contains().ignoreCase())
-                .withMatcher("type", ExampleMatcher.GenericPropertyMatcher.contains().ignoreCase())
-                .withMatcher("transmission", ExampleMatcher.GenericPropertyMatcher.contains().ignoreCase())
-                .withMatcher("color", ExampleMatcher.GenericPropertyMatcher.contains().ignoreCase());
-        Example<Car> carExample = Example.of(car,exampleMatcher);
+                .withMatcher("brand", ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase())
+                .withMatcher("type", ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase())
+                .withMatcher("transmission", ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase())
+                .withMatcher("color", ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase());
+
+        Example<Car> carExample = Example.of(car, exampleMatcher);
         List<Car> carList = carRepository.findAll(carExample);
+
         CarDtoListDto carDtoListDto = new CarDtoListDto();
         carDtoListDto.setCarDtoList(carList.stream().map(Car::getCarDto).collect(Collectors.toList()));
         return carDtoListDto;
