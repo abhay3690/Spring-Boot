@@ -45,6 +45,7 @@ public class TeacherServiceImpl implements TeacherService {
 
         existingTeacher.setTeacherName(teacher.getTeacherName());
         existingTeacher.setSubjectCourse(teacher.getSubjectCourse());
+        existingTeacher.setSchoolName(teacher.getSchoolName());
         existingTeacher.setStudents(teacher.getStudents());
 
         if (existingTeacher.getStudents() != null) {
