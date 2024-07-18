@@ -18,16 +18,14 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
+@CrossOrigin("http://localhost:4200")
 public class AuthController {
     private final AuthService authService;
     private final AuthenticationManager authenticationManager;
@@ -44,7 +42,6 @@ public class AuthController {
             return new ResponseEntity<>("customer not created, come again later", HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(createdCustomerDto, HttpStatus.CREATED);
     }
-
 
     @PostMapping("/login")
     public AuthenticationResponse createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws

@@ -21,13 +21,11 @@ public class AuthServiceImpl implements AuthService {
             User newAdminAccount = new User();
             newAdminAccount.setName("Admin");
             newAdminAccount.setEmail("admin@test.com");
-            newAdminAccount.setPassword(new BCryptPasswordEncoder().encode("admin"));
+            newAdminAccount.setPassword(new BCryptPasswordEncoder().encode(" "));
             newAdminAccount.setUserRole(UserRole.ADMIN);
             userRepository.save(newAdminAccount);
             System.out.println("Admin Account created Successfully");
-
         }
-
     }
 
     @Override
@@ -40,7 +38,6 @@ public class AuthServiceImpl implements AuthService {
         User createdUser = userRepository.save(user);
         UserDto userDto = new UserDto();
         userDto.setId(createdUser.getId());
-
         return userDto;
     }
 
