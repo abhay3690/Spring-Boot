@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class HospitalController {
 
     private final HospitalService hospitalService;
+
     @PostMapping
     public ResponseEntity<HospitalDto> createHospital(@RequestBody HospitalDto hospitalDto){
         System.out.println(hospitalDto.getHAddress()+" "+hospitalDto.getHName());

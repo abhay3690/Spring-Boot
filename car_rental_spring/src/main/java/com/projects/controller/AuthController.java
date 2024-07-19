@@ -27,6 +27,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @CrossOrigin("http://localhost:4200")
 public class AuthController {
+
     private final AuthService authService;
     private final AuthenticationManager authenticationManager;
     private final UserService userService;

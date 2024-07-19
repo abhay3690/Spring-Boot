@@ -17,7 +17,9 @@ import java.util.List;
 @RequestMapping("/api/admin")
 @RequiredArgsConstructor
 public class AdminController {
+
     private final AdminService adminService;
+
     @PostMapping("/car")
     public ResponseEntity<?> postCar(@ModelAttribute CarDto carDto) throws IOException {
        boolean success =  adminService.postCar(carDto);
@@ -27,20 +29,24 @@ public class AdminController {
            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
        }
     }
+
     @GetMapping("/cars")
     public ResponseEntity<?> getAllCars(){
         return ResponseEntity.ok(adminService.getAllCars());
     }
+
     @DeleteMapping("/car/{id}")
     public ResponseEntity<Void> deleteCar(@PathVariable Long id ){
         adminService.deleteCar(id);
         return ResponseEntity.ok(null);
     }
+
     @GetMapping("/car/{id}")
     public ResponseEntity<CarDto> getCarById(@PathVariable Long id){
         CarDto carDto =adminService.getCarById(id);
         return ResponseEntity.ok(carDto);
     }
+
     @PutMapping("/car/{carId}")
     public ResponseEntity<Void> updateCar(@PathVariable Long carId, @ModelAttribute CarDto carDto){
         try{
@@ -51,16 +57,19 @@ public class AdminController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
+
     @GetMapping("/car/bookings")
     public ResponseEntity<List<BookACarDto>> getBookings(){
         return ResponseEntity.ok(adminService.getBookings());
     }
+
     @GetMapping("/car/booking/{bookingId}/{}")
     public ResponseEntity<?> changeBookingStatus (@PathVariable Long bookingId, @PathVariable String status) {
         boolean success = adminService.changeBookingsStatus(bookingId, status);
         if (success) return ResponseEntity.ok().build();
         return ResponseEntity.notFound().build();
     }
+
     @PostMapping("/car/search")
     public ResponseEntity<?>searchBar(@RequestBody SearchCarDto searchCarDto){
         return ResponseEntity.ok(adminService.searchCar(searchCarDto));
