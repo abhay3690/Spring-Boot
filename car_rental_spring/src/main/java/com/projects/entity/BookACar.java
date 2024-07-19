@@ -33,6 +33,7 @@ public class BookACar {
     private Car car;
 
     public BookACarDto getBookACarDto(){
+
         BookACarDto bookACarDto = new BookACarDto();
         bookACarDto.setId(id);
         bookACarDto.setDays (days);
@@ -45,6 +46,6 @@ public class BookACar {
         bookACarDto.setUserId(user.getId());
         bookACarDto.setCarId(car.getId());
         return bookACarDto;
-    }
 
+    }
 }
