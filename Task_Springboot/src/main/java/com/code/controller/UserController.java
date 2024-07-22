@@ -1,0 +1,30 @@
+package com.code.controller;
+
+import com.code.dto.Userdto;
+import com.code.service.UserService;
+import lombok.RequiredArgsConstructor;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.logging.Logger;
+
+@RestController("/redy")
+@RequiredArgsConstructor
+public class UserController {
+    private final UserService userService;
+
+    @PostMapping()
+    public ResponseEntity<Userdto> registerProduct( @RequestBody Userdto productDto) {
+        try {
+            Userdto registerProduct = this.userService.createUser(productDto);
+            return new ResponseEntity<>(registerProduct, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
+}
