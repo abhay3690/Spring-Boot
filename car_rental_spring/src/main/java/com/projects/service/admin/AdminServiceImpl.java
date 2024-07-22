@@ -40,6 +40,7 @@ public class AdminServiceImpl implements AdminService{
             car.setDescription(carDto.getDescription());
             car.setTransmission(carDto.getTransmission());
             car.setImage(carDto.getImage().getBytes());
+            car.setColor(carDto.getColor());
             carRepository.save(car);
             return true;
         } catch (Exception e){
@@ -120,6 +121,7 @@ public class AdminServiceImpl implements AdminService{
                 .withMatcher("type", ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase())
                 .withMatcher("transmission", ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase())
                 .withMatcher("color", ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase());
+
 
         Example<Car> carExample = Example.of(car, exampleMatcher);
         List<Car> carList = carRepository.findAll(carExample);
