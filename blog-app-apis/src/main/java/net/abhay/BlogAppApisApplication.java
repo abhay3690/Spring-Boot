@@ -18,9 +18,9 @@ import net.abhay.repositories.RoleRepo;
 @RequiredArgsConstructor
 public class BlogAppApisApplication implements CommandLineRunner {
 
-	private PasswordEncoder passwordEncoder;
+	private final PasswordEncoder passwordEncoder;
 
-	private RoleRepo roleRepo;
+	private final RoleRepo roleRepo;
 
 	public static void main(String[] args) {
 		SpringApplication.run(BlogAppApisApplication.class, args);

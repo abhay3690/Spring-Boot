@@ -2,7 +2,6 @@ package net.abhay.security;
 
 import java.io.IOException;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,16 +22,13 @@ import net.abhay.blog.services.JwtService;
 @RequiredArgsConstructor
 public class JWTAuthenticationFilter extends OncePerRequestFilter {
 
-	@Autowired
-	private JwtService jwtService;
+	private final JwtService jwtService;
 
-	@Autowired
-	private UserDetailsService userDetailsService;
+	private final  UserDetailsService userDetailsService;
 
 	@Override
 	protected void doFilterInternal(@Nonnull HttpServletRequest request, @Nonnull HttpServletResponse response,
 			@Nonnull FilterChain filterChain) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		final String authHeader = request.getHeader("Authorization");
 		final String token;
 		final String userEmail;
@@ -43,12 +39,12 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
 		}
 		token = authHeader.substring(7);
 		userEmail = jwtService.getUsernameFromToken(token);
-//		userEmail = jwtService.extractUsername(token);
 		if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
 			UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
 
 			if (jwtService.isTokenValid(token, userDetails)) {
+
 				UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
 						userEmail, null, userDetails.getAuthorities());
 

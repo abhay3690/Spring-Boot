@@ -1,7 +1,6 @@
 package net.abhay.services.impl;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
 import net.abhay.entities.Role;
@@ -62,7 +61,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<UserDto> allUser() {
 		List<User> users = this.userRepo.findAll();
-		List<UserDto> list = users.stream().map(user -> this.userToDto(user)).collect(Collectors.toList());
+		List<UserDto> list = users.stream().map(user -> this.userToDto(user)).toList();
 		return list;
 	}
 

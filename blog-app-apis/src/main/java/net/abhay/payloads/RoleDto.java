@@ -7,5 +7,5 @@ public class RoleDto {
 
 	private int id;
 
-	private String Name;
+	private String name;
 }
