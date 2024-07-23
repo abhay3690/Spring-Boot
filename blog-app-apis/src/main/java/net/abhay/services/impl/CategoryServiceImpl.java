@@ -1,10 +1,8 @@
 package net.abhay.services.impl;
 
 import java.util.List;
-import java.util.stream.Collectors;
-
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import net.abhay.blog.services.CategoryService;
@@ -14,13 +12,12 @@ import net.abhay.payloads.CategoryDto;
 import net.abhay.repositories.CategoryRepo;
 
 @Service
+@RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
 
-	@Autowired
-	private CategoryRepo categoryRepo;
+	private final CategoryRepo categoryRepo;
 
-	@Autowired
-	private ModelMapper modelMapper;
+	private final ModelMapper modelMapper;
 
 	@Override
 	public CategoryDto createCategory(CategoryDto categoryDto) {
@@ -57,9 +54,8 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public List<CategoryDto> getCategories() {
 		List<Category> list = this.categoryRepo.findAll();
-		List<CategoryDto> list2 = list.stream().map(list1 -> this.modelMapper.map(list1, CategoryDto.class))
-				.collect(Collectors.toList());
-		return list2;
+		return  list.stream().map(list1 -> this.modelMapper.map(list1, CategoryDto.class))
+				.toList();
 	}
 
 }

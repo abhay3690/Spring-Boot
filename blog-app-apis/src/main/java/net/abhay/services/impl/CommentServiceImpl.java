@@ -1,7 +1,7 @@
 package net.abhay.services.impl;
 
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import net.abhay.blog.services.CommentService;
@@ -11,18 +11,15 @@ import net.abhay.exceptions.ResourceNotFoundException;
 import net.abhay.payloads.CommentDto;
 import net.abhay.repositories.CommentRepo;
 import net.abhay.repositories.PostRepo;
-import net.abhay.repositories.UserRepo;
 @Service
+@RequiredArgsConstructor
 public class CommentServiceImpl implements CommentService {
-	@Autowired
-	private PostRepo postRepo;
-	@Autowired
-	private CommentRepo commentRepo;
-	@Autowired
-	private UserRepo userRepo;
 
-	@Autowired
-	private ModelMapper modelMapper;
+	private final PostRepo postRepo;
+
+	private final CommentRepo commentRepo;
+
+	private final ModelMapper modelMapper;
 
 	@Override
 	public CommentDto createComment(CommentDto commentDto, Integer postId) {
