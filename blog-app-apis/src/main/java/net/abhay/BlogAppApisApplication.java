@@ -2,10 +2,8 @@ package net.abhay;
 
 import java.util.List;
 
-
-
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,14 +14,12 @@ import net.abhay.config.AppConstatns;
 import net.abhay.entities.Role;
 import net.abhay.repositories.RoleRepo;
 
-
-//public class BlogAppApisApplication {
 @SpringBootApplication
+@RequiredArgsConstructor
 public class BlogAppApisApplication implements CommandLineRunner {
-	@Autowired
+
 	private PasswordEncoder passwordEncoder;
-	
-	@Autowired
+
 	private RoleRepo roleRepo;
 
 	public static void main(String[] args) {
@@ -33,14 +29,13 @@ public class BlogAppApisApplication implements CommandLineRunner {
 
 	@Bean
 	public ModelMapper modelMapper() {
-		System.out.println("this is Main Check");
 		return new ModelMapper();
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
-//		System.out.println(this.passwordEncoder.encode("4521"));
 		try {
+
 			Role role = new Role();
 			role.setId(AppConstatns.ADMIN_USER);
 			role.setName("ROLE_ADMIN");
@@ -50,13 +45,9 @@ public class BlogAppApisApplication implements CommandLineRunner {
 			role1.setName("ROLE_NORMAL");
 			
 			List<Role> roles = List.of(role,role1);
-			
-			List<Role> result = this.roleRepo.saveAll(roles);
-			
-//			result.forEach(r -> System.out.println(r.getName()));
-	
+			this.roleRepo.saveAll(roles);
+
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 	}
