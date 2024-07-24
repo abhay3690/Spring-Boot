@@ -5,7 +5,7 @@ import java.io.InputStream;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -37,12 +37,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @RequestMapping("/api/")
 @CrossOrigin(origins = ("*+"))
+@RequiredArgsConstructor
 public class PostController {
 
-	@Autowired
-	private PostService postService;
-	@Autowired
-	private FileService fileService;
+	private final PostService postService;
+
+	private final FileService fileService;
 	@Value("${project.image}")
 	private String path;
 
@@ -51,7 +51,7 @@ public class PostController {
 	public ResponseEntity<PostDto> createPost(@RequestBody PostDto postDto, @PathVariable int userId,
 			@PathVariable int categoryId) {
 		PostDto createPost = this.postService.createPost(postDto, userId, categoryId);
-		return new ResponseEntity<PostDto>(createPost, HttpStatus.CREATED);
+		return new ResponseEntity<>(createPost, HttpStatus.CREATED);
 
 	}
 
@@ -79,7 +79,7 @@ public class PostController {
 			@RequestParam(value = "sortDir", defaultValue = AppConstatns.SORT_DIR, required = false) String sortDir) {
 
 		PostResponse postResponse = this.postService.getAllPost(pageNumber, pageSize, sortBy, sortDir);
-		return new ResponseEntity<PostResponse>(postResponse, HttpStatus.OK);
+		return new ResponseEntity<>(postResponse, HttpStatus.OK);
 	}
 
 	// get post by id
@@ -87,14 +87,14 @@ public class PostController {
 
 	public ResponseEntity<PostDto> PostById(@PathVariable Integer postId) {
 		PostDto postDto = this.postService.getPostById(postId);
-		return new ResponseEntity<PostDto>(postDto, HttpStatus.OK);
+		return new ResponseEntity<>(postDto, HttpStatus.OK);
 	}
 
 	// update
 	@PutMapping("/posts/{postId}")
 	public ResponseEntity<PostDto> updatePost(@RequestBody PostDto postDto, @PathVariable Integer postId) {
 		PostDto updatePost = this.postService.updatePost(postDto, postId);
-		return new ResponseEntity<PostDto>(updatePost, HttpStatus.OK);
+		return new ResponseEntity<>(updatePost, HttpStatus.OK);
 	}
 
 	// delete
@@ -125,7 +125,7 @@ public class PostController {
 		String fileName = this.fileService.uploadImage(path, image);
 		postDto.setImageName(fileName);
 		PostDto updatePost = this.postService.updatePost(postDto, postId);
-		return new ResponseEntity<PostDto>(updatePost, HttpStatus.OK);
+		return new ResponseEntity<>(updatePost, HttpStatus.OK);
 
 	}
 

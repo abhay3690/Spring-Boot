@@ -1,6 +1,6 @@
 package com.code.controller;
 
-import com.code.dto.Userdto;
+import com.code.dto.UserDto;
 import com.code.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.LoggerFactory;
@@ -19,9 +19,9 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping()
-    public ResponseEntity<Userdto> registerProduct( @RequestBody Userdto productDto) {
+    public ResponseEntity<UserDto> registerProduct( @RequestBody UserDto productDto) {
         try {
-            Userdto registerProduct = this.userService.createUser(productDto);
+            UserDto registerProduct = this.userService.createUser(productDto);
             return new ResponseEntity<>(registerProduct, HttpStatus.CREATED);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();

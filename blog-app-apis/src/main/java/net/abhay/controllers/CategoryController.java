@@ -2,7 +2,8 @@ package net.abhay.controllers;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,11 +22,10 @@ import net.abhay.services.impl.CategoryServiceImpl;
 
 @RestController
 @RequestMapping("/api/categories")
+@RequiredArgsConstructor
 public class CategoryController {
 
-	@Autowired
-	private CategoryServiceImpl categoryServiceImpl;
-
+	private final CategoryServiceImpl categoryServiceImpl;
 	// create
 	@PostMapping("/")
 	public ResponseEntity<CategoryDto> createCatogory(@Valid @RequestBody CategoryDto categoryDto) {
@@ -47,7 +47,7 @@ public class CategoryController {
 	@DeleteMapping("/{categoryId}")
 	public ResponseEntity<ApiResponse> deleteCategory(@PathVariable int categoryId) {
 		this.categoryServiceImpl.deleteCategory(categoryId);
-		return new ResponseEntity<ApiResponse>(new ApiResponse("catogory is deleted successfully !!", true),
+		return new ResponseEntity<>(new ApiResponse("catogory is deleted successfully !!", true),
 				HttpStatus.OK);
 	}
 
@@ -55,7 +55,7 @@ public class CategoryController {
 	@GetMapping("/{categoryId}")
 	public ResponseEntity<CategoryDto> getCategory(@PathVariable int categoryId) {
 		CategoryDto category = this.categoryServiceImpl.getCategory(categoryId);
-		return new ResponseEntity<CategoryDto>(category, HttpStatus.OK);
+		return new ResponseEntity<>(category, HttpStatus.OK);
 	}
 
 	// get All
