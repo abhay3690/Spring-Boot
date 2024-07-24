@@ -9,5 +9,7 @@ import java.util.List;
 public interface CityService {
     List<City> addCity(List<City> city);
     List<City> getCityWithPincodeRange(long start, long end);
+    City updateCity(City city1, Integer id);
+    void deleteCity( Integer id);
 
 }

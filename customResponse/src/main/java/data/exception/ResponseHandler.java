@@ -15,6 +15,6 @@ public class ResponseHandler {
         map.put("data", responseObj);
         map.put("Total Character Count", count);
 
-        return new ResponseEntity<Object>(map, status);
+        return new ResponseEntity<>(map, status);
     }
 }
