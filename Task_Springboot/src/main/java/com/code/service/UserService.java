@@ -1,12 +1,20 @@
 package com.code.service;
 
-import com.code.dto.Userdto;
+import com.code.dto.UserDto;
+
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public interface UserService {
-    Userdto createUser(Userdto userdto);
-    Userdto updateUser(Userdto userdto, Integer Id);
-    Userdto deleteUser(Integer Id);
-    Userdto getProductById(Integer Id);
+    UserDto createUser(UserDto userDTO);
+
+    UserDto updateUser(Long id, UserDto userDTO);
+
+    List<UserDto> getAllUsers();
+
+    UserDto getUserById(Long id);
+
+    void deleteUser(Long id);
 }
