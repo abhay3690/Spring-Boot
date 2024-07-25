@@ -6,10 +6,10 @@ import data.exception.ResourceNotFoundException;
 import data.repository.CityRepository;
 import data.service.CityService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class CityServiceImpl implements CityService {
@@ -18,7 +18,6 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public List<City> addCity(List<City> city) {
-
         return cityRepository.saveAll(city);
     }
 
@@ -41,4 +40,11 @@ public class CityServiceImpl implements CityService {
         City data = cityRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
         this.cityRepository.delete(data);
     }
+
+    @Override
+    public List<City> getAll() {
+        return cityRepository.findAll().stream().toList();
+//       return cityRepository.findAll();
+    }
+
 }

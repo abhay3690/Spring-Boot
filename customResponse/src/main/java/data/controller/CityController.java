@@ -46,4 +46,12 @@ public class CityController {
         this.cityService.deleteCity(id);
         return new ResponseEntity<>(new ApiResponse("User Deleted Successfully", true), HttpStatus.OK);
     }
+    @GetMapping("all")
+    public ResponseEntity<List<City>> getAllCity(   ){
+        List<City> all = cityService.getAll();
+        if (all.size() > 0) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(all);
+    }
 }
