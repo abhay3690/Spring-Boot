@@ -19,4 +19,7 @@ public class City {
     private String cityName;
     @Column(name = "pincode")
     private long pincode;
+
+    public City(int i, String city1) {
+    }
 }
