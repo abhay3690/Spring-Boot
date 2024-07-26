@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,6 +28,8 @@ public class CityServiceImplTest {
 
     @InjectMocks
     private CityServiceImpl cityService;
+
+    private Logger logger = LoggerFactory.getLogger(CityServiceImplTest.class);
 
     @BeforeEach
     public void setUp() {
@@ -73,7 +77,7 @@ public class CityServiceImplTest {
         });
 
         // Verify the exception message
-        assertEquals("User not found with id : 1", exception.getMessage());
+        assertEquals("City not found with id : 1", exception.getMessage());
 
         // Verify that findById method of repository was called once
         verify(cityRepository, times(1)).findById(cityId);
@@ -112,7 +116,7 @@ public class CityServiceImplTest {
         });
 
         // Verify the exception message
-        assertEquals("User not found with id : 1", exception.getMessage());
+        assertEquals("City not found with id : 1", exception.getMessage());
 
         // Verify that findById method of repository was called once
         verify(cityRepository, times(1)).findById(cityId);
@@ -163,5 +167,44 @@ public class CityServiceImplTest {
 
         // Assert the result
         Assertions.assertThat(result).containsExactly(city2); // City2's pincode (23456) falls within the range [20000, 30000]
+    }
+
+    @Test
+    public void testGetCityById_InvalidId_ThrowsIllegalArgumentException() {
+        // Test for null id
+        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
+            cityService.getCityById(null);
+        });
+        assertEquals("Invalid city id provided", thrown.getMessage());
+
+        // Test for negative id
+        thrown = assertThrows(IllegalArgumentException.class, () -> {
+            cityService.getCityById(-1);
+        });
+        assertEquals("Invalid city id provided", thrown.getMessage());
+    }
+    @Test
+    public void testGetCityById_CityNotFound_ThrowsResourceNotFoundException() {
+        // Arrange
+        int validId = 1;
+        when(cityRepository.findById(validId)).thenReturn(Optional.empty());
+
+        // Act & Assert
+        ResourceNotFoundException thrown = assertThrows(ResourceNotFoundException.class, () -> {
+            cityService.getCityById(validId);
+        });
+        assertEquals("City not found with id : 1", thrown.getMessage());
+    }
+    @Test
+    public void testGetCityById_CityFound_ReturnsCity() {
+        // Arrange
+        int validId = 1;
+        City mockCity = new City();
+        mockCity.setCityId(validId);
+        when(cityRepository.findById(validId)).thenReturn(Optional.of(mockCity));
+        // Act
+        City result = cityService.getCityById(validId);
+        // Assert
+        assertEquals(validId, result.getCityId());
     }
 }
