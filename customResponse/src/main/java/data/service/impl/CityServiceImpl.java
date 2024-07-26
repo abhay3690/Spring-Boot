@@ -5,7 +5,10 @@ import data.entity.CityName;
 import data.exception.ResourceNotFoundException;
 import data.repository.CityRepository;
 import data.service.CityService;
-import lombok.RequiredArgsConstructor;
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;          
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,10 +18,13 @@ import java.util.List;
 public class CityServiceImpl implements CityService {
 
     private final CityRepository cityRepository;
+    private Logger logger = LoggerFactory.getLogger(CityServiceImpl.class);
+
 
     @Override
-    public List<City> addCity(List<City> city) {
-        return cityRepository.saveAll(city);
+    @Transactional
+    public List<City> addCity(List<City> cities) {
+        return cityRepository.saveAll(cities);
     }
 
     @Override
@@ -27,18 +33,22 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
+    @Transactional
     public City updateCity(City city1,Integer id) {
-        City city2 = this.cityRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
-        city2.setCityId(id);
-        city2.setCityName(city1.getCityName());
-        city2.setPincode(city1.getPincode());
-        return this.cityRepository.save(city2);
+        City existingCity = cityRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("City", "id", id));
+
+        existingCity.setCityName(city1.getCityName());
+        existingCity.setPincode(city1.getPincode());
+        return cityRepository.save(existingCity);
     }
 
     @Override
-    public void deleteCity( Integer id) {
-        City data = cityRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
-        this.cityRepository.delete(data);
+    public void deleteCity(Integer id) {
+        City city = cityRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("City", "id", id));
+
+        cityRepository.delete(city);
     }
 
     @Override
@@ -47,4 +57,24 @@ public class CityServiceImpl implements CityService {
 //       return cityRepository.findAll();
     }
 
+    @Override
+    public City getCityById(Integer id) {
+        if (id == null || id <= 0) {
+            logger.error("Invalid city id provided: {}", id);
+            throw new IllegalArgumentException("Invalid city id provided");
+        }
+        logger.info("Request to get city with id: {}", id);
+        try {
+            City city = cityRepository.findById(id)
+                    .orElseThrow(() -> new ResourceNotFoundException("City", "id", id));
+            logger.info("Successfully retrieved city with id: {}", id);
+            return city;
+        } catch (ResourceNotFoundException ex) {
+            logger.error("City not found with id: {}", id, ex);
+            throw ex;
+        }
+//        City city = cityRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("City", "id", id));
+//        return city;
+    }
 }
+

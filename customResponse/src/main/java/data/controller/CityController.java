@@ -46,12 +46,20 @@ public class CityController {
         this.cityService.deleteCity(id);
         return new ResponseEntity<>(new ApiResponse("User Deleted Successfully", true), HttpStatus.OK);
     }
-    @GetMapping("all")
+    @GetMapping
     public ResponseEntity<List<City>> getAllCity(   ){
         List<City> all = cityService.getAll();
-        if (all.size() > 0) {
+        if (all.size() < 0) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         return ResponseEntity.status(HttpStatus.OK).body(all);
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<?>getCityById(@PathVariable Integer id){
+        City city = this.cityService.getCityById(id);
+        if (city == null) {
+            return new ResponseEntity<>(new ApiResponse("City not found with this id", true), HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(city, HttpStatus.OK);
     }
 }
