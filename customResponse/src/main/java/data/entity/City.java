@@ -25,6 +25,4 @@ public class City {
     @OneToMany(mappedBy = "city", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Car> cars = new HashSet<>();
 
-    public City(int i, String city1) {
-    }
 }

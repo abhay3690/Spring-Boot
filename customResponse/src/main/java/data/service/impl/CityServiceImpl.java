@@ -40,8 +40,6 @@ public class CityServiceImpl implements CityService {
 
         existingCity.setCityName(city1.getCityName());
         existingCity.setPincode(city1.getPincode());
-        existingCity.setCars(city1.getCars());
-
         return cityRepository.save(existingCity);
     }
 
