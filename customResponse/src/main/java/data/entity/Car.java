@@ -13,12 +13,20 @@ import lombok.NoArgsConstructor;
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Number;
+    @Column(name = "car_id")
+    private Integer carId; // Changed from `Number` to `carId` for clarity
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "model")
     private Integer model;
-    private String varient;
+
+    @Column(name = "variant") // Fixed typo from `varient` to `variant`
+    private String variant;
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "car_id")
+    @JoinColumn(name = "city_id") // Correct column name
     private City city;
 
 }

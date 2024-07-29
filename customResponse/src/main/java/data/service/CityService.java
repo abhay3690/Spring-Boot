@@ -8,7 +8,7 @@ import java.util.List;
 @Service
 public interface CityService {
 
-    List<City> addCity( List<City> city);
+    City addCity( City city);
 
     List<City> getCityWithPincodeRange( long start, long end);
 

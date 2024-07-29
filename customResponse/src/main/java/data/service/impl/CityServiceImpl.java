@@ -23,8 +23,8 @@ public class CityServiceImpl implements CityService {
 
     @Override
     @Transactional
-    public List<City> addCity(List<City> cities) {
-        return cityRepository.saveAll(cities);
+    public City addCity(City cities) {
+        return cityRepository.save(cities);
     }
 
     @Override
@@ -47,7 +47,6 @@ public class CityServiceImpl implements CityService {
     public void deleteCity(Integer id) {
         City city = cityRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("City", "id", id));
-
         cityRepository.delete(city);
     }
 
