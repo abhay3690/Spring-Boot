@@ -7,5 +7,10 @@ import java.util.List;
 
 @Service
 public interface CarService {
-    List<Car> addCar(List<Car> cars);
+    Car addCar(Car car);
+    List<Car> getAllCars();
+    Car getCarById(int id);
+    Car saveCar(Car car);
+    void deleteCar(int id);
+
 }

@@ -19,8 +19,9 @@ public class CityController {
     private final CityService cityService;
 
     @PostMapping("/addcity")
-    public List<City> addCity(@RequestBody List<City> city) {
-        return cityService.addCity(city);
+    public ResponseEntity<City> addCity(@RequestBody City city) {
+        City city1 = cityService.addCity(city);
+        return new ResponseEntity<>(city1, HttpStatus.CREATED);
     }
 
     @GetMapping("/getcityswithpincode")
@@ -33,33 +34,34 @@ public class CityController {
         sb.indexOf(city.getCityName());
         }
         String concatenatedCityNames = sb.toString();
-
         return ResponseHandler.generateResponse("Successfully retrieved data!", HttpStatus.OK, data, concatenatedCityNames.length());
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<City> updateCity(@RequestBody City city,@PathVariable("id") Integer id){
         City city1 = this.cityService.updateCity(city, id);
         return ResponseEntity.ok(city1);
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse> deleteCity(@PathVariable int id) {
         this.cityService.deleteCity(id);
         return new ResponseEntity<>(new ApiResponse("User Deleted Successfully", true), HttpStatus.OK);
     }
+
     @GetMapping
     public ResponseEntity<List<City>> getAllCity(   ){
-        List<City> all = cityService.getAll();
-        if (all.size() < 0) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(all);
+        List<City> cities = cityService.getAll();
+        return new ResponseEntity<>(cities, HttpStatus.OK);
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<?>getCityById(@PathVariable Integer id){
-        City city = this.cityService.getCityById(id);
-        if (city == null) {
-            return new ResponseEntity<>(new ApiResponse("City not found with this id", true), HttpStatus.NOT_FOUND);
+    public ResponseEntity<City>getCityById(@PathVariable Integer id) {
+            City city = cityService.getCityById(id);
+            if (city != null) {
+                return new ResponseEntity<>(city, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(city, HttpStatus.OK);
     }
 }
