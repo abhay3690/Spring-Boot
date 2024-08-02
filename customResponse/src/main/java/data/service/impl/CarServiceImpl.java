@@ -6,8 +6,6 @@ import data.repository.CarRepository;
 import data.service.CarService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
-
 import java.util.List;
 import java.util.Optional;
 

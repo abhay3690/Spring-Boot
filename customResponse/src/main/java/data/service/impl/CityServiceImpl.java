@@ -18,8 +18,8 @@ import java.util.List;
 public class CityServiceImpl implements CityService {
 
     private final CityRepository cityRepository;
-    private Logger logger = LoggerFactory.getLogger(CityServiceImpl.class);
 
+    private Logger logger = LoggerFactory.getLogger(CityServiceImpl.class);
 
     @Override
     @Transactional
