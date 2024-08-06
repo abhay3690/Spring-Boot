@@ -38,7 +38,7 @@ public class Car {
         carDto.setYear(year);
         carDto.setReturnedImage(image);
         return carDto;
-
+ 
     }
 
 }
