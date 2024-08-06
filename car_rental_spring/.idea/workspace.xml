@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a305f86c-57a9-4c69-97b7-b18653654ad0" name="Changes" comment="add extra space bar and book acar dto entity">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="a305f86c-57a9-4c69-97b7-b18653654ad0" name="Changes" comment="add extra space bar and book acar dto entity" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -48,9 +46,9 @@
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "Application.CarRentalSpringApplication.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "abhay",
+    "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Abhay Suthar/Desktop/spring-boott/Spring-Boot/search",
+    "last_opened_file_path": "C:/Users/Abhay Suthar/Desktop/spring-boott/Spring-Boot/car_rental_spring",
     "settings.editor.selected.configurable": "preferences.lookFeel"
   }
 }]]></component>
