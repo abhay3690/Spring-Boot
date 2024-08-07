@@ -1,5 +1,22 @@
 package com.example.service;
 
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.example.exception.classroom.ClassroomNotFoundException;
+import com.example.helper.BusinessMessage;
+import com.example.helper.GenerateClassroomName;
+import com.example.helper.LogMessage;
+import com.example.modal.Classroom;
+import com.example.payload.ClassroomDto;
+import com.example.payload.converter.ClassroomDtoConverter;
+import com.example.payload.request.classroom.CreateClassroomRequest;
+import com.example.payload.request.classroom.UpdateClassroomRequest;
+import com.example.repository.ClassroomRepository;
+
+import lombok.extern.slf4j.Slf4j;
+
 @Service
 @Slf4j
 public class ClassroomService {
