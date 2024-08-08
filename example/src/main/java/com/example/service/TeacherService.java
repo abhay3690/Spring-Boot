@@ -16,20 +16,16 @@ import com.example.payload.request.teacher.CreateTeacherRequest;
 import com.example.payload.request.teacher.UpdateTeacherRequest;
 import com.example.repository.TeacherRepository;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class TeacherService {
     private final TeacherRepository teacherRepository;
     private final TeacherDtoConverter converter;
-
-    public TeacherService(TeacherRepository teacherRepository,
-                          TeacherDtoConverter converter) {
-        this.teacherRepository = teacherRepository;
-        this.converter = converter;
-    }
-
+    
     public void createTeacher(CreateTeacherRequest request) {
         checkIfTeacherExists(request.getNationalId());
 
