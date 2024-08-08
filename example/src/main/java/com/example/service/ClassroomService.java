@@ -15,23 +15,17 @@ import com.example.payload.request.classroom.CreateClassroomRequest;
 import com.example.payload.request.classroom.UpdateClassroomRequest;
 import com.example.repository.ClassroomRepository;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class ClassroomService {
     private final ClassroomRepository classroomRepository;
     private final TeacherService teacherService;
     private final ClassroomDtoConverter converter;
-
-    public ClassroomService(ClassroomRepository classroomRepository,
-                            TeacherService teacherService,
-                            ClassroomDtoConverter converter) {
-        this.classroomRepository = classroomRepository;
-        this.teacherService = teacherService;
-        this.converter = converter;
-    }
-
+    
     public void createClassroom(CreateClassroomRequest request) {
         Classroom classroom = new Classroom();
         classroom.setName(GenerateClassroomName.generate());

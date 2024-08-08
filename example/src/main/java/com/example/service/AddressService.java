@@ -14,22 +14,16 @@ import com.example.payload.request.address.CreateAddressRequest;
 import com.example.payload.request.address.UpdateAddressRequest;
 import com.example.repository.AddressRepository;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class AddressService {
     private final AddressRepository addressRepository;
     private final StudentService studentService;
     private final AddressDtoConverter converter;
-
-    public AddressService(AddressRepository addressRepository,
-                          StudentService studentService,
-                          AddressDtoConverter converter) {
-        this.addressRepository = addressRepository;
-        this.studentService = studentService;
-        this.converter = converter;
-    }
 
     public void createAddress(CreateAddressRequest request) {
         Address address = new Address();

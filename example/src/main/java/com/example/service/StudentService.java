@@ -17,23 +17,17 @@ import com.example.payload.request.student.CreateStudentRequest;
 import com.example.payload.request.student.UpdateStudentRequest;
 import com.example.repository.StudentRepository;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class StudentService {
     private final StudentRepository studentRepository;
     private final ClassroomService classroomService;
     private final StudentDtoConverter converter;
-
-    public StudentService(StudentRepository studentRepository,
-                          ClassroomService classroomService,
-                          StudentDtoConverter converter) {
-        this.studentRepository = studentRepository;
-        this.classroomService = classroomService;
-        this.converter = converter;
-    }
 
     public void createStudent(CreateStudentRequest request) {
         checkIfStudentExists(request.getNationalId());
