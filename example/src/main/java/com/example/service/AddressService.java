@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.example.exception.address.AddressNotFoundException;
 import com.example.helper.BusinessMessage;
 import com.example.helper.LogMessage;
 import com.example.modal.Address;
@@ -14,16 +13,22 @@ import com.example.payload.request.address.CreateAddressRequest;
 import com.example.payload.request.address.UpdateAddressRequest;
 import com.example.repository.AddressRepository;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-@RequiredArgsConstructor
 public class AddressService {
     private final AddressRepository addressRepository;
     private final StudentService studentService;
     private final AddressDtoConverter converter;
+
+    public AddressService(AddressRepository addressRepository,
+                          StudentService studentService,
+                          AddressDtoConverter converter) {
+        this.addressRepository = addressRepository;
+        this.studentService = studentService;
+        this.converter = converter;
+    }
 
     public void createAddress(CreateAddressRequest request) {
         Address address = new Address();
@@ -68,7 +73,7 @@ public class AddressService {
 
         if (addressList.isEmpty()) {
             log.error(LogMessage.Address.AddressListEmpty());
-            throw new AddressNotFoundException(BusinessMessage.Address.ADDRESS_LIST_EMPTY);
+            throw new RuntimeException(BusinessMessage.Address.ADDRESS_LIST_EMPTY);
         }
 
         log.info(LogMessage.Address.AddressListed());
@@ -80,7 +85,7 @@ public class AddressService {
         return addressRepository.findById(id)
                 .orElseThrow(() -> {
                     log.error(LogMessage.Address.AddressNotFound(id));
-                    throw new AddressNotFoundException(LogMessage.Address.AddressNotFound(id));
+                    throw new RuntimeException(LogMessage.Address.AddressNotFound(id));
                 });
     }
 }

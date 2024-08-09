@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.example.exception.student.StudentAlreadyExistException;
-import com.example.exception.student.StudentNotFoundException;
 import com.example.helper.BusinessMessage;
 import com.example.helper.DateHelper;
 import com.example.helper.GenerateStudentNumber;
@@ -17,17 +15,23 @@ import com.example.payload.request.student.CreateStudentRequest;
 import com.example.payload.request.student.UpdateStudentRequest;
 import com.example.repository.StudentRepository;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 
 @Service
 @Slf4j
-@RequiredArgsConstructor
 public class StudentService {
     private final StudentRepository studentRepository;
     private final ClassroomService classroomService;
     private final StudentDtoConverter converter;
+
+    public StudentService(StudentRepository studentRepository,
+                          ClassroomService classroomService,
+                          StudentDtoConverter converter) {
+        this.studentRepository = studentRepository;
+        this.classroomService = classroomService;
+        this.converter = converter;
+    }
 
     public void createStudent(CreateStudentRequest request) {
         checkIfStudentExists(request.getNationalId());
@@ -110,7 +114,7 @@ public class StudentService {
 
         if (studentList.isEmpty()) {
             log.error(LogMessage.Student.StudentListEmpty());
-            throw new StudentNotFoundException(BusinessMessage.Student.STUDENT_LIST_EMPTY);
+            throw new RuntimeException(BusinessMessage.Student.STUDENT_LIST_EMPTY);
         }
 
         log.info(LogMessage.Student.StudentListed());
@@ -120,7 +124,7 @@ public class StudentService {
     private void checkIfStudentExists(String nationalId) {
         if (studentRepository.existsByNationalId(nationalId)) {
             log.error(LogMessage.Student.StudentAlreadyExists(nationalId));
-            throw new StudentAlreadyExistException(BusinessMessage.Student.STUDENT_ALREADY_EXISTS);
+            throw new RuntimeException(BusinessMessage.Student.STUDENT_ALREADY_EXISTS);
         }
     }
 
@@ -128,21 +132,21 @@ public class StudentService {
         return studentRepository.findById(id)
                 .orElseThrow(() -> {
                     log.error(LogMessage.Student.StudentNotFound(id));
-                    return new StudentNotFoundException(BusinessMessage.Student.STUDENT_NOT_FOUND);
+                    return new RuntimeException(BusinessMessage.Student.STUDENT_NOT_FOUND);
                 });
     }
 
     private void checkIfStudentFatherPhoneExists(String fatherPhone) {
         if (studentRepository.existsByFatherPhone(fatherPhone)) {
             log.error(LogMessage.Student.FatherPhoneAlreadyExists(fatherPhone));
-            throw new StudentAlreadyExistException(BusinessMessage.Student.STUDENT_FATHER_PHONE_ALREADY_EXISTS);
+            throw new RuntimeException(BusinessMessage.Student.STUDENT_FATHER_PHONE_ALREADY_EXISTS);
         }
     }
 
     private void checkIfStudentMotherPhoneExists(String motherPhone) {
         if (studentRepository.existsByMotherPhone(motherPhone)) {
             log.error(LogMessage.Student.MotherPhoneAlreadyExists(motherPhone));
-            throw new StudentAlreadyExistException(BusinessMessage.Student.STUDENT_MOTHER_PHONE_ALREADY_EXISTS);
+            throw new RuntimeException(BusinessMessage.Student.STUDENT_MOTHER_PHONE_ALREADY_EXISTS);
         }
     }
 }
