@@ -4,10 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.example.exception.teacher.TeacherAlreadyExistException;
-import com.example.exception.teacher.TeacherNotFoundException;
 import com.example.helper.BusinessMessage;
-import com.example.helper.DateHelper;
+
 import com.example.helper.LogMessage;
 import com.example.modal.Teacher;
 import com.example.payload.TeacherDto;
@@ -79,7 +77,7 @@ public class TeacherService {
 
         if (teacherList.isEmpty()) {
             log.error(LogMessage.Teacher.TeacherListEmpty());
-            throw new TeacherNotFoundException(BusinessMessage.Teacher.TEACHER_LIST_EMPTY);
+            throw new RuntimeException(BusinessMessage.Teacher.TEACHER_LIST_EMPTY);
         }
 
         log.info(LogMessage.Teacher.TeacherListed());
@@ -89,14 +87,14 @@ public class TeacherService {
     private void checkIfTeacherExists(String nationalId) {
         if (teacherRepository.existsByNationalId(nationalId)) {
             log.error(LogMessage.Teacher.TeacherAlreadyExists(nationalId));
-            throw new TeacherAlreadyExistException(BusinessMessage.Teacher.TEACHER_ALREADY_EXISTS);
+            throw new RuntimeException(BusinessMessage.Teacher.TEACHER_ALREADY_EXISTS);
         }
     }
 
     protected Teacher findTeacherByTeacherId(String id) {
         return teacherRepository.findById(id).orElseThrow(() -> {
             log.error(LogMessage.Teacher.TeacherNotFound(id));
-            return new TeacherNotFoundException(BusinessMessage.Teacher.TEACHER_NOT_FOUND);
+            return new RuntimeException(BusinessMessage.Teacher.TEACHER_NOT_FOUND);
         });
     }
 }

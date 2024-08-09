@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.example.exception.address.AddressNotFoundException;
 import com.example.helper.BusinessMessage;
 import com.example.helper.LogMessage;
 import com.example.modal.Address;
@@ -74,7 +73,7 @@ public class AddressService {
 
         if (addressList.isEmpty()) {
             log.error(LogMessage.Address.AddressListEmpty());
-            throw new AddressNotFoundException(BusinessMessage.Address.ADDRESS_LIST_EMPTY);
+            throw new RuntimeException(BusinessMessage.Address.ADDRESS_LIST_EMPTY);
         }
 
         log.info(LogMessage.Address.AddressListed());
@@ -86,7 +85,7 @@ public class AddressService {
         return addressRepository.findById(id)
                 .orElseThrow(() -> {
                     log.error(LogMessage.Address.AddressNotFound(id));
-                    throw new AddressNotFoundException(LogMessage.Address.AddressNotFound(id));
+                    throw new RuntimeException(LogMessage.Address.AddressNotFound(id));
                 });
     }
 }

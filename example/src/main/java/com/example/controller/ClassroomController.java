@@ -1,7 +1,5 @@
 package com.example.controller;
 
-import java.util.List;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,40 +11,41 @@ import com.example.service.ClassroomService;
 
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/classrooms")
+@RequestMapping("/api/classrooms")
 @RequiredArgsConstructor
 public class ClassroomController {
-
     private final ClassroomService classroomService;
 
     @PostMapping
     public ResponseEntity<Void> createClassroom(@RequestBody CreateClassroomRequest request) {
         classroomService.createClassroom(request);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Void> updateClassroom(@PathVariable String id, @RequestBody UpdateClassroomRequest request) {
         classroomService.updateClassroom(id, request);
-        return ResponseEntity.ok().build();
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteClassroom(@PathVariable String id) {
         classroomService.deleteClassroom(id);
-        return ResponseEntity.noContent().build();
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ClassroomDto> getClassroomById(@PathVariable String id) {
+    public ResponseEntity<ClassroomDto> findClassroomById(@PathVariable String id) {
         ClassroomDto classroomDto = classroomService.findClassroomById(id);
-        return ResponseEntity.ok(classroomDto);
+        return new ResponseEntity<>(classroomDto, HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity<List<ClassroomDto>> getAllClassrooms() {
-        List<ClassroomDto> classroomList = classroomService.findAllClassrooms();
-        return ResponseEntity.ok(classroomList);
+    public ResponseEntity<List<ClassroomDto>> findAllClassrooms() {
+        List<ClassroomDto> classroomDtoList = classroomService.findAllClassrooms();
+        return new ResponseEntity<>(classroomDtoList, HttpStatus.OK);
     }
 }

@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.example.exception.classroom.ClassroomNotFoundException;
 import com.example.helper.BusinessMessage;
 import com.example.helper.GenerateClassroomName;
 import com.example.helper.LogMessage;
@@ -71,7 +70,7 @@ public class ClassroomService {
 
         if (classroomList.isEmpty()) {
             log.error(LogMessage.Classroom.ClassroomListEmpty());
-            throw new ClassroomNotFoundException(BusinessMessage.Classroom.CLASSROOM_LIST_EMPTY);
+            throw new RuntimeException(BusinessMessage.Classroom.CLASSROOM_LIST_EMPTY);
         }
 
         log.info(LogMessage.Classroom.ClassroomListed());
@@ -81,7 +80,7 @@ public class ClassroomService {
     protected Classroom findClassroomByClassroomId(String id) {
         return classroomRepository.findById(id).orElseThrow(() -> {
             log.error(LogMessage.Classroom.ClassroomNotFound(id));
-            throw new ClassroomNotFoundException(BusinessMessage.Classroom.CLASSROOM_NOT_FOUND);
+            throw new RuntimeException(BusinessMessage.Classroom.CLASSROOM_NOT_FOUND);
         });
     }
 }
