@@ -1,9 +1,11 @@
 package com.example.service;
 
 import java.util.List;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional; // Ensure transactions are managed
 
+import org.springframework.stereotype.Service;
+
+import com.example.exception.student.StudentAlreadyExistException;
+import com.example.exception.student.StudentNotFoundException;
 import com.example.helper.BusinessMessage;
 import com.example.helper.DateHelper;
 import com.example.helper.GenerateStudentNumber;
@@ -15,19 +17,24 @@ import com.example.payload.request.student.CreateStudentRequest;
 import com.example.payload.request.student.UpdateStudentRequest;
 import com.example.repository.StudentRepository;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
 
 @Service
 @Slf4j
-@RequiredArgsConstructor
 public class StudentService {
-
     private final StudentRepository studentRepository;
     private final ClassroomService classroomService;
     private final StudentDtoConverter converter;
 
-    @Transactional // Ensure that the operations are managed within a transaction
+    public StudentService(StudentRepository studentRepository,
+                          ClassroomService classroomService,
+                          StudentDtoConverter converter) {
+        this.studentRepository = studentRepository;
+        this.classroomService = classroomService;
+        this.converter = converter;
+    }
+
     public void createStudent(CreateStudentRequest request) {
         checkIfStudentExists(request.getNationalId());
         checkIfStudentFatherPhoneExists(request.getFatherPhone());
@@ -49,7 +56,6 @@ public class StudentService {
         log.info(LogMessage.Student.StudentCreated());
     }
 
-    @Transactional // Ensure that the operations are managed within a transaction
     public void updateStudent(String id, UpdateStudentRequest request) {
         Student student = findStudentByStudentId(id);
 
@@ -73,7 +79,6 @@ public class StudentService {
         log.info(LogMessage.Student.StudentUpdated(id));
     }
 
-    @Transactional // Ensure that the operations are managed within a transaction
     public void addStudentToClassroom(String id, String classroomId) {
         Student student = findStudentByStudentId(id);
         student.setClassroom(classroomService.findClassroomByClassroomId(classroomId));
@@ -83,7 +88,6 @@ public class StudentService {
         log.info(LogMessage.Student.StudentAddedToClassroom(id, classroomId));
     }
 
-    @Transactional // Ensure that the operations are managed within a transaction
     public void removeStudentFromClassroom(String id) {
         Student student = findStudentByStudentId(id);
         student.setClassroom(null);
@@ -93,7 +97,6 @@ public class StudentService {
         log.info(LogMessage.Student.StudentRemovedFromClassroom(id));
     }
 
-    @Transactional // Ensure that the operations are managed within a transaction
     public void deleteStudent(String id) {
         Student student = findStudentByStudentId(id);
 
@@ -113,7 +116,7 @@ public class StudentService {
 
         if (studentList.isEmpty()) {
             log.error(LogMessage.Student.StudentListEmpty());
-            throw new RuntimeException(BusinessMessage.Student.STUDENT_LIST_EMPTY);
+            throw new StudentNotFoundException(BusinessMessage.Student.STUDENT_LIST_EMPTY);
         }
 
         log.info(LogMessage.Student.StudentListed());
@@ -123,7 +126,7 @@ public class StudentService {
     private void checkIfStudentExists(String nationalId) {
         if (studentRepository.existsByNationalId(nationalId)) {
             log.error(LogMessage.Student.StudentAlreadyExists(nationalId));
-            throw new RuntimeException(BusinessMessage.Student.STUDENT_ALREADY_EXISTS);
+            throw new StudentAlreadyExistException(BusinessMessage.Student.STUDENT_ALREADY_EXISTS);
         }
     }
 
@@ -131,21 +134,21 @@ public class StudentService {
         return studentRepository.findById(id)
                 .orElseThrow(() -> {
                     log.error(LogMessage.Student.StudentNotFound(id));
-                    throw new RuntimeException(BusinessMessage.Student.STUDENT_NOT_FOUND);
+                    return new StudentNotFoundException(BusinessMessage.Student.STUDENT_NOT_FOUND);
                 });
     }
 
     private void checkIfStudentFatherPhoneExists(String fatherPhone) {
         if (studentRepository.existsByFatherPhone(fatherPhone)) {
             log.error(LogMessage.Student.FatherPhoneAlreadyExists(fatherPhone));
-            throw new RuntimeException(BusinessMessage.Student.STUDENT_FATHER_PHONE_ALREADY_EXISTS);
+            throw new StudentAlreadyExistException(BusinessMessage.Student.STUDENT_FATHER_PHONE_ALREADY_EXISTS);
         }
     }
 
     private void checkIfStudentMotherPhoneExists(String motherPhone) {
         if (studentRepository.existsByMotherPhone(motherPhone)) {
             log.error(LogMessage.Student.MotherPhoneAlreadyExists(motherPhone));
-            throw new RuntimeException(BusinessMessage.Student.STUDENT_MOTHER_PHONE_ALREADY_EXISTS);
+            throw new StudentAlreadyExistException(BusinessMessage.Student.STUDENT_MOTHER_PHONE_ALREADY_EXISTS);
         }
     }
 }
