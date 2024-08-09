@@ -1,11 +1,9 @@
 package com.example.service;
 
 import java.util.List;
-
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional; // Ensure transactions are managed
 
-import com.example.exception.teacher.TeacherAlreadyExistException;
-import com.example.exception.teacher.TeacherNotFoundException;
 import com.example.helper.BusinessMessage;
 import com.example.helper.DateHelper;
 import com.example.helper.LogMessage;
@@ -16,20 +14,18 @@ import com.example.payload.request.teacher.CreateTeacherRequest;
 import com.example.payload.request.teacher.UpdateTeacherRequest;
 import com.example.repository.TeacherRepository;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class TeacherService {
+
     private final TeacherRepository teacherRepository;
     private final TeacherDtoConverter converter;
 
-    public TeacherService(TeacherRepository teacherRepository,
-                          TeacherDtoConverter converter) {
-        this.teacherRepository = teacherRepository;
-        this.converter = converter;
-    }
-
+    @Transactional // Ensure that the operations are managed within a transaction
     public void createTeacher(CreateTeacherRequest request) {
         checkIfTeacherExists(request.getNationalId());
 
@@ -38,28 +34,27 @@ public class TeacherService {
         teacher.setLastName(request.getLastName());
         teacher.setNationalId(request.getNationalId());
         teacher.setPhone(request.getPhone());
-        teacher.setCreatedDate(null);
-        teacher.setUpdatedDate(null);
-//        teacher.setCreatedDate(DateHelper.getCurrentDate());
-//        teacher.setUpdatedDate(DateHelper.getCurrentDate());
+        teacher.setCreatedDate(DateHelper.getCurrentDate()); // Set creation date
+        teacher.setUpdatedDate(DateHelper.getCurrentDate()); // Set update date initially
 
         teacherRepository.save(teacher);
         log.info(LogMessage.Teacher.TeacherCreated());
     }
 
+    @Transactional // Ensure that the operations are managed within a transaction
     public void updateTeacher(String id, UpdateTeacherRequest request) {
         Teacher teacher = findTeacherByTeacherId(id);
 
         teacher.setFirstName(request.getFirstName());
         teacher.setLastName(request.getLastName());
         teacher.setPhone(request.getPhone());
-        teacher.setUpdatedDate(null);
-//        teacher.setUpdatedDate(DateHelper.getCurrentDate());
+        teacher.setUpdatedDate(DateHelper.getCurrentDate()); // Update date
 
         teacherRepository.save(teacher);
         log.info(LogMessage.Teacher.TeacherUpdated(id));
     }
 
+    @Transactional // Ensure that the operations are managed within a transaction
     public void deleteTeacher(String id) {
         Teacher teacher = findTeacherByTeacherId(id);
 
@@ -79,7 +74,7 @@ public class TeacherService {
 
         if (teacherList.isEmpty()) {
             log.error(LogMessage.Teacher.TeacherListEmpty());
-            throw new TeacherNotFoundException(BusinessMessage.Teacher.TEACHER_LIST_EMPTY);
+            throw new RuntimeException(BusinessMessage.Teacher.TEACHER_LIST_EMPTY);
         }
 
         log.info(LogMessage.Teacher.TeacherListed());
@@ -89,14 +84,14 @@ public class TeacherService {
     private void checkIfTeacherExists(String nationalId) {
         if (teacherRepository.existsByNationalId(nationalId)) {
             log.error(LogMessage.Teacher.TeacherAlreadyExists(nationalId));
-            throw new TeacherAlreadyExistException(BusinessMessage.Teacher.TEACHER_ALREADY_EXISTS);
+            throw new RuntimeException(BusinessMessage.Teacher.TEACHER_ALREADY_EXISTS);
         }
     }
 
     protected Teacher findTeacherByTeacherId(String id) {
         return teacherRepository.findById(id).orElseThrow(() -> {
             log.error(LogMessage.Teacher.TeacherNotFound(id));
-            return new TeacherNotFoundException(BusinessMessage.Teacher.TEACHER_NOT_FOUND);
+            throw new RuntimeException(BusinessMessage.Teacher.TEACHER_NOT_FOUND);
         });
     }
 }

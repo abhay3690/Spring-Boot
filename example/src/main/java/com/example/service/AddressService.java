@@ -3,8 +3,8 @@ package com.example.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.example.exception.address.AddressNotFoundException;
 import com.example.helper.BusinessMessage;
 import com.example.helper.LogMessage;
 import com.example.modal.Address;
@@ -14,23 +14,19 @@ import com.example.payload.request.address.CreateAddressRequest;
 import com.example.payload.request.address.UpdateAddressRequest;
 import com.example.repository.AddressRepository;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class AddressService {
+
     private final AddressRepository addressRepository;
     private final StudentService studentService;
     private final AddressDtoConverter converter;
 
-    public AddressService(AddressRepository addressRepository,
-                          StudentService studentService,
-                          AddressDtoConverter converter) {
-        this.addressRepository = addressRepository;
-        this.studentService = studentService;
-        this.converter = converter;
-    }
-
+    @Transactional
     public void createAddress(CreateAddressRequest request) {
         Address address = new Address();
         address.setStreet(request.getStreet());
@@ -43,6 +39,7 @@ public class AddressService {
         log.info(LogMessage.Address.AddressCreated());
     }
 
+    @Transactional
     public void updateAddress(String id, UpdateAddressRequest request) {
         Address address = findAddressByAddressId(id);
 
@@ -55,6 +52,7 @@ public class AddressService {
         log.info(LogMessage.Address.AddressUpdated(id));
     }
 
+    @Transactional
     public void deleteAddress(String id) {
         Address address = findAddressByAddressId(id);
 
@@ -74,19 +72,18 @@ public class AddressService {
 
         if (addressList.isEmpty()) {
             log.error(LogMessage.Address.AddressListEmpty());
-            throw new AddressNotFoundException(BusinessMessage.Address.ADDRESS_LIST_EMPTY);
+            throw new RuntimeException(BusinessMessage.Address.ADDRESS_LIST_EMPTY);
         }
 
         log.info(LogMessage.Address.AddressListed());
         return converter.convert(addressList);
     }
 
-
     protected Address findAddressByAddressId(String id) {
         return addressRepository.findById(id)
                 .orElseThrow(() -> {
                     log.error(LogMessage.Address.AddressNotFound(id));
-                    throw new AddressNotFoundException(LogMessage.Address.AddressNotFound(id));
+                    throw new RuntimeException(LogMessage.Address.AddressNotFound(id));
                 });
     }
 }
