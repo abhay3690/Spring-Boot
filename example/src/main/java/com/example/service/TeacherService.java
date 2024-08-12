@@ -2,6 +2,7 @@ package com.example.service;
 
 import java.util.List;
 
+import com.example.helper.DateHelper;
 import org.springframework.stereotype.Service;
 
 import com.example.helper.BusinessMessage;
@@ -38,8 +39,8 @@ public class TeacherService {
         teacher.setPhone(request.getPhone());
         teacher.setCreatedDate(null);
         teacher.setUpdatedDate(null);
-//        teacher.setCreatedDate(DateHelper.getCurrentDate());
-//        teacher.setUpdatedDate(DateHelper.getCurrentDate());
+        teacher.setCreatedDate(DateHelper.getCurrentDate());
+        teacher.setUpdatedDate(DateHelper.getCurrentDate());
 
         teacherRepository.save(teacher);
         log.info(LogMessage.Teacher.TeacherCreated());
