@@ -8,6 +8,7 @@ public class BusinessMessage {
         public static final String ADDRESS_UPDATED_SUCCESSFULLY = "Address updated successfully";
         public static final String ADDRESS_DELETED_SUCCESSFULLY = "Address deleted successfully";
         public static final String ADDRESS_RETRIEVED_SUCCESSFULLY = "Address retrieved successfully";
+
         public static final String ADDRESS_LIST_EMPTY = "Address list is empty";
 
     }

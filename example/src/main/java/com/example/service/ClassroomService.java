@@ -1,7 +1,10 @@
 package com.example.service;
 
 import java.util.List;
+import java.util.Optional;
 
+import com.example.exception.classroom.ClassroomNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import com.example.helper.BusinessMessage;
@@ -16,29 +19,36 @@ import com.example.repository.ClassroomRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
+
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class ClassroomService {
     private final ClassroomRepository classroomRepository;
     private final TeacherService teacherService;
     private final ClassroomDtoConverter converter;
 
-    public ClassroomService(ClassroomRepository classroomRepository,
-                            TeacherService teacherService,
-                            ClassroomDtoConverter converter) {
-        this.classroomRepository = classroomRepository;
-        this.teacherService = teacherService;
-        this.converter = converter;
-    }
 
-    public void createClassroom(CreateClassroomRequest request) {
+    public String createClassroom(CreateClassroomRequest request) {
+        // Check if a classroom with the same description already exists
+        Optional<Classroom> existingClassroom = classroomRepository.findByDescription(request.getDescription());
+
+        if (existingClassroom.isPresent()) {
+            // If a classroom with the same description exists, return "Already exists"
+            return BusinessMessage.Classroom.CLASSROOM_ALREADY_EXISTS;
+        }else{
+
+        // If no such classroom exists, create a new one
         Classroom classroom = new Classroom();
         classroom.setName(GenerateClassroomName.generate());
         classroom.setDescription(request.getDescription());
         classroom.setTeacher(teacherService.findTeacherByTeacherId(request.getTeacherId()));
-
         classroomRepository.save(classroom);
         log.info(LogMessage.Classroom.ClassroomCreated());
+
+        // Return "Created successfully" after creating the classroom
+        return "Created successfully";
+        }
     }
 
     public void updateClassroom(String id, UpdateClassroomRequest request) {
@@ -70,7 +80,7 @@ public class ClassroomService {
 
         if (classroomList.isEmpty()) {
             log.error(LogMessage.Classroom.ClassroomListEmpty());
-            throw new RuntimeException(BusinessMessage.Classroom.CLASSROOM_LIST_EMPTY);
+            throw new ClassroomNotFoundException(BusinessMessage.Classroom.CLASSROOM_LIST_EMPTY);
         }
 
         log.info(LogMessage.Classroom.ClassroomListed());
@@ -80,7 +90,75 @@ public class ClassroomService {
     protected Classroom findClassroomByClassroomId(String id) {
         return classroomRepository.findById(id).orElseThrow(() -> {
             log.error(LogMessage.Classroom.ClassroomNotFound(id));
-            throw new RuntimeException(BusinessMessage.Classroom.CLASSROOM_NOT_FOUND);
+            throw new ClassroomNotFoundException(BusinessMessage.Classroom.CLASSROOM_NOT_FOUND);
         });
     }
 }
+//@Service
+//@Slf4j
+//public class ClassroomService {
+//    private final ClassroomRepository classroomRepository;
+//    private final TeacherService teacherService;
+//    private final ClassroomDtoConverter converter;
+//
+//    public ClassroomService(ClassroomRepository classroomRepository,
+//                            TeacherService teacherService,
+//                            ClassroomDtoConverter converter) {
+//        this.classroomRepository = classroomRepository;
+//        this.teacherService = teacherService;
+//        this.converter = converter;
+//    }
+//
+//    public void createClassroom(CreateClassroomRequest request) {
+//        Classroom classroom = new Classroom();
+//        classroom.setName(GenerateClassroomName.generate());
+//        classroom.setDescription(request.getDescription());
+//        classroom.setTeacher(teacherService.findTeacherByTeacherId(request.getTeacherId()));
+//
+//        classroomRepository.save(classroom);
+//        log.info(LogMessage.Classroom.ClassroomCreated());
+//    }
+//
+//    public void updateClassroom(String id, UpdateClassroomRequest request) {
+//        Classroom classroom = findClassroomByClassroomId(id);
+//
+//        classroom.setDescription(request.getDescription());
+//        classroom.setTeacher(teacherService.findTeacherByTeacherId(request.getTeacherId()));
+//
+//        classroomRepository.save(classroom);
+//        log.info(LogMessage.Classroom.ClassroomUpdated(id));
+//    }
+//
+//    public void deleteClassroom(String id) {
+//        Classroom classroom = findClassroomByClassroomId(id);
+//
+//        classroomRepository.delete(classroom);
+//        log.info(LogMessage.Classroom.ClassroomDeleted(id));
+//    }
+//
+//    public ClassroomDto findClassroomById(String id) {
+//        Classroom classroom = findClassroomByClassroomId(id);
+//
+//        log.info(LogMessage.Classroom.ClassroomFound(id));
+//        return converter.convert(classroom);
+//    }
+//
+//    public List<ClassroomDto> findAllClassrooms() {
+//        List<Classroom> classroomList = classroomRepository.findAll();
+//
+//        if (classroomList.isEmpty()) {
+//            log.error(LogMessage.Classroom.ClassroomListEmpty());
+//            throw new ClassroomNotFoundException(BusinessMessage.Classroom.CLASSROOM_LIST_EMPTY);
+//        }
+//
+//        log.info(LogMessage.Classroom.ClassroomListed());
+//        return converter.convert(classroomList);
+//    }
+//
+//    protected Classroom findClassroomByClassroomId(String id) {
+//        return classroomRepository.findById(id).orElseThrow(() -> {
+//            log.error(LogMessage.Classroom.ClassroomNotFound(id));
+//            throw new ClassroomNotFoundException(BusinessMessage.Classroom.CLASSROOM_NOT_FOUND);
+//        });
+//    }
+//}
