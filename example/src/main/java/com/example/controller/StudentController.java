@@ -19,12 +19,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/students")
 @Tag(name = "Student", description = "Student API")
+@RequiredArgsConstructor
 public class StudentController {
     private final StudentService studentService;
 
-    public StudentController(StudentService studentService) {
-        this.studentService = studentService;
-    }
 
     @Operation(summary = "Create Student",
             description = "Create Student",

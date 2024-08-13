@@ -19,12 +19,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/classrooms")
 @Tag(name = "Classroom", description = "Classroom API")
+@RequiredArgsConstructor
 public class ClassroomController {
     private final ClassroomService classroomService;
-
-    public ClassroomController(ClassroomService classroomService) {
-        this.classroomService = classroomService;
-    }
 
     @Operation(summary = "Create a classroom",
             description = "Create a classroom",
