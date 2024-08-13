@@ -19,12 +19,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/addresses")
 @Tag(name = "Address", description = "Address API")
+@RequiredArgsConstructor
 public class AddressController {
     private final AddressService addressService;
-
-    public AddressController(AddressService addressService) {
-        this.addressService = addressService;
-    }
 
     @Operation(summary = "Create Address",
             description = "Create Address",
