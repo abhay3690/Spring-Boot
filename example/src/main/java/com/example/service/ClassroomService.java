@@ -53,7 +53,6 @@ public class ClassroomService {
 
     public void updateClassroom(String id, UpdateClassroomRequest request) {
         Classroom classroom = findClassroomByClassroomId(id);
-
         classroom.setDescription(request.getDescription());
         classroom.setTeacher(teacherService.findTeacherByTeacherId(request.getTeacherId()));
 
