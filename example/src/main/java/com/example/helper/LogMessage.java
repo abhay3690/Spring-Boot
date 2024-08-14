@@ -103,6 +103,7 @@ public class LogMessage {
             return "Student list is empty";
         }
 
+
         public static String FatherPhoneAlreadyExists(String value) {
             return "Student father phone with " + value + " already exists";
         }
