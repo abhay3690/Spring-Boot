@@ -12,5 +12,6 @@ public interface UserService {
     UserDto getUserById(Long id);
     void depositToAccount(Long accountNumber, BigDecimal amount);
     BigDecimal getTotalBalance(Long userId);
+//    UserDto getAccountNoToAllDetails(Long accountNumber);
     // Add this method
 }
