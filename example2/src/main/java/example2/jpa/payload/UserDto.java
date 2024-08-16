@@ -1,5 +1,7 @@
 package example2.jpa.payload;
 
+
+import example2.jpa.model.UserRole;
 import lombok.Data;
 
 import java.util.Set;

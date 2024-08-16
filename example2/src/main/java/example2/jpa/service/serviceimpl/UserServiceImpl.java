@@ -8,7 +8,10 @@ import example2.jpa.payload.UserDto;
 import example2.jpa.repository.AccountRepository;
 import example2.jpa.repository.UserRepository;
 import example2.jpa.service.UserService;
+import org.springframework.security.core.userdetails.UserDetails;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -24,6 +27,17 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final AccountRepository accountRepository;
 
+
+    @Override
+    public UserDetailsService userDetailsService() {
+        return new UserDetailsService() {
+            @Override
+            public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+                return userRepository.findFirstByEmail(username).orElseThrow(() -> new UsernameNotFoundException("User Not found "));
+            }
+        };
+    }
+
     @Override
     public UserDto createUser(CreateUserRequest request) {
         // Create a new User entity from the request
@@ -32,7 +46,7 @@ public class UserServiceImpl implements UserService {
         user.setEmail(request.getEmail());
         user.setPassword(request.getPassword());
         user.setContactNumber(user.getContactNumber());
-        user.setRole(request.getRole());
+        user.setUserRole(request.getUserRole());
 
         // Handle Accounts if provided in the CreateUserRequest
         if (request.getAccounts() != null && !request.getAccounts().isEmpty()) {
@@ -76,23 +90,53 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public BigDecimal getTotalBalance(Long accountNumber) {
-        Optional<User> optionalUser = userRepository.findById(accountNumber);
-        if (optionalUser.isPresent()) {
-            return optionalUser.get().getAccounts().stream()
-                    .map(Account::getBalance)
-                    .reduce(BigDecimal.ZERO, BigDecimal::add);
+    public BigDecimal getAccountBalanceDetails(Long accountNumber) {
+        Optional<Account> accountOptional = accountRepository.findByAccountNumber(accountNumber);
+        if (accountOptional.isPresent()) {
+            return accountOptional.get().getBalance();
         } else {
-            throw new RuntimeException("User not found");
+            throw new RuntimeException("Account not found");
         }
     }
+
+    @Override
+    public UserDto getUserByAccountNumber(Long accountNumber) {
+        Optional<Account> accountOptional = accountRepository.findByAccountNumber(accountNumber);
+        if (accountOptional.isPresent()) {
+            Account account = accountOptional.get();
+            User user = account.getUser();
+            return convertToUserDto(user);
+        } else {
+            throw new RuntimeException("Account not found");
+        }
+    }
+    @Override
+    public BigDecimal withdrawFromAccount(Long accountNumber, BigDecimal amount) {
+        Optional<Account> accountOptional = accountRepository.findByAccountNumber(accountNumber);
+        if (accountOptional.isPresent()) {
+            Account account = accountOptional.get();
+
+            if (account.getBalance().compareTo(amount) < 0) {
+                throw new RuntimeException("Insufficient balance");
+            }
+
+            BigDecimal newBalance = account.getBalance().subtract(amount);
+            account.setBalance(newBalance);
+            accountRepository.save(account);
+
+            return newBalance;
+        } else {
+            throw new RuntimeException("Account not found");
+        }
+    }
+
     private UserDto convertToUserDto(User user) {
         UserDto userDto = new UserDto();
         userDto.setId(user.getId());
-        userDto.setUserName(user.getUserName());
+        userDto.setUserName(user.getUsername());
         userDto.setEmail(user.getEmail());
         userDto.setContactNumber(user.getContactNumber());
-        userDto.setRole(user.getRole());
+        userDto.setRole(user.getUserRole());
 
         // Convert Account entities to AccountDTOs
         Set<AccountDto> acc = user.getAccounts().stream()
@@ -118,6 +162,42 @@ public class UserServiceImpl implements UserService {
         account.setBalance(accountDto.getBalance());
         account.setAccountType(accountDto.getAccountType());
         return account;
+    }
+    @Override
+    public BigDecimal getAccountBalance(Long accountNumber) {
+        return accountRepository.findByAccountNumber(accountNumber)
+                .map(Account::getBalance)
+                .orElseThrow(() -> new RuntimeException("Account not found"));
+    }
+    @Override
+    public void transferFunds(Long fromAccountNumber, Long toAccountNumber, BigDecimal amount) {
+        if (amount.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new IllegalArgumentException("Transfer amount must be positive.");
+        }
+
+        Optional<Account> fromAccountOptional = accountRepository.findByAccountNumber(fromAccountNumber);
+        Optional<Account> toAccountOptional = accountRepository.findByAccountNumber(toAccountNumber);
+
+        if (fromAccountOptional.isPresent() && toAccountOptional.isPresent()) {
+            Account fromAccount = fromAccountOptional.get();
+            Account toAccount = toAccountOptional.get();
+
+            if (fromAccount.getBalance().compareTo(amount) >= 0) {
+                // Deduct amount from the source account
+                fromAccount.setBalance(fromAccount.getBalance().subtract(amount));
+
+                // Add amount to the destination account
+                toAccount.setBalance(toAccount.getBalance().add(amount));
+
+                // Save the updated account balances
+                accountRepository.save(fromAccount);
+                accountRepository.save(toAccount);
+            } else {
+                throw new RuntimeException("Insufficient balance in the source account");
+            }
+        } else {
+            throw new RuntimeException("One or both accounts not found");
+        }
     }
 
 
