@@ -5,76 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a305f86c-57a9-4c69-97b7-b18653654ad0" name="Changes" comment="add extra space bar and book acar dto entity">
-      <change afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/config/SwaggerConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/configuration/JwtAuthenticationFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/configuration/WebSecurityConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/controller/AuthController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/enums/UserRole.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/model/UserRole.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/payload/AccountBalanceDetailsMesage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/payload/AuthenticationRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/payload/AuthenticationResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/payload/SignupRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/payload/TransferResponseDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/payload/WithdrawResponseDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/service/auth/AuthService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/service/auth/AuthServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/util/JWTUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/projects/configuration/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/projects/configuration/JwtAuthenticationFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/projects/configuration/SimpleCorsFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/projects/configuration/SimpleCorsFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/projects/configuration/WebSecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/projects/configuration/WebSecurityConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/projects/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/projects/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/projects/enums/UserRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/projects/enums/UserRole.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/projects/service/auth/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/projects/service/auth/AuthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/projects/service/auth/AuthServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/projects/service/auth/AuthServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/projects/service/auth/jwt/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/projects/service/auth/jwt/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/projects/service/auth/jwt/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/projects/service/auth/jwt/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/projects/utils/JWTUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/projects/utils/JWTUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/maven/com.projects/car_rental_spring/pom.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/maven/com.projects/car_rental_spring/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/projects/CarRentalSpringApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/projects/CarRentalSpringApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/projects/controller/AdminController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/projects/controller/AdminController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/projects/controller/CustomerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/projects/controller/CustomerController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/projects/controller/HospitalController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/projects/controller/HospitalController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/projects/dto/AuthenticationRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/projects/dto/AuthenticationRequest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/projects/dto/AuthenticationResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/projects/dto/AuthenticationResponse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/projects/dto/BookACarDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/projects/dto/BookACarDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/projects/dto/CarDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/projects/dto/CarDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/projects/dto/CarDtoListDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/projects/dto/CarDtoListDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/projects/dto/HospitalDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/projects/dto/HospitalDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/projects/dto/SearchCarDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/projects/dto/SearchCarDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/projects/dto/SignupRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/projects/dto/SignupRequest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/projects/dto/UserDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/projects/dto/UserDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/projects/entity/BookACar.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/projects/entity/BookACar.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/projects/entity/Car.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/projects/entity/Car.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/projects/entity/Hospital.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/projects/entity/Hospital.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/projects/entity/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/projects/entity/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/projects/enums/BookCarStatus.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/projects/enums/BookCarStatus.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/projects/enums/UserRole.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/projects/enums/UserRole.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/projects/repository/BookACarRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/projects/repository/BookACarRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/projects/repository/CarRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/projects/repository/CarRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/projects/repository/HosptitalRepo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/projects/repository/HosptitalRepo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/projects/repository/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/projects/repository/UserRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/projects/service/admin/AdminService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/projects/service/admin/AdminService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/projects/service/admin/AdminServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/projects/service/admin/AdminServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/projects/service/customer/CustomerService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/projects/service/customer/CustomerService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/projects/service/customer/CustomerServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/projects/service/customer/CustomerServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/projects/service/hospital/HospitalService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/projects/service/hospital/HospitalService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/projects/service/hospital/HospitalServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/projects/service/hospital/HospitalServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../example/src/main/java/com/example/controller/TeacherController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../example/src/main/java/com/example/controller/TeacherController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../example2/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../example2/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/config/OpenApiConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/config/SwaggerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/config/OpenApiConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/configuration/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/configuration/JwtAuthenticationFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/configuration/WebSecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/configuration/WebSecurityConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/enums/UserRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/enums/UserRole.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/model/UserRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/model/UserRole.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/payload/AuthenticationResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/payload/AuthenticationResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/payload/CreateUserRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/payload/CreateUserRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/payload/UserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/payload/UserDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/repository/UserRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/service/auth/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/service/auth/AuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/service/auth/AuthServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/service/auth/AuthServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/service/serviceimpl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/service/serviceimpl/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../example2/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../example2/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/util/JWTUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/util/JWTUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,7 +67,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "abhay",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Abhay Suthar/Desktop/spring/Spring-Boot/car_rental_spring",
+    "last_opened_file_path": "C:/Users/Abhay Suthar/Desktop/spring/Spring-Boot/example2",
     "settings.editor.selected.configurable": "preferences.lookFeel"
   }
 }]]></component>
