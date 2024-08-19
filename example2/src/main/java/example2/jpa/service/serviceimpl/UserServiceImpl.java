@@ -8,10 +8,10 @@ import example2.jpa.payload.UserDto;
 import example2.jpa.repository.AccountRepository;
 import example2.jpa.repository.UserRepository;
 import example2.jpa.service.UserService;
-import org.springframework.security.core.userdetails.UserDetails;
+//import org.springframework.security.core.userdetails.UserDetails;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+//import org.springframework.security.core.userdetails.UserDetailsService;
+//import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -27,16 +27,16 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final AccountRepository accountRepository;
 
-
-    @Override
-    public UserDetailsService userDetailsService() {
-        return new UserDetailsService() {
-            @Override
-            public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-                return userRepository.findFirstByEmail(username).orElseThrow(() -> new UsernameNotFoundException("User Not found "));
-            }
-        };
-    }
+//
+//    @Override
+//    public UserDetailsService userDetailsService() {
+//        return new UserDetailsService() {
+//            @Override
+//            public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//                return userRepository.findFirstByEmail(username).orElseThrow(() -> new UsernameNotFoundException("User Not found "));
+//            }
+//        };
+//    }
 
     @Override
     public UserDto createUser(CreateUserRequest request) {
@@ -133,7 +133,7 @@ public class UserServiceImpl implements UserService {
     private UserDto convertToUserDto(User user) {
         UserDto userDto = new UserDto();
         userDto.setId(user.getId());
-        userDto.setUserName(user.getUsername());
+        userDto.setUserName(user.getUserName());
         userDto.setEmail(user.getEmail());
         userDto.setContactNumber(user.getContactNumber());
         userDto.setRole(user.getUserRole());
