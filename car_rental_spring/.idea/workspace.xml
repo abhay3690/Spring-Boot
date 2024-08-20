@@ -6,23 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a305f86c-57a9-4c69-97b7-b18653654ad0" name="Changes" comment="add extra space bar and book acar dto entity">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../example2/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../example2/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/config/SwaggerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/config/OpenApiConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/configuration/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/configuration/JwtAuthenticationFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/configuration/WebSecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/configuration/WebSecurityConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/enums/UserRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/enums/UserRole.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/model/UserRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/model/UserRole.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/payload/AuthenticationResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/payload/AuthenticationResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/payload/CreateUserRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/payload/CreateUserRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/payload/UserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/payload/UserDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/service/auth/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/service/auth/AuthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/service/auth/AuthServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/service/auth/AuthServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/service/serviceimpl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/service/serviceimpl/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/util/JWTUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/../example2/src/main/java/example2/jpa/util/JWTUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +48,7 @@
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "Application.CarRentalSpringApplication.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
     "git-widget-placeholder": "abhay",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Abhay Suthar/Desktop/spring/Spring-Boot/example2",
@@ -116,7 +100,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721408626044</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="add extra space bar and book acar dto entity">
+      <option name="closed" value="true" />
+      <created>1724088259703</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1724088259703</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
