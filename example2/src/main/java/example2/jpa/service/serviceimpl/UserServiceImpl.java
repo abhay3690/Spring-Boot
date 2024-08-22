@@ -435,6 +435,8 @@ public class UserServiceImpl implements UserService {
             Account account = accountOptional.get();
             account.setBalance(account.getBalance().add(amount));
             accountRepository.save(account);
+            System.out.println("This is the api fetching details ");
+
         } else {
             throw new RuntimeException("Account not found");
         }
@@ -462,6 +464,7 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("Account not found");
         }
     }
+
     @Override
     public BigDecimal withdrawFromAccount(Long accountNumber, BigDecimal amount) {
         Optional<Account> accountOptional = accountRepository.findByAccountNumber(accountNumber);
