@@ -24,11 +24,11 @@ public class User{
     private Long contactNumber;
     private String password;
     private String userRole;
-
+    
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Account> accounts = new HashSet<>();
 
-//    @Override
+    //    @Override
 //    public String getPassword() {
 //        return this.password; // Return the actual password stored in the entity
 //    }

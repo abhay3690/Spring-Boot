@@ -64,7 +64,8 @@ public class UserController {
             AccountBalanceDetailsMesage accountBalanceDetailsMesage = new AccountBalanceDetailsMesage("Your total account balance is below : ",totalBalance);
             return new ResponseEntity<>(accountBalanceDetailsMesage, HttpStatus.OK);
         } catch (Exception e) {
-            // Log the exception and return an appropriate error response
+            // Log the exception and return an approp
+            // riate error response
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
@@ -74,12 +75,14 @@ public class UserController {
         UserDto userDto = userService.getUserByAccountNumber(accountNumber);
         return new ResponseEntity<>(userDto, HttpStatus.OK);
     }
+
     @PostMapping("/withdraw/{accountNumber}")
     public ResponseEntity<WithdrawResponseDto> withdrawFromAccount(@PathVariable Long accountNumber, @RequestParam BigDecimal amount) {
         BigDecimal updatedBalance = userService.withdrawFromAccount(accountNumber, amount);
         WithdrawResponseDto response = new WithdrawResponseDto("Withdraw Successful", updatedBalance);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
     @PostMapping("/transfer")
     public ResponseEntity<?> transferFunds(
             @RequestParam Long fromAccountNumber,
