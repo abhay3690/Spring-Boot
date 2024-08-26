@@ -21,6 +21,7 @@ public class Account {
     private BigDecimal balance;
     private String accountType;
 
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

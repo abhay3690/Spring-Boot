@@ -96,7 +96,7 @@ public class UserController {
             BigDecimal fromAccountBalance = userService.getAccountBalance(fromAccountNumber);
             BigDecimal toAccountBalance = userService.getAccountBalance(toAccountNumber);
 
-            TransferResponseDto response = new TransferResponseDto("Transfer Successful",fromAccountBalance);
+            TransferResponseDto response = new TransferResponseDto("Transfer Successful",fromAccountBalance, toAccountBalance);
 
             return new ResponseEntity<>(response, HttpStatus.OK);
 
@@ -106,6 +106,22 @@ public class UserController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
+
+//    @PostMapping("/transferWithContactNumber")
+//    public ResponseEntity<String> transferFundsWithContactNumber(
+//            @RequestParam("fromContactNumber") Long fromContactNumber,
+//            @RequestParam("toContactNumber") Long toContactNumber,
+//            @RequestParam("amount") BigDecimal amount) {
+//
+//        try {
+//            userService.transferFundsWithContactNumber(fromContactNumber, toContactNumber, amount);
+//            return ResponseEntity.ok("Transfer successful");
+//        } catch (IllegalArgumentException e) {
+//            return ResponseEntity.badRequest().body(e.getMessage());
+//        } catch (RuntimeException e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+//        }
+//    }
 }
 
 

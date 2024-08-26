@@ -18,5 +18,7 @@ public interface UserService {
     BigDecimal getAccountBalanceDetails(Long accountNumber);
     void transferFunds(Long fromAccountNumber, Long toAccountNumber, BigDecimal amount);
 //    UserDto getAccountNoToAllDetails(Long accountNumber);
+//    void transferFundsWithContactNumber(Long fromContactNumber, Long toContactNumber, BigDecimal amount);
+
     // Add this method
 }
