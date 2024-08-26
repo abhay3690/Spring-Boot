@@ -24,6 +24,7 @@ public class User{
     private Long contactNumber;
     private String password;
     private String userRole;
+
     
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Account> accounts = new HashSet<>();
