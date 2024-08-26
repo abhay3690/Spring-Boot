@@ -10,5 +10,7 @@ import java.math.BigDecimal;
 public class TransferResponseDto {
     private String message;
     private BigDecimal fromAccountNewBalance;
+    private BigDecimal toAccountBalance;
+
 
 }
