@@ -205,33 +205,33 @@ public class UserServiceImpl implements UserService {
 //            }
 //        };
 //    }
-@Override
-public UserDto createUser(CreateUserRequest request) {
-    // Create a new User entity from the request
-    User user = new User();
-    user.setUserName(request.getUserName());
-    user.setEmail(request.getEmail());
-    user.setPassword(request.getPassword());
-    user.setContactNumber(request.getContactNumber()); // This line is corrected
-    user.setUserRole(request.getUserRole());
+    @Override
+    public UserDto createUser(CreateUserRequest request) {
+        // Create a new User entity from the request
+        User user = new User();
+        user.setUserName(request.getUserName());
+        user.setEmail(request.getEmail());
+        user.setPassword(request.getPassword());
+        user.setContactNumber(request.getContactNumber()); // This line is corrected
+        user.setUserRole(request.getUserRole());
 
-    // Handle Accounts if provided in the CreateUserRequest
-    if (request.getAccounts() != null && !request.getAccounts().isEmpty()) {
-        Set<Account> accounts = request.getAccounts().stream()
-                .map(this::convertToAccountEntity)  // Convert each AccountDto to Account entity
-                .peek(account -> account.setUser(user))  // Set the user for each account
-                .collect(Collectors.toSet());
-        user.setAccounts(accounts);  // Associate accounts with the user
-    } else {
-        user.setAccounts(new HashSet<>());  // Initialize an empty set of accounts
+        // Handle Accounts if provided in the CreateUserRequest
+        if (request.getAccounts() != null && !request.getAccounts().isEmpty()) {
+            Set<Account> accounts = request.getAccounts().stream()
+                    .map(this::convertToAccountEntity)  // Convert each AccountDto to Account entity
+                    .peek(account -> account.setUser(user))  // Set the user for each account
+                    .collect(Collectors.toSet());
+            user.setAccounts(accounts);  // Associate accounts with the user
+        } else {
+            user.setAccounts(new HashSet<>());  // Initialize an empty set of accounts
+        }
+
+        // Save the user to the database
+        User savedUser = userRepository.save(user);
+
+        // Convert the saved user entity to a UserDto
+        return convertToUserDto(savedUser);
     }
-
-    // Save the user to the database
-    User savedUser = userRepository.save(user);
-
-    // Convert the saved user entity to a UserDto
-    return convertToUserDto(savedUser);
-}
     @Override
     public UserDto getUserById(Long id) {
         Optional<User> user = userRepository.findById(id);
