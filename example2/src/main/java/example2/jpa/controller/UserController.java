@@ -3,6 +3,8 @@ package example2.jpa.controller;
 import example2.jpa.payload.*;
 import example2.jpa.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +17,7 @@ import java.math.BigDecimal;
 public class UserController {
 
     private final UserService userService;
-
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
     @PostMapping
     public ResponseEntity<UserDto> createUser(@RequestBody CreateUserRequest request) {
         try {
@@ -64,10 +66,10 @@ public class UserController {
             AccountBalanceDetailsMesage accountBalanceDetailsMesage = new AccountBalanceDetailsMesage("Your total account balance is below : ",totalBalance);
             return new ResponseEntity<>(accountBalanceDetailsMesage, HttpStatus.OK);
         } catch (Exception e) {
-            // Log the exception and return an approp
+            logger.error("Error fetching account balance for account number: {}", accountNumber, e);
             // riate error response
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new AccountBalanceDetailsMesage("An error occurred while retrieving account balance. Please try again later.", null));        }
     }
 
     @GetMapping("/account/{accountNumber}")
