@@ -14,40 +14,45 @@ import java.util.Optional;
 public class UserController {
     private final UserRepository userRepository;
     private final UserService userService;
-    @PostMapping("/users")
-    public User createUser(@RequestBody User user){
-        User savedUser = userService.registerUser(user);
-        return savedUser;
-    }
 
-    @GetMapping("/users")
+
+    @GetMapping("/api/users")
     public List<User> getUser(){
         List<User> users = userRepository.findAll();
         return users;
     }
 
-    @GetMapping("/users/{userid}")
+    @GetMapping("/api/users/{userid}")
     public User getUserById(@PathVariable("userid") Integer userId) throws Exception{
         User user = userService.findUserById(userId);
         return user;
 
     }
 
-    @PutMapping("/users/{userId}")
-    public User updateUser(@RequestBody User user, @PathVariable Integer userId) throws Exception {
-        User updatedUser = userService.updateUser(user, userId);
+    @PutMapping("/api/users")
+    public User updateUser(@RequestHeader("Authorization") String jwt, @RequestBody User user) throws Exception {
+        User reqUser = userService.findUserByJwt(jwt);
+        User updatedUser = userService.updateUser(user, reqUser.getId() );
         return updatedUser;
     }
-    @PutMapping("/users/follow/{userId1}/{userId2}")
+    @PutMapping("/api/users/follow/{userId1}/{userId2}")
     public User followUserHandler(@PathVariable Integer userId1, @PathVariable Integer userId2) throws Exception {
         User user = userService.followUser(userId1,userId2);
         return user;
     }
-    @GetMapping("/users/search")
+    @GetMapping("/api/users/search")
     public List<User> searchUser(@RequestParam("query") String query){
         List<User> user = userService.searchUser(query);
         return user;
     }
+@GetMapping("/api/users/profile")
+public User getUserFromToken(@RequestHeader("Authorization") String jwt) {
+
+    User user = userService.findUserByJwt(jwt);
+    user.setPassword(null);
+    // Add your logic to retrieve the user using the JWT token
+    return user;
+}
 
    /* @DeleteMapping("users/{userId}")
     public String delteUser(@PathVariable("userId") Integer userId) throws Exception{
