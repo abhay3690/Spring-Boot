@@ -1,5 +1,6 @@
 package com.zosh.service.serviceImpl;
 
+import com.zosh.config.JwtProvider;
 import com.zosh.model.User;
 import com.zosh.repository.UserRepository;
 import com.zosh.service.UserService;
@@ -21,6 +22,7 @@ public class UserServiceImpl implements UserService {
         newUser.setLastName(user.getLastName());
         newUser.setEmail(user.getEmail());
         newUser.setPassword(user.getPassword());
+        newUser.setGender(user.getGender());
 
         User savedUser = userRepository.save(newUser);
         return savedUser;
@@ -69,6 +71,9 @@ public class UserServiceImpl implements UserService {
         if (user.getEmail() != null) {
             oldUser.setEmail(user.getEmail());
         }
+        if (user.getGender() != null){
+            oldUser.setGender(user.getGender());
+        }
         return userRepository.save(oldUser);
     }
 
@@ -76,5 +81,12 @@ public class UserServiceImpl implements UserService {
     public List<User> searchUser(String query) {
 
         return userRepository.searchUser(query);
+    }
+
+    @Override
+    public User findUserByJwt(String jwt) {
+        String email = JwtProvider.getEmailFromJwtToken(jwt);
+        User user = userRepository.findByEmail(email);
+        return user;
     }
 }
