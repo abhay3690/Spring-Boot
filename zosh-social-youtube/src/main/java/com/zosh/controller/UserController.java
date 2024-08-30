@@ -1,5 +1,6 @@
 package com.zosh.controller;
 
+import com.zosh.exception.UserException;
 import com.zosh.model.User;
 import com.zosh.repository.UserRepository;
 import com.zosh.service.UserService;
@@ -23,21 +24,22 @@ public class UserController {
     }
 
     @GetMapping("/api/users/{userid}")
-    public User getUserById(@PathVariable("userid") Integer userId) throws Exception{
+    public User getUserById(@PathVariable("userid") Integer userId) throws UserException{
         User user = userService.findUserById(userId);
         return user;
 
     }
 
     @PutMapping("/api/users")
-    public User updateUser(@RequestHeader("Authorization") String jwt, @RequestBody User user) throws Exception {
+    public User updateUser(@RequestHeader("Authorization") String jwt, @RequestBody User user) throws UserException {
         User reqUser = userService.findUserByJwt(jwt);
-        User updatedUser = userService.updateUser(user, reqUser.getId() );
+        User updatedUser = userService.updateUser(user, reqUser.getId());
         return updatedUser;
     }
-    @PutMapping("/api/users/follow/{userId1}/{userId2}")
-    public User followUserHandler(@PathVariable Integer userId1, @PathVariable Integer userId2) throws Exception {
-        User user = userService.followUser(userId1,userId2);
+    @PutMapping("/api/users/follow/{userId2}")
+    public User followUserHandler(@RequestHeader("Authorization") String jwt, @PathVariable Integer userId2) throws UserException {
+        User reqUser = userService.findUserByJwt(jwt);
+        User user = userService.followUser(reqUser.getId(),userId2);
         return user;
     }
     @GetMapping("/api/users/search")

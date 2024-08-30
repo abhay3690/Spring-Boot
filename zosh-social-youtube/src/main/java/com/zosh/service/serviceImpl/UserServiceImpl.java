@@ -1,6 +1,7 @@
 package com.zosh.service.serviceImpl;
 
 import com.zosh.config.JwtProvider;
+import com.zosh.exception.UserException;
 import com.zosh.model.User;
 import com.zosh.repository.UserRepository;
 import com.zosh.service.UserService;
@@ -29,12 +30,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findUserById(Integer userId) throws Exception {
+    public User findUserById(Integer userId) throws UserException {
         Optional<User> user = userRepository.findById(userId);
         if (user.isPresent()){
             return user.get();
         }
-        throw new Exception("User not exist with userId" + userId);
+        throw new UserException("User not exist with userId" + userId);
     }
 
     @Override
@@ -44,22 +45,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User followUser(Integer userId1, Integer userId2) throws Exception {
-        User user1 = findUserById(userId1);
+    public User followUser(Integer reqUserId, Integer userId2) throws UserException {
+        User reqUser = findUserById(reqUserId);
         User user2 = findUserById(userId2);
-        user2.getFollowers().add(user1.getId());
-        user1.getFollowings().add(user2.getId());
+        user2.getFollowers().add(reqUser.getId());
+        reqUser.getFollowings().add(user2.getId());
 
-        userRepository.save(user1);
+        userRepository.save(reqUser);
         userRepository.save(user2);
-        return user1;
+        return reqUser;
     }
 
     @Override
-    public User updateUser(User user, Integer userId) throws Exception {
+    public User updateUser(User user, Integer userId) throws UserException {
         Optional<User> user1 = userRepository.findById(userId);
         if (user1.isEmpty()) {
-            throw new Exception("User does not exist with id " + userId);
+            throw new UserException("User does not exist with id " + userId);
         }
         User oldUser = user1.get();
         if (user.getFirstName() != null) {
